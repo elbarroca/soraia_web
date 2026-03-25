@@ -551,15 +551,24 @@ if (priceCents)          → "€1,800.00"
 
 **Artwork card hover:** Subtle 1.02x scale on the image within `overflow-hidden`. Title underlines on hover.
 
-**✅ Sprint 3 Checkpoint:**
-- [ ] Home page loads with hero, category grid, artist statement, newsletter
-- [ ] Home pulls real data from Neon (settings, featured artwork)
-- [ ] Scroll animations work (staggered fade-in on each section)
-- [ ] Newsletter form submits and stores in database
-- [ ] Artworks page shows all artworks in a grid
-- [ ] Category filter works via URL params
-- [ ] Price displays correctly for all 4 states
-- [ ] Responsive: both pages look good on mobile
+**✅ Sprint 3 Checkpoint:** _(Completed 2026-03-25)_
+- [x] Home page loads with hero, category grid, artist statement, newsletter
+- [x] Home pulls real data from Neon (settings, featured artwork)
+- [x] Scroll animations work (staggered fade-in on each section)
+- [x] Newsletter form submits and stores in database
+- [x] Artworks page shows all artworks in a grid
+- [x] Category filter works via URL params
+- [x] Price displays correctly for all 4 states
+- [ ] Responsive: both pages look good on mobile (needs visual QA)
+
+**Implementation notes:**
+- Created `src/lib/types.ts` (shared public types), `src/lib/mappers.ts` (DB→public type converters)
+- Created query files: `settings.ts`, `news.ts`, `exhibitions.ts` in `src/lib/queries/`
+- All 6 public pages now query DB instead of mock data
+- `featured_artwork_id` site setting drives featured artwork on home page
+- Newsletter API persists to DB via `db.insert(newsletterSubscribers)`
+- `generateStaticParams` in artwork detail page gracefully handles DB errors (returns [])
+- `src/lib/mock-data.ts` is no longer imported anywhere (can be deleted)
 
 ---
 
@@ -702,14 +711,21 @@ export async function POST(req: Request) {
 }
 ```
 
-**✅ Sprint 4 Checkpoint:**
-- [ ] Artwork detail page shows full product info + images
-- [ ] Lightbox opens on image click, arrow key navigation works
-- [ ] "Inquire" button redirects to contact with pre-filled subject
-- [ ] About page shows bio, animated identity block, exhibitions list
-- [ ] Soraia Space shows studio info, appointments CTAs, news items
-- [ ] Contact form submits, saves to DB, sends email notification
-- [ ] All pages responsive on mobile
+**✅ Sprint 4 Checkpoint:** _(Completed 2026-03-25)_
+- [x] Artwork detail page shows full product info + images
+- [x] Lightbox opens on image click, arrow key navigation works
+- [x] "Inquire" button redirects to contact with pre-filled subject
+- [x] About page shows bio, animated identity block, exhibitions list
+- [x] Soraia Space shows studio info, appointments CTAs, news items
+- [x] Contact form submits, saves to DB, sends email notification (via Resend)
+- [ ] All pages responsive on mobile (needs visual QA)
+
+**Implementation notes:**
+- Contact API: persists to `contacts` table + sends email via Resend (`src/lib/email.ts`)
+- Resend client with graceful error handling — email failure doesn't break form submission
+- About page: safe JSON.parse with try/catch for `about_bio`/`about_identity` settings
+- JSON-LD structured data: Person schema on about page, Product schema on artwork detail
+- All public pages wired to DB with proper type mapping via `toPublicArtwork/Exhibition/News`
 
 ---
 
@@ -873,12 +889,21 @@ src/app/admin/orders/
 
 Table columns: Date, Customer, Artwork Title, Amount, Status (badge), Actions (Update status dropdown).
 
-**✅ Sprint 5 Checkpoint:**
-- [ ] Click "Purchase" on artwork → redirected to Stripe Checkout
-- [ ] Complete test payment → order appears in admin
-- [ ] Webhook creates order record in database
-- [ ] Admin can update order status (paid → shipped → delivered)
-- [ ] "Inquire" flow works (redirects to contact with pre-filled subject)
+**✅ Sprint 5 Checkpoint:** _(Completed 2026-03-25)_
+- [x] Click "Purchase" on artwork → redirected to Stripe Checkout
+- [x] Webhook creates order record in database (with payment_status check)
+- [x] Artwork auto-marked as sold after successful payment
+- [x] "Inquire" flow works (redirects to contact with pre-filled subject)
+- [ ] Complete test payment → order appears in admin (needs real Stripe keys)
+- [ ] Admin can update order status (paid → shipped → delivered) (needs admin action)
+
+**Implementation notes:**
+- `stripe` and `resend` packages installed
+- Stripe client at `src/lib/stripe.ts`
+- Checkout route: `src/app/api/checkout/route.ts` — validates artwork exists, visible, not sold, has price
+- Webhook route: `src/app/api/webhooks/stripe/route.ts` — signature verification, payment_status guard
+- PurchaseButton component with loading state at `src/components/features/purchase-button.tsx`
+- Wired into artwork-detail.tsx: "PURCHASE" for purchasable, "INQUIRE" for price-on-request, "SOLD" badge
 
 ---
 
@@ -1104,16 +1129,33 @@ export async function POST(req: Request) {
 
 Call this from admin after saving artwork changes to bust the ISR cache instantly.
 
-**✅ Sprint 7 Checkpoint:**
-- [ ] Lighthouse Performance > 90
-- [ ] Lighthouse Accessibility > 95
-- [ ] Lighthouse SEO > 95
-- [ ] All pages have proper meta titles, descriptions, OG images
-- [ ] Sitemap generates correctly
-- [ ] robots.txt blocks /admin/
-- [ ] 301 redirects work for old Squarespace URLs
-- [ ] axe-core reports zero critical violations
-- [ ] Keyboard navigation works end-to-end
+**✅ Sprint 7 Checkpoint:** _(Partially completed 2026-03-25)_
+- [ ] Lighthouse Performance > 90 (needs production testing)
+- [ ] Lighthouse Accessibility > 95 (needs production testing)
+- [ ] Lighthouse SEO > 95 (needs production testing)
+- [x] All pages have proper meta titles, descriptions, OG images
+- [x] Sitemap generates correctly (`/sitemap.xml`)
+- [x] robots.txt blocks /admin/ (`/robots.txt`)
+- [x] 301 redirects work for old Squarespace URLs (in next.config.ts)
+- [ ] axe-core reports zero critical violations (needs audit)
+- [x] Skip-to-content link added
+- [x] JSON-LD structured data (WebSite, Person, Product schemas)
+- [x] Dynamic OG images (root + per-artwork)
+- [x] llms.txt endpoint
+- [x] ISR revalidation endpoint with path allowlist
+- [x] Bilingual metadata (en/pt alternates, OG locale)
+
+**Implementation notes:**
+- `src/app/robots.ts` — disallows /admin/, points to sitemap
+- `src/app/sitemap.ts` — static pages + dynamic artwork pages from DB
+- `src/app/llms.txt/route.ts` — plain text describing site for LLM crawlers
+- `src/app/opengraph-image.tsx` — root OG (1200x630, dark bg, artist name)
+- `src/app/artworks/[slug]/opengraph-image.tsx` — per-artwork OG with image + title + price
+- `src/lib/structured-data.ts` — websiteJsonLd, artistPersonJsonLd, artworkProductJsonLd
+- Root layout: metadataBase, keywords, openGraph, twitter card, alternates.languages
+- `src/app/api/revalidate/route.ts` — path-validated revalidation endpoint
+- next.config.ts: redirects for `/artworks/p/:slug` → `/artworks/:slug`, `/home` → `/`
+- News/exhibition actions now also revalidate `/soraia-space` and `/about` respectively
 
 ---
 

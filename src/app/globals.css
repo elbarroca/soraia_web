@@ -20,7 +20,7 @@
   --color-sale: #b91c1c;
 
   /* ─── Typography ─── */
-  --font-primary: var(--font-satoshi), "Satoshi Variable", "Inter", system-ui, sans-serif;
+  --font-primary: var(--font-sans), "Inter", system-ui, sans-serif;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;

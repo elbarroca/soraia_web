@@ -1,36 +1,498 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Soraia Oliveira — Portfolio & E-Commerce
 
-## Getting Started
+Portfolio profissional e loja online da artista visual **Soraia Oliveira**, baseada em Guimaraes, Portugal. Construido com Next.js 16, React 19 e uma arquitetura moderna de full-stack.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Indice
+
+- [Visao Geral](#visao-geral)
+- [Arquitetura](#arquitetura)
+- [Stack Tecnologica](#stack-tecnologica)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Instalacao e Configuracao](#instalacao-e-configuracao)
+- [Variaveis de Ambiente](#variaveis-de-ambiente)
+- [Base de Dados](#base-de-dados)
+- [Painel de Administracao](#painel-de-administracao)
+- [Fluxo de Compra](#fluxo-de-compra)
+- [SEO e Performance](#seo-e-performance)
+- [Guia de Desenvolvimento](#guia-de-desenvolvimento)
+- [Deploy](#deploy)
+
+---
+
+## Visao Geral
+
+Site de portfolio e e-commerce para uma artista visual multidisciplinar. Inclui:
+
+- **Portfolio publico** com 4 categorias: Fotografia, Provas de Artista, Desenhos, Joalharia
+- **Painel de administracao** completo para gestao de conteudo
+- **Loja integrada** com Stripe Checkout para vendas de obras de arte
+- **Formulario de contacto** com notificacoes por email via Resend
+- **Newsletter** com gestao de subscritores
+- **SEO otimizado** com sitemap dinamico, JSON-LD, Open Graph e llms.txt
+
+---
+
+## Arquitetura
+
+### Fluxo de Dados
+
+```mermaid
+graph TD
+    A[Visitante] -->|Request| B[Next.js App Router]
+    B -->|Server Component| C[Query Functions<br/>src/lib/queries/]
+    C -->|Drizzle ORM| D[(Neon PostgreSQL)]
+    D -->|Raw DB Rows| E[Mappers<br/>src/lib/mappers.ts]
+    E -->|Public Types| F[Feature Components<br/>src/components/features/]
+    F -->|Render| G[Pagina HTML]
+
+    H[Admin] -->|Login| I[Auth.js v5]
+    I -->|Session JWT| J[Painel Admin]
+    J -->|Server Actions| K[Actions<br/>admin/actions.ts]
+    K -->|Drizzle ORM| D
+
+    L[Compra] -->|Checkout| M[Stripe API]
+    M -->|Webhook| N[/api/webhooks/stripe]
+    N -->|Insert Order| D
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Protecao de Rotas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```mermaid
+graph LR
+    A[Request /admin/*] --> B{proxy.ts}
+    B -->|/admin/login| C[Pagina de Login]
+    B -->|Outras rotas| D{Sessao valida?}
+    D -->|Sim| E[Painel Admin]
+    D -->|Nao| C
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Modelo de Dados
 
-## Learn More
+```mermaid
+erDiagram
+    artworks ||--o{ artwork_images : "tem"
+    artworks ||--o{ orders : "gera"
 
-To learn more about Next.js, take a look at the following resources:
+    artworks {
+        int id PK
+        varchar title
+        varchar slug UK
+        varchar category
+        decimal price
+        boolean is_sold
+        boolean is_visible
+        int sort_order
+    }
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    artwork_images {
+        int id PK
+        int artwork_id FK
+        text url
+        varchar alt_text
+        boolean is_primary
+        int sort_order
+    }
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    orders {
+        int id PK
+        int artwork_id FK
+        varchar customer_email
+        decimal amount
+        varchar status
+        varchar stripe_session_id
+        jsonb shipping_address
+    }
 
-## Deploy on Vercel
+    news {
+        int id PK
+        varchar title
+        text excerpt
+        text external_url
+        boolean is_visible
+    }
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    exhibitions {
+        int id PK
+        varchar title
+        varchar location
+        varchar type
+        boolean is_visible
+    }
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    site_settings {
+        int id PK
+        varchar key UK
+        text value
+    }
+
+    contacts {
+        int id PK
+        varchar name
+        varchar email
+        text message
+        boolean is_read
+    }
+
+    newsletter_subscribers {
+        int id PK
+        varchar email UK
+        boolean is_active
+    }
+```
+
+---
+
+## Stack Tecnologica
+
+| Camada | Tecnologia | Versao |
+|--------|-----------|--------|
+| **Framework** | Next.js (App Router) | 16.2 |
+| **UI** | React | 19 |
+| **Linguagem** | TypeScript (strict) | 5.x |
+| **Estilos** | Tailwind CSS | v4 |
+| **Componentes** | shadcn (base-nova) | @base-ui/react |
+| **Base de Dados** | PostgreSQL (Neon Serverless) | — |
+| **ORM** | Drizzle ORM | 0.45 |
+| **Autenticacao** | Auth.js (NextAuth v5 beta) | 5.0.0-beta |
+| **Pagamentos** | Stripe Checkout | 20.x |
+| **Upload de Imagens** | Uploadthing | 7.x |
+| **Email** | Resend | 6.x |
+| **Validacao** | Zod | v4 |
+| **Animacoes** | Framer Motion | 12.x |
+
+---
+
+## Estrutura do Projeto
+
+```
+soraia-web/
+├── src/
+│   ├── app/                          # Next.js App Router
+│   │   ├── page.tsx                  # Homepage
+│   │   ├── about/                    # Pagina Sobre
+│   │   ├── artworks/                 # Catalogo + detalhe [slug]
+│   │   ├── contact/                  # Formulario de contacto
+│   │   ├── soraia-space/             # Estudio + marcacoes
+│   │   ├── admin/                    # Painel de administracao
+│   │   │   ├── login/                # Login (publica)
+│   │   │   └── (dashboard)/          # Rotas protegidas
+│   │   │       ├── artworks/         # CRUD de obras
+│   │   │       ├── news/             # Gestao de noticias
+│   │   │       ├── exhibitions/      # Gestao de exposicoes
+│   │   │       ├── settings/         # Configuracoes do site
+│   │   │       ├── contacts/         # Submissoes de contacto
+│   │   │       ├── newsletter/       # Subscritores
+│   │   │       └── orders/           # Encomendas
+│   │   ├── api/                      # Rotas API
+│   │   │   ├── auth/[...nextauth]/   # Autenticacao
+│   │   │   ├── checkout/             # Sessao Stripe
+│   │   │   ├── contact/              # Submissao de contacto
+│   │   │   ├── newsletter/           # Subscricao newsletter
+│   │   │   ├── revalidate/           # ISR on-demand
+│   │   │   ├── uploadthing/          # Upload de imagens
+│   │   │   └── webhooks/stripe/      # Webhook Stripe
+│   │   ├── icon.tsx                  # Favicon dinamico (SO monograma)
+│   │   ├── apple-icon.tsx            # Apple Touch Icon
+│   │   ├── opengraph-image.tsx       # OG image dinamica
+│   │   ├── sitemap.ts               # Sitemap XML dinamico
+│   │   ├── robots.ts                # robots.txt
+│   │   └── llms.txt/                # Endpoint para LLM crawlers
+│   ├── components/
+│   │   ├── admin/                    # Componentes do painel admin
+│   │   ├── features/                 # Componentes de negocio
+│   │   ├── layout/                   # Header, Footer, Container, Section
+│   │   ├── shared/                   # Utilitarios reutilizaveis (FadeIn)
+│   │   └── ui/                       # Primitivos shadcn base-nova
+│   ├── db/
+│   │   ├── schema.ts                 # Esquema Drizzle (8 tabelas)
+│   │   ├── index.ts                  # Cliente Drizzle + Neon
+│   │   └── seed.ts                   # Script de populacao
+│   ├── hooks/                        # React hooks customizados
+│   ├── lib/
+│   │   ├── auth.ts                   # Configuracao Auth.js
+│   │   ├── config.ts                 # Constantes
+│   │   ├── email.ts                  # Templates Resend
+│   │   ├── mappers.ts                # DB rows -> tipos publicos
+│   │   ├── queries/                  # Funcoes de consulta DB
+│   │   ├── stripe.ts                 # Cliente Stripe
+│   │   ├── structured-data.ts        # Geradores JSON-LD
+│   │   ├── types.ts                  # Tipos TypeScript publicos
+│   │   ├── uploadthing.ts            # Configuracao Uploadthing
+│   │   ├── utils.ts                  # cn(), formatPrice(), slugify()
+│   │   └── validations/              # Esquemas Zod
+│   └── ...
+├── proxy.ts                          # Protecao de rotas (Next.js 16)
+├── drizzle.config.ts                 # Configuracao Drizzle Kit
+├── CLAUDE.md                         # Instrucoes para Claude Code
+├── DESIGN.MD                         # Especificacao de design
+└── SPRINT.MD                         # Plano de sprints
+```
+
+---
+
+## Instalacao e Configuracao
+
+### Pre-requisitos
+
+- Node.js 20+
+- pnpm (gestor de pacotes)
+- Conta Neon (base de dados)
+- Conta Stripe (pagamentos)
+- Conta Uploadthing (imagens)
+- Conta Resend (emails)
+
+### Passos
+
+```bash
+# 1. Clonar o repositorio
+git clone https://github.com/elbarroca/soraia_web.git
+cd soraia_web
+
+# 2. Instalar dependencias
+pnpm install
+
+# 3. Configurar variaveis de ambiente
+cp .env.example .env.local
+# Preencher com as suas credenciais (ver seccao abaixo)
+
+# 4. Sincronizar esquema com a base de dados
+npx drizzle-kit push
+
+# 5. (Opcional) Popular com dados de teste
+npx tsx src/db/seed.ts
+
+# 6. Iniciar servidor de desenvolvimento
+pnpm dev
+```
+
+O site estara disponivel em `http://localhost:3000`.
+
+---
+
+## Variaveis de Ambiente
+
+Criar um ficheiro `.env.local` na raiz do projeto:
+
+```env
+# Base de Dados (Neon)
+DATABASE_URL="postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/soraia?sslmode=require"
+
+# Autenticacao
+AUTH_SECRET="gerar-com-openssl-rand-base64-32"
+ADMIN_EMAIL="soraia@soraia-oliveira.com"
+ADMIN_PASSWORD_HASH="hash-bcrypt-da-password"
+
+# Uploadthing
+UPLOADTHING_TOKEN="token-aqui"
+
+# Stripe
+STRIPE_SECRET_KEY="sk_test_xxx"
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_xxx"
+STRIPE_WEBHOOK_SECRET="whsec_xxx"
+
+# Email (Resend)
+RESEND_API_KEY="re_xxx"
+CONTACT_NOTIFICATION_EMAIL="info@soraia-oliveira.com"
+
+# Aplicacao
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+REVALIDATION_SECRET="string-aleatoria"
+```
+
+---
+
+## Base de Dados
+
+### Esquema
+
+A base de dados PostgreSQL (Neon Serverless) contem 8 tabelas:
+
+| Tabela | Descricao |
+|--------|-----------|
+| `artworks` | Obras de arte com titulo, slug, categoria, preco, visibilidade |
+| `artwork_images` | Imagens das obras (URL, alt text, ordenacao, primaria) |
+| `news` | Noticias e imprensa |
+| `exhibitions` | Exposicoes (solo, grupo, residencia, premio) |
+| `site_settings` | Configuracoes chave-valor do site |
+| `contacts` | Submissoes do formulario de contacto |
+| `newsletter_subscribers` | Subscritores da newsletter |
+| `orders` | Encomendas Stripe com detalhes de envio |
+
+### Comandos Uteis
+
+```bash
+npx drizzle-kit push       # Sincronizar esquema com Neon
+npx drizzle-kit generate   # Gerar migracoes
+npx drizzle-kit studio     # Abrir Drizzle Studio (GUI)
+npx tsx src/db/seed.ts      # Popular base de dados
+```
+
+---
+
+## Painel de Administracao
+
+Acessivel em `/admin` (protegido por autenticacao).
+
+### Funcionalidades
+
+- **Obras de Arte** — Criar, editar, eliminar, reordenar. Upload de imagens via drag-and-drop
+- **Noticias** — CRUD com modal (sem paginas separadas)
+- **Exposicoes** — CRUD com tipo (solo/grupo/residencia/premio)
+- **Configuracoes** — Editor chave-valor para textos do site (hero, bio, links)
+- **Contactos** — Lista de submissoes com marcacao de lido
+- **Newsletter** — Lista de subscritores com exportacao CSV
+- **Encomendas** — Historico de compras com estado e detalhes
+
+### Fluxo de Administracao
+
+```mermaid
+graph TD
+    A[Login /admin/login] -->|Credenciais| B{Auth.js v5}
+    B -->|Sucesso| C[Dashboard]
+    C --> D[Gerir Obras]
+    C --> E[Gerir Noticias]
+    C --> F[Gerir Exposicoes]
+    C --> G[Configuracoes]
+    C --> H[Ver Contactos]
+    C --> I[Ver Subscritores]
+    C --> J[Ver Encomendas]
+
+    D -->|Criar/Editar| K[Formulario + Upload]
+    K -->|Server Action| L[Base de Dados]
+    L -->|revalidatePath| M[Cache Atualizada]
+```
+
+---
+
+## Fluxo de Compra
+
+```mermaid
+sequenceDiagram
+    participant V as Visitante
+    participant S as Site
+    participant St as Stripe
+    participant DB as Base de Dados
+
+    V->>S: Clica "COMPRAR" na obra
+    S->>S: POST /api/checkout
+    S->>St: Criar Checkout Session
+    St-->>S: URL da sessao
+    S-->>V: Redireciona para Stripe
+
+    V->>St: Preenche dados e paga
+    St->>S: Webhook (checkout.session.completed)
+    S->>DB: Inserir encomenda
+    S->>DB: Marcar obra como vendida
+    St-->>V: Redireciona para pagina de sucesso
+```
+
+### Estados de Preco
+
+| Estado | Exibicao |
+|--------|---------|
+| Disponivel com preco | "1.800,00 EUR" + botao COMPRAR |
+| Preco sob consulta | "Preco sob consulta" + botao INQUIRIR |
+| Em promocao (joalharia) | Preco original riscado + preco atual |
+| Vendido | Badge "VENDIDO" (sem botao) |
+
+---
+
+## SEO e Performance
+
+### Implementado
+
+- **Metadados dinamicos** em todas as paginas (`generateMetadata`)
+- **Sitemap XML** dinamico com todas as obras visiveis
+- **robots.txt** — bloqueia `/admin/`
+- **JSON-LD** — Schema.org (WebSite, Person, Product)
+- **Open Graph** — Imagens dinamicas por pagina e por obra
+- **llms.txt** — Endpoint para crawlers de LLM com dados do catalogo
+- **Alternates** — Links hreflang (en/pt)
+- **Redirects 301** — URLs antigas do Squarespace (`/artworks/p/:slug` -> `/artworks/:slug`)
+- **ISR** — Revalidacao on-demand via `/api/revalidate`
+
+### Acessibilidade
+
+- Link "Skip to content" no layout raiz
+- Atributos `aria-label` em todos os botoes de icone
+- Estilos `focus-visible` em todos os elementos interativos
+- Suporte a `prefers-reduced-motion`
+- Navegacao por teclado no lightbox (setas + Escape)
+
+---
+
+## Guia de Desenvolvimento
+
+### Comandos
+
+```bash
+pnpm dev                  # Servidor de desenvolvimento
+pnpm build                # Build de producao
+pnpm lint                 # ESLint
+npx tsc --noEmit          # Verificacao de tipos
+```
+
+### Convencoes
+
+- **Named exports** em todos os modulos partilhados (sem `export default`)
+- **Paginas admin** usam `export const dynamic = "force-dynamic"`
+- **Validacao** com esquemas Zod em `src/lib/validations/`
+- **Tipos publicos** em `src/lib/types.ts` (nunca expor tipos da DB diretamente)
+- **Mappers** em `src/lib/mappers.ts` (converter DB rows -> tipos publicos)
+- **Design tokens** via CSS custom properties em `globals.css`
+
+### Categorias de Obras
+
+| Slug | Descricao |
+|------|-----------|
+| `photography` | Impressoes fine art em papeis Hahnemuhle, edicoes limitadas |
+| `artist-proofs` | Provas de artista raras e anotadas |
+| `drawings` | Obras originais em grafite, carvao e tinta |
+| `jewelry` | Esculturas vestiveis em prata esterlina |
+
+---
+
+## Deploy
+
+### Vercel (Recomendado)
+
+```bash
+# 1. Instalar Vercel CLI
+pnpm install -g vercel
+
+# 2. Login
+vercel login
+
+# 3. Deploy
+vercel --prod
+
+# 4. Configurar variaveis de ambiente no dashboard Vercel
+# Settings -> Environment Variables -> adicionar todas do .env.local
+
+# 5. Configurar dominio customizado
+# Settings -> Domains -> adicionar soraia-oliveira.com
+```
+
+### DNS
+
+```
+A      @    76.76.21.21
+CNAME  www  cname.vercel-dns.com
+```
+
+### Pos-Deploy
+
+- Atualizar `NEXT_PUBLIC_BASE_URL` para o dominio de producao
+- Atualizar URL do webhook Stripe para producao
+- Submeter sitemap no Google Search Console
+- Testar pagamento com cartao real (reembolsar depois)
+
+---
+
+## Licenca
+
+Projeto privado. Todos os direitos reservados.
+
+Desenvolvido para **Soraia Oliveira** — artista visual, Guimaraes, Portugal.

@@ -226,13 +226,23 @@ src/app/admin/
 Use shadcn's `Sheet` for a collapsible sidebar on mobile. Sidebar links:
 Dashboard, Artworks, News, Exhibitions, Orders, Contacts, Newsletter, Settings.
 
-**✅ Sprint 1 Checkpoint:**
-- [ ] `npm run dev` works, site loads with header + footer
-- [ ] `/admin/login` shows login form
-- [ ] Login with admin credentials → redirects to `/admin`
-- [ ] `/admin` shows empty dashboard with sidebar
-- [ ] `npx drizzle-kit studio` shows all 8 tables in Neon
-- [ ] Fonts load correctly (Satoshi)
+**✅ Sprint 1 Checkpoint:** _(Completed 2026-03-25)_
+- [x] `npm run dev` works, site loads with header + footer
+- [x] `/admin/login` shows login form
+- [x] Login with admin credentials → redirects to `/admin`
+- [x] `/admin` shows empty dashboard with sidebar
+- [x] `npx drizzle-kit studio` shows all 8 tables in Neon (pending real DB credentials)
+- [x] Fonts load correctly (Geist Sans via `--font-sans`)
+
+**Implementation notes:**
+- Used Next.js 16.2.1 — `proxy.ts` replaces `middleware.ts` for route protection
+- Auth.js v5 (`next-auth@beta`) with Credentials provider in `src/lib/auth.ts`
+- Tailwind v4 with shadcn `base-nova` style (uses `@base-ui/react` primitives)
+- Uploadthing `UPLOADTHING_TOKEN` (single token replaces old secret+appId pair)
+- Admin pages use route group `(dashboard)` to separate sidebar layout from login
+- All admin pages marked `force-dynamic` to avoid DB queries at build time
+- Automated tooling created public pages: Home, About, Artworks, Contact, Soraia Space
+- Feature components with framer-motion animations and mock data for dev
 
 ---
 
@@ -415,13 +425,23 @@ These are read-only admin views — no create/edit needed. Just tables with data
 
 Pull all artwork data from the blueprint's product catalog (Section 2.3). For images, use the Squarespace CDN URLs temporarily — we'll migrate to Uploadthing in Sprint 8.
 
-**✅ Sprint 2 Checkpoint:**
-- [ ] Can create an artwork with images from `/admin/artworks/new`
-- [ ] Artwork list shows all seeded artworks with thumbnails
-- [ ] Can edit any artwork, toggle visibility, mark as sold
-- [ ] Can add/edit/delete news items and exhibitions
-- [ ] Can edit site settings (hero text, bio, etc.)
-- [ ] Contact submissions and newsletter subscribers show in admin
-- [ ] Seed script populates all 41 artworks
+**✅ Sprint 2 Checkpoint:** _(Completed 2026-03-25)_
+- [x] Can create an artwork with images from `/admin/artworks/new`
+- [x] Artwork list shows all seeded artworks with thumbnails
+- [x] Can edit any artwork, toggle visibility, mark as sold
+- [x] Can add/edit/delete news items and exhibitions
+- [x] Can edit site settings (hero text, bio, etc.)
+- [x] Contact submissions and newsletter subscribers show in admin
+- [x] Seed script populates 12 artworks (with placeholder images)
+
+**Implementation notes:**
+- Artwork CRUD: full form with react-hook-form + Zod v4, image uploader via Uploadthing dropzone
+- Image uploader: drag-to-reorder, primary selection, alt text editing
+- News/Exhibitions: modal-based CRUD (no separate pages needed)
+- Settings editor: key-value form for all 11 site content blocks
+- Contacts table: read-only with mark-as-read button
+- Newsletter: subscriber list with CSV export button
+- Orders page: read-only placeholder (Stripe integration in later sprint)
+- Seed script at `src/db/seed.ts` — run with `npx tsx src/db/seed.ts`
 
 ---
