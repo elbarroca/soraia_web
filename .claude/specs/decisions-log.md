@@ -20,6 +20,26 @@
 
 **Why**: `@neondatabase/serverless` is edge-compatible (HTTP-based, no persistent connections). This allows OG images to be generated at the edge without Node.js runtime, improving latency.
 
+## 2026-03-26: Mock Data Fallback in Query Functions
+
+**Decision**: All query functions in `src/lib/queries/` wrapped with try/catch that falls back to mock data from `src/lib/mock-data.ts`.
+
+**Why**: DB credentials are placeholders during development. Without fallback, every page crashes with `NeonDbError: password authentication failed`. Wrapping enables UI-first development without DB dependency.
+
+**Trade-off**: Settings return rich mock content (hero text, bio, etc.) while artworks/exhibitions/news return mock arrays. Pages also check `dbResult.length > 0` before using DB data, falling back to mock if empty.
+
+## 2026-03-26: Local Images for Development, CDN for Production
+
+**Decision**: Downloaded all 55 images from Squarespace CDN to `/public/images/` for local development. Mock data references local paths. Production will use Uploadthing CDN URLs stored in DB.
+
+**Why**: External CDN URLs may change or have CORS issues during development. Local files ensure the site always renders correctly. Migration to Uploadthing happens during Sprint 8 content migration.
+
+## 2026-03-26: Geist Over Satoshi Font
+
+**Decision**: Keep Geist (from next/font/google) as the primary font instead of installing Satoshi Variable.
+
+**Why**: Geist is already loading correctly, visually similar to Satoshi (both clean geometric sans-serifs), and avoids adding another dependency. The CSS variable was renamed from `--font-satoshi` to `--font-sans` for clarity.
+
 ## 2026-03-25: Path Allowlist on Revalidation Endpoint
 
 **Decision**: Revalidation endpoint validates paths against an allowlist + regex pattern rather than accepting arbitrary paths.
