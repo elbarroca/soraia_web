@@ -5,7 +5,7 @@ import Image from "next/image";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, GripVertical, Star } from "lucide-react";
+import { X, GripVertical, Star, ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import type { ArtworkImageInput } from "@/lib/validations";
 
@@ -42,9 +42,7 @@ export function ImageUploader({ images, onChange }: ImageUploaderProps) {
   }
 
   function setPrimary(index: number) {
-    onChange(
-      images.map((img, i) => ({ ...img, isPrimary: i === index }))
-    );
+    onChange(images.map((img, i) => ({ ...img, isPrimary: i === index })));
   }
 
   function updateAltText(index: number, altText: string) {
@@ -74,6 +72,21 @@ export function ImageUploader({ images, onChange }: ImageUploaderProps) {
 
   return (
     <div className="space-y-4">
+      {/* Empty state — shown above upload zone when no images */}
+      {images.length === 0 && (
+        <div className="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[var(--color-border)] p-8 text-center">
+          <ImageIcon className="h-8 w-8 text-[var(--color-ink-muted)]" />
+          <div className="space-y-1">
+            <p className="text-sm font-medium text-[var(--color-ink)]">
+              No images yet
+            </p>
+            <p className="text-xs text-[var(--color-ink-muted)]">
+              Upload your first image to get started
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Existing images */}
       {images.length > 0 && (
         <div className="space-y-2">

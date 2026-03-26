@@ -1,5 +1,5 @@
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import postgres from "postgres";
+import { drizzle } from "drizzle-orm/postgres-js";
 import {
   artworks,
   artworkImages,
@@ -12,7 +12,7 @@ import * as schema from "./schema";
 // Load .env.local
 import "dotenv/config";
 
-const sql = neon(process.env.DATABASE_URL!);
+const sql = postgres(process.env.DATABASE_URL!, { prepare: false });
 const db = drizzle({ client: sql, schema });
 
 const SEED_ARTWORKS = [

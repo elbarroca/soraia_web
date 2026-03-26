@@ -30,6 +30,9 @@ export async function updateSetting(key: string, value: string) {
 
   revalidatePath("/admin/settings");
   revalidatePath("/");
+  revalidatePath("/about");
+  revalidatePath("/soraia-space");
+  revalidatePath("/contact");
   return { success: true };
 }
 
@@ -51,5 +54,8 @@ export async function updateSettings(entries: { key: string; value: string }[]) 
 
   revalidatePath("/admin/settings");
   revalidatePath("/");
+  revalidatePath("/about");
+  revalidatePath("/soraia-space");
+  revalidatePath("/contact");
   return { success: true };
 }

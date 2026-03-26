@@ -16,7 +16,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Newspaper, Plus, Pencil, Trash2 } from "lucide-react";
+import { AdminEmptyState } from "./empty-state";
 import {
   createNews,
   updateNews,
@@ -120,8 +121,13 @@ export function NewsManager({ news }: { news: NewsItem[] }) {
           <TableBody>
             {news.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={4} className="py-8 text-center text-[var(--color-ink-muted)]">
-                  No news items yet.
+                <TableCell colSpan={4}>
+                  <AdminEmptyState
+                    icon={Newspaper}
+                    title="No news items yet"
+                    description="Share updates, press mentions, or announcements."
+                    action={{ label: "Add News", onClick: openNew }}
+                  />
                 </TableCell>
               </TableRow>
             ) : (
@@ -140,7 +146,7 @@ export function NewsManager({ news }: { news: NewsItem[] }) {
                   <TableCell>
                     {item.publishedAt ? (
                       <Badge variant="secondary">
-                        {new Date(item.publishedAt).toLocaleDateString()}
+                        {new Date(item.publishedAt).toLocaleDateString("en-GB")}
                       </Badge>
                     ) : (
                       <span className="text-[var(--color-ink-muted)]">—</span>
@@ -154,12 +160,13 @@ export function NewsManager({ news }: { news: NewsItem[] }) {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="icon" onClick={() => openEdit(item)}>
+                      <Button variant="ghost" size="icon" aria-label={`Edit ${item.title}`} onClick={() => openEdit(item)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
+                        aria-label={`Delete ${item.title}`}
                         onClick={() => handleDelete(item.id, item.title)}
                       >
                         <Trash2 className="h-4 w-4" />

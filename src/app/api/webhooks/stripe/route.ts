@@ -3,6 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { db } from "@/db";
 import { orders, artworks } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
     const artworkId = session.metadata?.artworkId
       ? parseInt(session.metadata.artworkId, 10)
       : null;
+    const artworkSlug = session.metadata?.artworkSlug ?? null;
 
     await db.insert(orders).values({
       stripeSessionId: session.id,
@@ -49,6 +51,14 @@ export async function POST(req: Request) {
         .update(artworks)
         .set({ isSold: true })
         .where(eq(artworks.id, artworkId));
+
+      // Bust ISR cache so the artwork shows as sold immediately
+      revalidatePath("/artworks");
+      if (artworkSlug) {
+        revalidatePath(`/artworks/${artworkSlug}`);
+      }
+      revalidatePath("/admin/artworks");
+      revalidatePath("/admin/orders");
     }
   }
 

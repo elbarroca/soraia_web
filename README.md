@@ -45,7 +45,7 @@ Site de portfolio e e-commerce para uma artista visual multidisciplinar. Inclui:
 graph TD
     A[Visitante] -->|Request| B[Next.js App Router]
     B -->|Server Component| C[Query Functions<br/>src/lib/queries/]
-    C -->|Drizzle ORM| D[(Neon PostgreSQL)]
+    C -->|Drizzle ORM| D[(Supabase PostgreSQL)]
     C -->|Fallback| E[Mock Data<br/>src/lib/mock-data.ts]
     D -->|Raw DB Rows| F[Mappers<br/>src/lib/mappers.ts]
     F -->|Public Types| G[Feature Components<br/>src/components/features/]
@@ -158,7 +158,7 @@ erDiagram
 | **Linguagem** | TypeScript (strict) | 5.x |
 | **Estilos** | Tailwind CSS (PostCSS) | v4 |
 | **Componentes** | shadcn (base-nova) | @base-ui/react |
-| **Base de Dados** | PostgreSQL (Neon Serverless) | — |
+| **Base de Dados** | PostgreSQL (Supabase) | — |
 | **ORM** | Drizzle ORM | 0.45 |
 | **Autenticação** | Auth.js (NextAuth v5 beta) | 5.0.0-beta |
 | **Pagamentos** | Stripe Checkout | 20.x |
@@ -308,7 +308,7 @@ soraia-web/
 │   │   └── ui/                       # Primitivos shadcn base-nova
 │   ├── db/
 │   │   ├── schema.ts                 # Esquema Drizzle (8 tabelas)
-│   │   ├── index.ts                  # Cliente Drizzle + Neon
+│   │   ├── index.ts                  # Cliente Drizzle + Supabase (postgres-js)
 │   │   └── seed.ts                   # Script de população
 │   ├── hooks/
 │   │   ├── use-newsletter.ts         # Hook partilhado (Footer + Section)
@@ -361,7 +361,7 @@ O site estará disponível em `http://localhost:3000` — funciona sem base de d
 ### Com Base de Dados (opcional)
 
 ```bash
-# Sincronizar esquema com Neon
+# Sincronizar esquema com Supabase
 npx drizzle-kit push
 
 # Popular com dados de teste
@@ -375,8 +375,8 @@ npx tsx src/db/seed.ts
 Criar um ficheiro `.env.local` na raiz do projeto:
 
 ```env
-# Base de Dados (Neon) — opcional para desenvolvimento
-DATABASE_URL="postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/soraia?sslmode=require"
+# Base de Dados (Supabase) — opcional para desenvolvimento
+DATABASE_URL="postgresql://postgres.xxxxxxxxxxxx:YOUR-PASSWORD@aws-0-eu-west-1.pooler.supabase.com:6543/postgres"
 
 # Autenticação
 AUTH_SECRET="gerar-com-openssl-rand-base64-32"
@@ -406,7 +406,7 @@ REVALIDATION_SECRET="string-aleatória"
 
 ### Esquema
 
-A base de dados PostgreSQL (Neon Serverless) contém 8 tabelas:
+A base de dados PostgreSQL (Supabase) contém 8 tabelas:
 
 | Tabela | Descrição |
 |--------|-----------|
@@ -422,7 +422,7 @@ A base de dados PostgreSQL (Neon Serverless) contém 8 tabelas:
 ### Comandos Úteis
 
 ```bash
-npx drizzle-kit push       # Sincronizar esquema com Neon
+npx drizzle-kit push       # Sincronizar esquema com Supabase
 npx drizzle-kit generate   # Gerar migrações
 npx drizzle-kit studio     # Abrir Drizzle Studio (GUI)
 npx tsx src/db/seed.ts      # Popular base de dados

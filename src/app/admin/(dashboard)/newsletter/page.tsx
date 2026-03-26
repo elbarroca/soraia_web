@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Users } from "lucide-react";
+import { AdminEmptyState } from "@/components/admin/empty-state";
 import { ExportCsvButton } from "@/components/admin/export-csv-button";
 
 export const dynamic = "force-dynamic";
@@ -51,8 +53,12 @@ export default async function AdminNewsletterPage() {
           <TableBody>
             {subscribers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={3} className="py-8 text-center text-[var(--color-ink-muted)]">
-                  No subscribers yet.
+                <TableCell colSpan={3}>
+                  <AdminEmptyState
+                    icon={Users}
+                    title="No subscribers yet"
+                    description="Subscribers will appear when visitors sign up on your site."
+                  />
                 </TableCell>
               </TableRow>
             ) : (

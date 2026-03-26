@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(cents: number): string {
-  return new Intl.NumberFormat("en-EU", {
+  return new Intl.NumberFormat("en-IE", {
     style: "currency",
     currency: "EUR",
     minimumFractionDigits: cents % 100 === 0 ? 0 : 2,

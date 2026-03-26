@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { ShoppingBag } from "lucide-react";
+import { AdminEmptyState } from "@/components/admin/empty-state";
 
 export const dynamic = "force-dynamic";
 
@@ -53,8 +55,12 @@ export default async function AdminOrdersPage() {
           <TableBody>
             {allOrders.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="py-8 text-center text-[var(--color-ink-muted)]">
-                  No orders yet.
+                <TableCell colSpan={5}>
+                  <AdminEmptyState
+                    icon={ShoppingBag}
+                    title="No orders yet"
+                    description="Orders will appear here when customers make purchases."
+                  />
                 </TableCell>
               </TableRow>
             ) : (

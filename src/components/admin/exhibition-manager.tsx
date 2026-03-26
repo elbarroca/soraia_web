@@ -21,7 +21,8 @@ import {
 } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { CalendarDays, Plus, Pencil, Trash2 } from "lucide-react";
+import { AdminEmptyState } from "./empty-state";
 import {
   createExhibition,
   updateExhibition,
@@ -122,8 +123,13 @@ export function ExhibitionManager({ exhibitions }: { exhibitions: Exhibition[] }
           <TableBody>
             {exhibitions.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="py-8 text-center text-[var(--color-ink-muted)]">
-                  No exhibitions yet.
+                <TableCell colSpan={5}>
+                  <AdminEmptyState
+                    icon={CalendarDays}
+                    title="No exhibitions yet"
+                    description="Add your exhibition history and upcoming shows."
+                    action={{ label: "Add Exhibition", onClick: openNew }}
+                  />
                 </TableCell>
               </TableRow>
             ) : (
@@ -137,12 +143,13 @@ export function ExhibitionManager({ exhibitions }: { exhibitions: Exhibition[] }
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="icon" onClick={() => openEdit(item)}>
+                      <Button variant="ghost" size="icon" aria-label={`Edit ${item.title}`} onClick={() => openEdit(item)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
+                        aria-label={`Delete ${item.title}`}
                         onClick={() => handleDelete(item.id, item.title)}
                       >
                         <Trash2 className="h-4 w-4" />

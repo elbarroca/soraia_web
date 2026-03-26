@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm dev` — start dev server
 - `pnpm build` — production build
 - `pnpm lint` — ESLint
-- `npx drizzle-kit push` — push schema to Neon
+- `npx drizzle-kit push` — push schema to Supabase
 - `npx drizzle-kit generate` — generate migrations
 - `npx drizzle-kit studio` — open Drizzle Studio
 - No test runner configured yet
@@ -19,7 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Next.js 16.2** (App Router) + React 19 + TypeScript strict
 - **Tailwind CSS v4** — PostCSS-based, design tokens as CSS custom properties in `globals.css`
 - **shadcn (base-nova)** — `@base-ui/react` primitives, not Radix
-- **Drizzle ORM** + Neon serverless PostgreSQL
+- **Drizzle ORM** + Supabase PostgreSQL (postgres-js driver, `prepare: false` for Supavisor pooler)
 - **NextAuth v5 beta** — Credentials provider (email + bcrypt hash from env vars)
 - **Stripe** — checkout sessions via `/api/checkout`
 - **Uploadthing** — image uploads in admin
@@ -40,7 +40,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Database
 - Schema: `src/db/schema.ts` (8 tables: artworks, artwork_images, news, exhibitions, site_settings, contacts, newsletter_subscribers, + auth tables)
-- Client: `src/db/index.ts` — `neon()` + `drizzle()` with schema
+- Client: `src/db/index.ts` — `postgres()` + `drizzle()` with `prepare: false` (Supabase Supavisor)
 - Config: `drizzle.config.ts`
 - Artwork categories: `photography | artist-proofs | drawings | jewelry`
 - Prices stored as decimal in DB, converted to cents via `decimalToCents()` in mappers

@@ -41,6 +41,7 @@ export async function POST(req: Request) {
       ],
       metadata: {
         artworkId: String(dbArtwork.id),
+        artworkSlug: artwork.slug,
       },
       shipping_address_collection: {
         allowed_countries: ["PT", "ES", "FR", "DE", "IT", "GB", "US", "NL", "BE"],

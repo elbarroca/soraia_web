@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Mail } from "lucide-react";
+import { AdminEmptyState } from "./empty-state";
+import { toast } from "sonner";
 import type { Contact } from "@/db/schema";
 
 export function ContactsTable({ contacts }: { contacts: Contact[] }) {
@@ -19,11 +21,14 @@ export function ContactsTable({ contacts }: { contacts: Contact[] }) {
 
   async function markAsRead(id: number) {
     startTransition(async () => {
-      await fetch("/api/contact/read", {
+      const res = await fetch("/api/contact/read", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
+      if (!res.ok) {
+        toast.error("Failed to mark as read");
+      }
     });
   }
 
@@ -44,8 +49,12 @@ export function ContactsTable({ contacts }: { contacts: Contact[] }) {
         <TableBody>
           {contacts.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={7} className="py-8 text-center text-[var(--color-ink-muted)]">
-                No contact submissions yet.
+              <TableCell colSpan={7}>
+                <AdminEmptyState
+                  icon={Mail}
+                  title="No messages yet"
+                  description="Messages from your website contact form will appear here."
+                />
               </TableCell>
             </TableRow>
           ) : (
@@ -65,7 +74,7 @@ export function ContactsTable({ contacts }: { contacts: Contact[] }) {
                   {contact.message}
                 </TableCell>
                 <TableCell className="text-sm text-[var(--color-ink-muted)]">
-                  {new Date(contact.createdAt).toLocaleDateString()}
+                  {new Date(contact.createdAt).toLocaleDateString("en-GB")}
                 </TableCell>
                 <TableCell>
                   {!contact.isRead && (

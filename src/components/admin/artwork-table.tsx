@@ -21,12 +21,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Pencil, Trash2 } from "lucide-react";
+import { Image as ImageIcon, Pencil, Trash2 } from "lucide-react";
+import { AdminEmptyState } from "./empty-state";
 import {
   deleteArtwork,
   toggleArtworkVisibility,
 } from "@/app/admin/(dashboard)/artworks/actions";
 import { ARTWORK_CATEGORIES } from "@/lib/validations";
+import { formatPrice } from "@/lib/utils";
 import type { Artwork, ArtworkImage } from "@/db/schema";
 
 type ArtworkWithImages = Artwork & { images: ArtworkImage[] };
@@ -94,8 +96,13 @@ export function ArtworkTable({
           <TableBody>
             {filtered.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="py-8 text-center text-[var(--color-ink-muted)]">
-                  No artworks found.
+                <TableCell colSpan={7}>
+                  <AdminEmptyState
+                    icon={ImageIcon}
+                    title="No artworks yet"
+                    description="Create your first artwork to showcase in your portfolio."
+                    action={{ label: "Add Artwork", href: "/admin/artworks/new" }}
+                  />
                 </TableCell>
               </TableRow>
             ) : (
@@ -126,7 +133,7 @@ export function ArtworkTable({
                       {artwork.priceOnRequest
                         ? "On request"
                         : artwork.price
-                          ? `€${Number(artwork.price).toLocaleString()}`
+                          ? formatPrice(Math.round(parseFloat(artwork.price) * 100))
                           : "—"}
                     </TableCell>
                     <TableCell>
@@ -147,13 +154,14 @@ export function ArtworkTable({
                     <TableCell>
                       <div className="flex items-center gap-1">
                         <Link href={`/admin/artworks/${artwork.id}/edit`}>
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" aria-label={`Edit ${artwork.title}`}>
                             <Pencil className="h-4 w-4" />
                           </Button>
                         </Link>
                         <Button
                           variant="ghost"
                           size="icon"
+                          aria-label={`Delete ${artwork.title}`}
                           onClick={() => handleDelete(artwork.id, artwork.title)}
                         >
                           <Trash2 className="h-4 w-4" />

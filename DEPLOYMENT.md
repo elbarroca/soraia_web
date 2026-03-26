@@ -7,7 +7,7 @@ This guide walks you through setting up every external service and environment v
 ## Table of Contents
 
 1. [Overview](#1-overview)
-2. [Neon (Database)](#2-neon-database)
+2. [Supabase (Database)](#2-supabase-database)
 3. [Stripe (Payments)](#3-stripe-payments)
 4. [Resend (Email)](#4-resend-email)
 5. [Uploadthing (Image Storage)](#5-uploadthing-image-storage)
@@ -25,7 +25,7 @@ The website needs **6 external services** (all have free tiers):
 
 | Service | Purpose | Free Tier |
 |---------|---------|-----------|
-| **Neon** | PostgreSQL database | 0.5 GB storage, always free |
+| **Supabase** | PostgreSQL database | 500 MB storage, 2 projects free |
 | **Stripe** | Payment processing | No monthly fee, 1.5% + €0.25 per transaction |
 | **Resend** | Email notifications (contact form) | 3,000 emails/month |
 | **Uploadthing** | Image uploads (admin panel) | 2 GB storage, 2 GB bandwidth |
@@ -34,40 +34,47 @@ The website needs **6 external services** (all have free tiers):
 
 You will collect **11 environment variables** across these services.
 
+> **Important**: When creating accounts for each service, make sure to invite or grant access to `ricardobarroca45@gmail.com` so the developer can help troubleshoot and manage the setup.
+
 ---
 
-## 2. Neon (Database)
+## 2. Supabase (Database)
 
-Neon is a serverless PostgreSQL database. It stores all artworks, exhibitions, news, contacts, newsletter subscribers, and orders.
+Supabase provides a managed PostgreSQL database. It stores all artworks, exhibitions, news, contacts, newsletter subscribers, and orders.
 
 ### Step 1: Create Account
 
-1. Go to [neon.tech](https://neon.tech)
-2. Click **"Sign Up"** — use Google or GitHub account
+1. Go to [supabase.com](https://supabase.com)
+2. Click **"Start your project"** — use GitHub account
 3. You'll land on the dashboard
 
 ### Step 2: Create a Project
 
 1. Click **"New Project"**
-2. **Project name**: `soraia-portfolio`
-3. **Region**: `AWS eu-central-1 (Frankfurt)` — closest to Portugal
-4. **Database name**: `soraia`
-5. Click **"Create Project"**
+2. **Organization**: Select your org (or create one)
+3. **Project name**: `soraia-portfolio`
+4. **Database password**: Generate a strong password and **save it** — you'll need it for the connection string
+5. **Region**: `West EU (Ireland)` — closest to Portugal
+6. Click **"Create new project"** and wait for it to finish provisioning (~2 minutes)
 
 ### Step 3: Get Connection String
 
-1. After creating the project, you'll see a **"Connection Details"** panel
-2. Make sure **"Pooled connection"** is selected (not direct)
-3. Copy the full connection string. It looks like:
+1. In the project dashboard, go to **Project Settings → Database**
+2. Scroll to **"Connection string"** section
+3. Select the **"URI"** tab
+4. Copy the **Transaction (Supavisor)** connection string — it uses port `6543` and has connection pooling built in
+5. Replace `[YOUR-PASSWORD]` with the database password from Step 2
+
+It looks like:
 
 ```
-postgresql://username:password@ep-xxx-xxx-123456.eu-central-1.aws.neon.tech/soraia?sslmode=require
+postgresql://postgres.xxxxxxxxxxxx:[YOUR-PASSWORD]@aws-0-eu-west-1.pooler.supabase.com:6543/postgres
 ```
 
 ### Environment Variable
 
 ```env
-DATABASE_URL="postgresql://username:password@ep-xxx.eu-central-1.aws.neon.tech/soraia?sslmode=require"
+DATABASE_URL="postgresql://postgres.xxxxxxxxxxxx:YOUR-PASSWORD@aws-0-eu-west-1.pooler.supabase.com:6543/postgres"
 ```
 
 ### Step 4: Initialize Database
@@ -346,8 +353,8 @@ Vercel automatically provisions a free SSL certificate. No action needed — `ht
 Here is the complete list of all 11 environment variables. Copy this template, fill in your values, and add them all to Vercel.
 
 ```env
-# ─── Database (Neon) ───
-DATABASE_URL="postgresql://user:pass@ep-xxx.eu-central-1.aws.neon.tech/soraia?sslmode=require"
+# ─── Database (Supabase) ───
+DATABASE_URL="postgresql://postgres.xxxxxxxxxxxx:YOUR-PASSWORD@aws-0-eu-west-1.pooler.supabase.com:6543/postgres"
 
 # ─── Authentication ───
 AUTH_SECRET="your-openssl-rand-base64-32-output"
@@ -422,9 +429,9 @@ Check that `STRIPE_WEBHOOK_SECRET` matches the webhook in your Stripe dashboard.
 
 For technical issues with the website code, contact the developer.
 
-For account issues with Stripe, Neon, Resend, or Uploadthing, visit their respective support pages:
+For account issues with Stripe, Supabase, Resend, or Uploadthing, visit their respective support pages:
 
 - Stripe: [support.stripe.com](https://support.stripe.com)
-- Neon: [neon.tech/docs](https://neon.tech/docs)
+- Supabase: [supabase.com/docs](https://supabase.com/docs)
 - Resend: [resend.com/docs](https://resend.com/docs)
 - Uploadthing: [docs.uploadthing.com](https://docs.uploadthing.com)
