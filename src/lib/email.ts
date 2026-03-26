@@ -1,6 +1,15 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-init: Resend throws at construction without an API key.
+let _resend: Resend | null = null;
+
+function getResend(): Resend | null {
+  if (!process.env.RESEND_API_KEY) return null;
+  if (!_resend) {
+    _resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return _resend;
+}
 
 type ContactData = {
   name: string;
@@ -11,7 +20,8 @@ type ContactData = {
 
 export async function sendContactNotification(data: ContactData) {
   const notificationEmail = process.env.CONTACT_NOTIFICATION_EMAIL;
-  if (!notificationEmail || !process.env.RESEND_API_KEY) {
+  const resend = getResend();
+  if (!resend || !notificationEmail) {
     console.warn("Resend not configured — skipping email notification");
     return;
   }
