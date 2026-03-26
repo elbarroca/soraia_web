@@ -34,5 +34,10 @@ export function useNewsletter() {
     setStatus("idle");
   }
 
-  return { email, status, subscribe, updateEmail };
+  function reset() {
+    setStatus("idle");
+    setEmail("");
+  }
+
+  return { email, status, subscribe, updateEmail, reset };
 }

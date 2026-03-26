@@ -6,18 +6,22 @@ import { ExhibitionList } from "@/components/features/exhibition-list";
 import { getSettings, getVisibleExhibitions } from "@/lib/queries";
 import { toPublicExhibition } from "@/lib/mappers";
 import { artistPersonJsonLd } from "@/lib/structured-data";
+import { mockExhibitions } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn about Soraia Oliveira — multidisciplinary visual artist based in Guimarães, Portugal.",
+  description: "Learn about Soraia Oliveira — multidisciplinary visual artist based in Guimaraes, Portugal.",
 };
 
 export default async function AboutPage() {
   const settings = await getSettings();
   const dbExhibitions = await getVisibleExhibitions();
-  const exhibitions = dbExhibitions.map(toPublicExhibition);
+  const exhibitions =
+    dbExhibitions.length > 0
+      ? dbExhibitions.map(toPublicExhibition)
+      : mockExhibitions;
 
   let bioParagraphs: string[] = [];
   let identityWords: string[] = [];

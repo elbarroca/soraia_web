@@ -2,9 +2,9 @@ import { HeroSection } from "@/components/features/hero-section";
 import { CategoryGrid } from "@/components/features/category-grid";
 import { ArtistStatement } from "@/components/features/artist-statement";
 import { NewsletterSection } from "@/components/features/newsletter-section";
-import { getSettings } from "@/lib/queries";
-import { getVisibleArtworks } from "@/lib/queries";
+import { getSettings, getVisibleArtworks } from "@/lib/queries";
 import { toPublicArtwork } from "@/lib/mappers";
+import { mockArtworks } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
@@ -14,15 +14,21 @@ export default async function HomePage() {
   const featuredId = settings.featured_artwork_id
     ? parseInt(settings.featured_artwork_id, 10)
     : undefined;
-  const artworks = dbArtworks.map((a) => toPublicArtwork(a, featuredId));
+
+  const artworks =
+    dbArtworks.length > 0
+      ? dbArtworks.map((a) => toPublicArtwork(a, featuredId))
+      : mockArtworks;
+
   const featuredArtwork = artworks.find((a) => a.isFeatured && a.isVisible);
+  const heroImage = featuredArtwork?.images?.[0]?.url ?? "/images/hero-featured.png";
 
   return (
     <>
       <HeroSection
         statement={settings.hero_statement}
         tagline={settings.hero_tagline}
-        featuredImage={featuredArtwork?.images?.[0]?.url}
+        featuredImage={heroImage}
       />
       <CategoryGrid />
       <ArtistStatement

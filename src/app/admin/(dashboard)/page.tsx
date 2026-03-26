@@ -21,30 +21,42 @@ import { count } from "drizzle-orm";
 export const dynamic = "force-dynamic";
 
 async function getDashboardStats() {
-  const [
-    [artworkCount],
-    [newsCount],
-    [exhibitionCount],
-    [orderCount],
-    [contactCount],
-    [subscriberCount],
-  ] = await Promise.all([
-    db.select({ value: count() }).from(artworks),
-    db.select({ value: count() }).from(news),
-    db.select({ value: count() }).from(exhibitions),
-    db.select({ value: count() }).from(orders),
-    db.select({ value: count() }).from(contacts),
-    db.select({ value: count() }).from(newsletterSubscribers),
-  ]);
+  try {
+    const [
+      [artworkCount],
+      [newsCount],
+      [exhibitionCount],
+      [orderCount],
+      [contactCount],
+      [subscriberCount],
+    ] = await Promise.all([
+      db.select({ value: count() }).from(artworks),
+      db.select({ value: count() }).from(news),
+      db.select({ value: count() }).from(exhibitions),
+      db.select({ value: count() }).from(orders),
+      db.select({ value: count() }).from(contacts),
+      db.select({ value: count() }).from(newsletterSubscribers),
+    ]);
 
-  return {
-    artworks: artworkCount.value,
-    news: newsCount.value,
-    exhibitions: exhibitionCount.value,
-    orders: orderCount.value,
-    contacts: contactCount.value,
-    subscribers: subscriberCount.value,
-  };
+    return {
+      artworks: artworkCount.value,
+      news: newsCount.value,
+      exhibitions: exhibitionCount.value,
+      orders: orderCount.value,
+      contacts: contactCount.value,
+      subscribers: subscriberCount.value,
+    };
+  } catch {
+    console.warn("[DB] Dashboard stats failed — using zeros");
+    return {
+      artworks: 0,
+      news: 0,
+      exhibitions: 0,
+      orders: 0,
+      contacts: 0,
+      subscribers: 0,
+    };
+  }
 }
 
 export default async function AdminDashboard() {

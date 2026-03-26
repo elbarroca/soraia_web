@@ -5,6 +5,7 @@ import { ArtworkFilter } from "@/components/features/artwork-filter";
 import { ArtworkGrid } from "@/components/features/artwork-grid";
 import { getVisibleArtworks } from "@/lib/queries";
 import { toPublicArtwork } from "@/lib/mappers";
+import { mockArtworks } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 
 export default async function ArtworksPage() {
   const dbArtworks = await getVisibleArtworks();
-  const visibleArtworks = dbArtworks.map((a) => toPublicArtwork(a));
+  const visibleArtworks =
+    dbArtworks.length > 0
+      ? dbArtworks.map((a) => toPublicArtwork(a))
+      : mockArtworks;
 
   return (
     <Section className="pt-8 md:pt-12">
