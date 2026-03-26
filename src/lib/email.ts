@@ -90,6 +90,31 @@ export async function sendContactNotification(data: ContactData) {
   }
 }
 
+// ─── Newsletter Subscriber Notification (to Soraia) ───
+
+export async function sendNewSubscriberNotification(email: string) {
+  const notificationEmail = process.env.CONTACT_NOTIFICATION_EMAIL;
+  const resend = getResend();
+  if (!resend || !notificationEmail) return;
+
+  try {
+    await resend.emails.send({
+      from: FROM,
+      to: notificationEmail,
+      subject: `New newsletter subscriber: ${email}`,
+      html: emailLayout(`
+        <h2 style="margin:0 0 16px;font-size:20px;font-weight:500">New Subscriber</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6"><strong>${email}</strong> just subscribed to your newsletter.</p>
+        <div style="margin:20px 0 0">
+          <a href="${BASE_URL}/admin/newsletter" style="display:inline-block;padding:10px 24px;background:#1a1a1a;color:#ffffff;font-size:13px;font-weight:500;text-decoration:none;border-radius:6px">View Subscribers</a>
+        </div>
+      `),
+    });
+  } catch (error) {
+    console.error("Failed to send subscriber notification:", error);
+  }
+}
+
 // ─── Order Confirmation (to customer) ───
 
 type OrderEmailData = {
