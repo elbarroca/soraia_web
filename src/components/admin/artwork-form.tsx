@@ -289,6 +289,48 @@ export function ArtworkForm({ artwork }: ArtworkFormProps) {
             />
             <Label>Visible on site</Label>
           </div>
+
+          {/* Checkout Readiness */}
+          {(() => {
+            const price = form.watch("price");
+            const priceOnRequest = form.watch("priceOnRequest");
+            const isSold = form.watch("isSold");
+            const hasPrice = price && parseFloat(price) > 0;
+            const canCheckout = hasPrice && !priceOnRequest && !isSold;
+
+            const warnings: string[] = [];
+            if (isSold) warnings.push("Artwork is marked as sold");
+            if (priceOnRequest) warnings.push("Price is set to 'on request' — no checkout button shown");
+            if (!priceOnRequest && !hasPrice) warnings.push("No price set — visitors cannot purchase");
+
+            return (
+              <div className={`mt-2 rounded-lg border p-3 ${canCheckout ? "border-green-200 bg-green-50" : "border-amber-200 bg-amber-50"}`}>
+                <div className="flex items-center gap-2">
+                  <span className={`inline-block h-2 w-2 rounded-full ${canCheckout ? "bg-green-500" : "bg-amber-500"}`} />
+                  <span className={`text-sm font-medium ${canCheckout ? "text-green-800" : "text-amber-800"}`}>
+                    {canCheckout ? "Checkout ready" : "Not purchasable"}
+                  </span>
+                  {canCheckout && (
+                    <span className="text-xs text-green-600">
+                      — Stripe checkout will use dynamic pricing ({pricePreview})
+                    </span>
+                  )}
+                </div>
+                {warnings.length > 0 && (
+                  <ul className="mt-1 space-y-0.5">
+                    {warnings.map((w) => (
+                      <li key={w} className="text-xs text-amber-700">• {w}</li>
+                    ))}
+                  </ul>
+                )}
+                {canCheckout && (
+                  <p className="mt-1 text-xs text-green-600">
+                    No Stripe Price ID needed — price is sent dynamically at checkout time.
+                  </p>
+                )}
+              </div>
+            );
+          })()}
         </CardContent>
       </Card>
 
