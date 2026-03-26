@@ -85,14 +85,14 @@ export function Footer() {
           {/* Top row: Signature + Nav + Social + Newsletter */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
             {/* Brand */}
-            <div className="md:col-span-3 space-y-6">
+            <div className="md:col-span-3 space-y-4">
               <Link href="/" className="block" aria-label="Soraia Oliveira — home">
                 <Image
                   src="/images/branding/signature-bold.png"
                   alt="Soraia Oliveira"
-                  width={180}
-                  height={36}
-                  className="h-8 md:h-10 w-auto object-contain"
+                  width={160}
+                  height={32}
+                  className="h-7 md:h-9 w-auto object-contain object-left"
                 />
               </Link>
               <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed max-w-[240px]">

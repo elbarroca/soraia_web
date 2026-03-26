@@ -7,11 +7,11 @@ import { ArrowRight } from "lucide-react";
 
 type HeroSectionProps = {
   statement: string;
-  tagline: string;
+  tagline?: string;
   featuredImage?: string;
 };
 
-export function HeroSection({ statement, tagline, featuredImage }: HeroSectionProps) {
+export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
   const prefersReducedMotion = useReducedMotion();
   const d = prefersReducedMotion ? 0 : 1;
 
@@ -68,16 +68,6 @@ export function HeroSection({ statement, tagline, featuredImage }: HeroSectionPr
             >
               {statement}
             </motion.h1>
-
-            {/* Tagline */}
-            <motion.p
-              className="text-[14px] md:text-[15px] text-[var(--color-ink-light)] max-w-[380px] leading-[1.8] tracking-[0.01em]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 * d, delay: 0.55 * d }}
-            >
-              {tagline}
-            </motion.p>
 
             {/* Single, understated CTA */}
             <motion.div

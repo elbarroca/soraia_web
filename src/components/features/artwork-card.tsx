@@ -15,14 +15,14 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/artworks/${artwork.slug}`} className="group block">
       {/* Image container */}
-      <div className="relative overflow-hidden bg-[var(--color-surface-dim)] aspect-[4/3] mb-4">
+      <div className="relative overflow-hidden bg-[var(--color-surface-dim)] aspect-[3/4] mb-4">
         {primaryImage ? (
           <>
             <Image
               src={primaryImage.url}
               alt={primaryImage.altText || artwork.title}
               fill
-              className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+              className="object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
             />
             {/* Subtle overlay on hover — frames the image without obscuring it */}
@@ -37,7 +37,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
         {/* Status badges */}
         <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
           {artwork.isSold && (
-            <span className="text-[9px] font-medium tracking-[0.15em] uppercase bg-[var(--color-sold)] text-white px-2 py-0.5">
+            <span className="text-[9px] font-medium tracking-[0.15em] uppercase bg-[var(--color-sale)] text-white px-2 py-0.5">
               Sold
             </span>
           )}

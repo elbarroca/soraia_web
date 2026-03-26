@@ -10,33 +10,50 @@ type PurchaseButtonProps = {
 
 export function PurchaseButton({ artworkId, disabled }: PurchaseButtonProps) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handlePurchase() {
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ artworkId }),
       });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
         return;
       }
+      setError("Could not start checkout. Please try again.");
+    } catch {
+      setError("Connection error. Please check your internet and try again.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <Button
-      onClick={handlePurchase}
-      disabled={disabled || loading}
-      className="w-full"
-      size="lg"
-    >
-      {loading ? "Redirecting..." : "PURCHASE"}
-    </Button>
+    <div className="space-y-2">
+      <Button
+        onClick={handlePurchase}
+        disabled={disabled || loading}
+        className="w-full"
+        size="lg"
+      >
+        {loading ? "Redirecting..." : "PURCHASE"}
+      </Button>
+      {error && (
+        <p className="text-[12px] text-red-600 text-center">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

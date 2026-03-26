@@ -593,4 +593,4 @@ CNAME  www  cname.vercel-dns.com
 
 Projeto privado. Todos os direitos reservados.
 
-Desenvolvido para **Soraia Oliveira** — artista visual, Guimarães, Portugal.
+Desenvolvido para **Soraia Oliveira** — artista visual, Guimarães, Portugal.  

@@ -28,7 +28,6 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
     { label: "Medium", value: artwork.medium },
     { label: "Edition", value: artwork.edition },
     { label: "Dimensions", value: artwork.dimensions },
-    { label: "Category", value: artwork.category.replaceAll("-", " ") },
   ].filter((d) => d.value);
 
   const canPurchase = !artwork.isSold && !artwork.isPriceOnRequest && artwork.priceCents;
@@ -63,10 +62,6 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
             <div className="lg:sticky lg:top-28 space-y-8">
               {/* Title + price */}
               <div className="space-y-3">
-                <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] flex items-center gap-3">
-                  <span className="block h-px w-6 bg-[var(--color-ink-muted)]" aria-hidden="true" />
-                  {artwork.category.replaceAll("-", " ")}
-                </p>
                 <h1 className="heading-1">{artwork.title}</h1>
                 <div className="pt-1">
                   <PriceDisplay
@@ -126,6 +121,21 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
                   </Link>
                 )}
               </div>
+
+              {/* Shipping info */}
+              {!artwork.isSold && (
+                <div className="border-t border-[var(--color-border)] pt-5 space-y-2">
+                  <p className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">
+                    Shipping
+                  </p>
+                  <p className="text-[12px] text-[var(--color-ink-light)] leading-relaxed">
+                    Ships from Guimarães, Portugal. Delivery available to Portugal, Spain, France, Germany, Italy, United Kingdom, Netherlands, Belgium, and the United States.
+                  </p>
+                  <p className="text-[12px] text-[var(--color-ink-muted)] leading-relaxed">
+                    Shipping costs calculated at checkout. All works are carefully packed and insured.
+                  </p>
+                </div>
+              )}
             </div>
           </FadeIn>
         </div>

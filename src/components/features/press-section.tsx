@@ -19,9 +19,9 @@ const PRESS_ITEMS: PressItem[] = [
 
 export function PressSection() {
   return (
-    <div className="space-y-8">
+    <div className="max-w-2xl mx-auto space-y-8">
       <FadeIn>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center gap-4">
           <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
           <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
             Press & Media
@@ -64,7 +64,7 @@ export function PressSection() {
       </div>
 
       <FadeIn delay={0.2}>
-        <p className="text-[13px] text-[var(--color-ink-muted)]">
+        <p className="text-[13px] text-[var(--color-ink-muted)] text-center">
           For press inquiries, contact{" "}
           <a
             href="mailto:info@soraia-oliveira.com"

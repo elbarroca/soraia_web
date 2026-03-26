@@ -26,7 +26,7 @@ export function PriceDisplay({
     return (
       <span
         className={cn(
-          "inline-block text-[var(--color-ink-muted)] font-medium tracking-[0.14em] uppercase",
+          "inline-block text-[var(--color-sale)] font-medium tracking-[0.14em] uppercase",
           sizeClasses[size]
         )}
       >

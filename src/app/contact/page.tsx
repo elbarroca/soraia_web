@@ -27,13 +27,7 @@ export default function ContactPage() {
                 </div>
                 <h1 className="heading-1 mb-4">I&apos;d Love to Hear From You</h1>
                 <p className="text-[var(--color-ink-light)] leading-relaxed max-w-md">
-                  Whether you&apos;re drawn to a particular piece, curious about commissioning something new, or simply want to talk about art — I read every message personally.
-                </p>
-                <p
-                  className="text-[15px] text-[var(--color-ink-muted)] mt-3"
-                  style={{ fontFamily: "var(--font-serif)", fontStyle: "italic" }}
-                >
-                  — Soraia
+                  Whether you&apos;re drawn to a particular piece, curious about commissioning something new, or looking to collaborate — I&apos;d love to hear from you.
                 </p>
               </div>
             </FadeIn>

@@ -48,42 +48,48 @@ export default async function AboutPage() {
       {/* "Let's talk" CTA */}
       <Section>
         <FadeIn>
-          <div className="max-w-xl mx-auto text-center space-y-6">
-            <h2 className="heading-editorial">
-              More questions? Let&apos;s talk.
-            </h2>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
-            >
-              Get in Touch
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
+          <Link href="/contact" className="group block">
+            <div className="flex items-end justify-between gap-8">
+              <div>
+                <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-4">
+                  ( Contact )
+                </p>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)]">
+                  More questions?<br />
+                  <span className="pl-[10%]">Let&apos;s talk!</span>
+                </h2>
+              </div>
+              <div className="hidden sm:block flex-shrink-0 mb-2">
+                <div className="relative w-16 h-16 md:w-20 md:h-20 border-2 border-[var(--color-ink)] flex items-center justify-center group-hover:bg-[var(--color-ink)] transition-colors duration-300">
+                  <ArrowRight size={24} className="rotate-45 text-[var(--color-ink)] group-hover:text-white transition-colors duration-300" />
+                </div>
+              </div>
+            </div>
+          </Link>
         </FadeIn>
       </Section>
 
       {/* Closing CTA */}
-      <Section className="bg-[var(--color-ink)] text-white">
+      <Section className="bg-[var(--color-surface-dim)]">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center space-y-6">
-            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/40">
+            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
               What&apos;s Next
             </p>
-            <h2 className="heading-editorial text-white">
+            <h2 className="heading-editorial text-[var(--color-ink)]">
               The work speaks for itself
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
               <Link
                 href="/artworks"
-                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-white/70 hover:text-white transition-colors duration-300"
+                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
               >
                 Explore the Work
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/soraia-space"
-                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-white/70 hover:text-white transition-colors duration-300"
+                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
               >
                 Book a Studio Visit
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />

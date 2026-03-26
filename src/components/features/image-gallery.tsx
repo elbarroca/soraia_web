@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { ArtworkImage } from "@/lib/types";
@@ -13,6 +13,17 @@ type ImageGalleryProps = {
 
 export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isZooming, setIsZooming] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomPos({ x, y });
+  }, []);
 
   if (images.length === 0) {
     return (
@@ -24,21 +35,33 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
 
   return (
     <div className="space-y-4">
-      {/* Main image */}
-      <button
+      {/* Main image with hover zoom */}
+      <div
+        ref={containerRef}
+        className="relative w-full min-h-[300px] bg-[var(--color-surface-dim)] overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] focus-visible:ring-offset-2 outline-none"
+        onMouseEnter={() => setIsZooming(true)}
+        onMouseLeave={() => setIsZooming(false)}
+        onMouseMove={handleMouseMove}
         onClick={() => onOpenLightbox(activeIndex)}
-        className="relative w-full aspect-[3/4] bg-[var(--color-surface-dim)] overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter") onOpenLightbox(activeIndex); }}
         aria-label={`View ${title} fullscreen`}
       >
         <Image
           src={images[activeIndex].url}
           alt={images[activeIndex].altText || title}
-          fill
-          className="object-cover"
+          width={1200}
+          height={1200}
+          className={cn(
+            "w-full h-auto object-contain transition-transform duration-200 ease-out",
+            isZooming && "scale-[2.5]"
+          )}
+          style={isZooming ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : undefined}
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority
         />
-      </button>
+      </div>
 
       {/* Thumbnails */}
       {images.length > 1 && (
