@@ -1,124 +1,67 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [visible, setVisible] = useState(false);
-  const [hovering, setHovering] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const visible = useRef(false);
+  const raf = useRef<number>(0);
+  const mx = useRef(-100);
+  const my = useRef(-100);
 
-  const onMouseMove = useCallback((e: MouseEvent) => {
-    setPos({ x: e.clientX, y: e.clientY });
-    if (!visible) setVisible(true);
-  }, [visible]);
-
-  const onMouseLeave = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const onMouseEnter = useCallback(() => {
-    setVisible(true);
-  }, []);
-
-  useEffect(() => {
-    // Only show custom cursor on non-touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    document.documentElement.style.cursor = "none";
-
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("mouseenter", onMouseEnter);
-
-    return () => {
-      document.documentElement.style.cursor = "";
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("mouseenter", onMouseEnter);
-    };
-  }, [onMouseMove, onMouseLeave, onMouseEnter]);
-
-  useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-
-    function checkHover() {
-      const interactiveEls = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, select, label, [data-cursor="pointer"]'
-      );
-
-      const handler = () => setHovering(true);
-      const leaveHandler = () => setHovering(false);
-
-      for (const el of interactiveEls) {
-        el.addEventListener("mouseenter", handler);
-        el.addEventListener("mouseleave", leaveHandler);
-      }
-
-      return () => {
-        for (const el of interactiveEls) {
-          el.removeEventListener("mouseenter", handler);
-          el.removeEventListener("mouseleave", leaveHandler);
-        }
-      };
+  const animate = useCallback(() => {
+    const el = cursorRef.current;
+    if (el) {
+      el.style.transform = `translate3d(${mx.current}px, ${my.current}px, 0) translate(-50%, -50%)`;
+      el.style.opacity = visible.current ? "1" : "0";
     }
-
-    // Run initially + observe DOM changes for dynamic content
-    let cleanup = checkHover();
-    const observer = new MutationObserver(() => {
-      cleanup?.();
-      cleanup = checkHover();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      cleanup?.();
-      observer.disconnect();
-    };
+    raf.current = requestAnimationFrame(animate);
   }, []);
 
-  // Don't render on touch devices
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-    return null;
-  }
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
-  const size = hovering ? 40 : 28;
-  const dotSize = hovering ? 6 : 4;
+    function onMove(e: MouseEvent) {
+      mx.current = e.clientX;
+      my.current = e.clientY;
+      visible.current = true;
+    }
+    function onLeave() { visible.current = false; }
+    function onEnter() { visible.current = true; }
+
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
+    raf.current = requestAnimationFrame(animate);
+
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
+      cancelAnimationFrame(raf.current);
+    };
+  }, [animate]);
 
   return (
-    <div
-      className="pointer-events-none fixed inset-0 z-[9999]"
-      aria-hidden="true"
-    >
-      {/* Outer ring */}
+    <div className="pointer-events-none fixed inset-0 z-[9999]" aria-hidden="true">
       <div
+        ref={cursorRef}
         style={{
-          position: "absolute",
-          left: pos.x - size / 2,
-          top: pos.y - size / 2,
-          width: size,
-          height: size,
-          borderRadius: "50%",
-          border: "1.5px solid var(--color-ink)",
-          opacity: visible ? 1 : 0,
-          transition: "width 0.25s cubic-bezier(0.22, 1, 0.36, 1), height 0.25s cubic-bezier(0.22, 1, 0.36, 1), left 0.08s linear, top 0.08s linear, opacity 0.2s ease",
-          willChange: "left, top, width, height",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: 32,
+          height: 32,
+          opacity: 0,
+          willChange: "transform",
         }}
-      />
-      {/* Center dot */}
-      <div
-        style={{
-          position: "absolute",
-          left: pos.x - dotSize / 2,
-          top: pos.y - dotSize / 2,
-          width: dotSize,
-          height: dotSize,
-          borderRadius: "50%",
-          backgroundColor: "var(--color-ink)",
-          opacity: visible ? 1 : 0,
-          transition: "width 0.25s cubic-bezier(0.22, 1, 0.36, 1), height 0.25s cubic-bezier(0.22, 1, 0.36, 1), left 0.08s linear, top 0.08s linear, opacity 0.2s ease",
-          willChange: "left, top, width, height",
-        }}
-      />
+      >
+        {/* SVG circle + dot — crisp at any size */}
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14.5" stroke="var(--color-ink)" strokeWidth="1.5" />
+          <circle cx="16" cy="16" r="2.5" fill="var(--color-ink)" />
+        </svg>
+      </div>
     </div>
   );
 }
