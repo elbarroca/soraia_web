@@ -27,13 +27,22 @@ export async function POST(req: Request) {
         {
           price_data: {
             currency: "eur",
-            product_data: {
-              name: artwork.title,
-              images: artwork.images[0]?.url ? [artwork.images[0].url] : [],
-              description: [artwork.medium, artwork.dimensions, artwork.edition]
+            product_data: (() => {
+              const desc = [artwork.medium, artwork.dimensions, artwork.edition]
                 .filter(Boolean)
-                .join(" · "),
-            },
+                .join(" · ");
+              const imageUrl = artwork.images[0]?.url;
+              const absoluteImage = imageUrl?.startsWith("http")
+                ? imageUrl
+                : imageUrl
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`
+                  : null;
+              return {
+                name: artwork.title,
+                ...(absoluteImage ? { images: [absoluteImage] } : {}),
+                ...(desc ? { description: desc } : {}),
+              };
+            })(),
             unit_amount: artwork.priceCents,
           },
           quantity: 1,

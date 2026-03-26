@@ -61,7 +61,7 @@ export function ArtworkGrid({ artworks }: ArtworkGridProps) {
 
   const filtered =
     activeCategory === "all"
-      ? artworks
+      ? artworks.filter((a) => a.category !== "jewelry")
       : artworks.filter((a) => a.category === activeCategory);
 
   const sorted = sortArtworks(filtered, sort);
@@ -100,7 +100,7 @@ export function ArtworkGrid({ artworks }: ArtworkGridProps) {
           <p className="text-[var(--color-ink-muted)]">No artworks in this category yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-x-8 sm:gap-y-14">
           {sorted.map((artwork, i) => (
             <FadeIn key={artwork.id} delay={Math.min(i * 0.05, 0.3)}>
               <ArtworkCard artwork={artwork} />

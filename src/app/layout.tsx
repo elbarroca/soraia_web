@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { CustomCursor } from "@/components/shared/custom-cursor";
 import { websiteJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
@@ -82,6 +83,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <CustomCursor />
         <Header />
         <main id="main-content" className="flex-1 pt-[var(--header-h)] md:pt-[var(--header-h-md)]">
           {children}

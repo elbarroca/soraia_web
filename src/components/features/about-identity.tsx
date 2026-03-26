@@ -20,7 +20,7 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
 
   return (
     <div className="bg-[var(--color-ink)] text-white py-24 md:py-32">
-      <div className="mx-auto w-full max-w-[1440px] px-[var(--space-page-x)] text-center">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] text-center">
         <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/40 mb-6">I Am</p>
         <div className="h-20 md:h-28 flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">

@@ -5,14 +5,10 @@ import { Section } from "@/components/layout/section";
 import { AboutBio } from "@/components/features/about-bio";
 import { AboutIdentity } from "@/components/features/about-identity";
 import { EducationTimeline } from "@/components/features/education-timeline";
-import { ExhibitionList } from "@/components/features/exhibition-list";
-import { CollaboratorsSection } from "@/components/features/collaborators-section";
 import { PressSection } from "@/components/features/press-section";
 import { FadeIn } from "@/components/shared/fade-in";
-import { getSettings, getVisibleExhibitions } from "@/lib/queries";
-import { toPublicExhibition } from "@/lib/mappers";
+import { getSettings } from "@/lib/queries";
 import { artistPersonJsonLd } from "@/lib/structured-data";
-import { mockExhibitions } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
@@ -23,11 +19,6 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const settings = await getSettings();
-  const dbExhibitions = await getVisibleExhibitions();
-  const exhibitions =
-    dbExhibitions.length > 0
-      ? dbExhibitions.map(toPublicExhibition)
-      : mockExhibitions;
 
   let bioParagraphs: string[] = [];
   let identityWords: string[] = [];
@@ -50,15 +41,26 @@ export default async function AboutPage() {
 
       <AboutIdentity words={identityWords} />
 
-      <Section>
-        <ExhibitionList exhibitions={exhibitions} />
+      <Section className="bg-[var(--color-surface-dim)]">
+        <PressSection />
       </Section>
 
-      <Section className="bg-[var(--color-surface-dim)]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <CollaboratorsSection />
-          <PressSection />
-        </div>
+      {/* "Let's talk" CTA */}
+      <Section>
+        <FadeIn>
+          <div className="max-w-xl mx-auto text-center space-y-6">
+            <h2 className="heading-editorial">
+              More questions? Let&apos;s talk.
+            </h2>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
+            >
+              Get in Touch
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </FadeIn>
       </Section>
 
       {/* Closing CTA */}

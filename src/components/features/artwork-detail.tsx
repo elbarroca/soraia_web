@@ -36,7 +36,7 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
 
   return (
     <>
-      <div className="mx-auto w-full max-w-[1440px] px-[var(--space-page-x)] py-8 md:py-16">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-8 md:py-16">
         {/* Back link */}
         <FadeIn>
           <Link

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+// Button used via direct Link styling (Server Component can't call client buttonVariants)
 import {
   Table,
   TableBody,
@@ -29,7 +29,6 @@ import {
   type Order,
 } from "@/db/schema";
 import { count, desc } from "drizzle-orm";
-import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -138,13 +137,13 @@ export default async function AdminDashboard() {
       <div className="flex flex-wrap gap-3">
         <Link
           href="/admin/artworks/new"
-          className={cn(buttonVariants({ variant: "default" }))}
+          className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg bg-primary px-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/80"
         >
           Add Artwork
         </Link>
         <Link
           href="/admin/settings"
-          className={cn(buttonVariants({ variant: "outline" }))}
+          className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-2.5 text-sm font-medium transition-all hover:bg-muted hover:text-foreground"
         >
           Manage Settings
         </Link>

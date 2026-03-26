@@ -2,6 +2,7 @@ import { z } from "zod";
 import { db } from "@/db";
 import { newsletterSubscribers } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { addSubscriberToMailerLite } from "@/lib/mailerlite";
 
 const emailSchema = z.object({
   email: z.email(),
@@ -20,7 +21,11 @@ export async function POST(req: Request) {
       return Response.json({ message: "Already subscribed" }, { status: 200 });
     }
 
-    await db.insert(newsletterSubscribers).values({ email });
+    // Store in local DB and sync to MailerLite in parallel
+    await Promise.all([
+      db.insert(newsletterSubscribers).values({ email }),
+      addSubscriberToMailerLite(email),
+    ]);
 
     return Response.json({ success: true });
   } catch {

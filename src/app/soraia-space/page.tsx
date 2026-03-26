@@ -3,11 +3,11 @@ import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { AppointmentSection } from "@/components/features/appointment-section";
 import { NewsList } from "@/components/features/news-list";
-import { ExhibitionList } from "@/components/features/exhibition-list";
+import { SpaceNav } from "@/components/features/space-nav";
 import { FadeIn } from "@/components/shared/fade-in";
-import { getSettings, getVisibleNews, getVisibleExhibitions } from "@/lib/queries";
-import { toPublicNews, toPublicExhibition } from "@/lib/mappers";
-import { mockNews, mockExhibitions } from "@/lib/mock-data";
+import { getSettings, getVisibleNews } from "@/lib/queries";
+import { toPublicNews } from "@/lib/mappers";
+import { mockNews } from "@/lib/mock-data";
 import { NewsletterSection } from "@/components/features/newsletter-section";
 
 export const dynamic = "force-dynamic";
@@ -18,34 +18,21 @@ export const metadata: Metadata = {
 };
 
 export default async function SoraiaSpacePage() {
-  const [settings, dbNews, dbExhibitions] = await Promise.all([
+  const [settings, dbNews] = await Promise.all([
     getSettings(),
     getVisibleNews(),
-    getVisibleExhibitions(),
   ]);
 
   const visibleNews =
     dbNews.length > 0 ? dbNews.map(toPublicNews) : mockNews;
-  const exhibitions =
-    dbExhibitions.length > 0
-      ? dbExhibitions.map(toPublicExhibition)
-      : mockExhibitions;
-
-  // Show top 3 most recent exhibitions
-  const recentExhibitions = exhibitions.slice(0, 3);
 
   return (
     <>
-      {/*
-        Hero — image-dominant editorial layout.
-        The studio image takes 7 of 12 columns; the text sidebar sits left.
-        On mobile the image stacks below the heading for natural reading order.
-        No excessive top padding — the content should feel like stepping straight in.
-      */}
+      {/* Hero */}
       <Section className="pt-6 md:pt-10 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8 items-start">
 
-          {/* Text sidebar — narrow left column, vertically centered with the upper image */}
+          {/* Text sidebar */}
           <div className="lg:col-span-4 space-y-7 lg:pt-6 pb-10 lg:pb-0 pr-0 lg:pr-6">
             <FadeIn>
               <div className="flex items-center gap-4">
@@ -56,14 +43,12 @@ export default async function SoraiaSpacePage() {
               </div>
             </FadeIn>
 
-            {/* Monumental heading — not confined, spans its column with authority */}
             <FadeIn delay={0.08}>
               <h1 className="heading-display leading-[1.0] text-[var(--color-ink)]">
                 Soraia<br />Space
               </h1>
             </FadeIn>
 
-            {/* Serif italic pull-line — the emotional hook */}
             <FadeIn delay={0.16}>
               <p
                 className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug"
@@ -72,7 +57,6 @@ export default async function SoraiaSpacePage() {
               </p>
             </FadeIn>
 
-            {/* Tighter body copy — studio facts, no walls of text */}
             <FadeIn delay={0.22}>
               <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
                 Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
@@ -83,7 +67,7 @@ export default async function SoraiaSpacePage() {
             </FadeIn>
           </div>
 
-          {/* Studio image — dominates 8 of 12 columns; tall aspect ratio for presence */}
+          {/* Studio image */}
           <FadeIn delay={0.1} className="lg:col-span-8">
             <div className="relative aspect-[4/3] lg:aspect-[16/10] overflow-hidden">
               <Image
@@ -100,8 +84,11 @@ export default async function SoraiaSpacePage() {
         </div>
       </Section>
 
-      {/* The Practice — context for visitors */}
-      <Section className="bg-[var(--color-surface-warm)]">
+      {/* Anchor navigation */}
+      <SpaceNav />
+
+      {/* The Practice */}
+      <Section id="the-practice" className="bg-[var(--color-surface-warm)]">
         <FadeIn>
           <div className="max-w-2xl">
             <div className="flex items-center gap-4 mb-6">
@@ -132,7 +119,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* Appointments */}
-      <Section className="bg-[var(--color-surface-dim)]">
+      <Section id="appointments" className="bg-[var(--color-surface-dim)]">
         <AppointmentSection
           text={settings.appointment_text}
           studioUrl={settings.appointment_url}
@@ -140,19 +127,12 @@ export default async function SoraiaSpacePage() {
         />
       </Section>
 
-      {/* Recent Exhibitions */}
-      {recentExhibitions.length > 0 && (
-        <Section>
-          <ExhibitionList exhibitions={recentExhibitions} />
-        </Section>
-      )}
-
       {/* News */}
-      <Section className="bg-[var(--color-surface-dim)]">
+      <Section id="news" className="bg-[var(--color-surface-dim)]">
         <NewsList items={visibleNews} />
       </Section>
 
-      {/* Newsletter — capture visitors who want to stay close */}
+      {/* Newsletter */}
       <NewsletterSection />
     </>
   );

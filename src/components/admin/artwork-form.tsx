@@ -66,8 +66,8 @@ export function ArtworkForm({ artwork }: ArtworkFormProps) {
     artwork?.images ?? []
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const form = useForm<ArtworkFormValues>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Zod v4 + react-hook-form resolver type mismatch
     resolver: zodResolver(artworkFormSchema) as any,
     defaultValues: {
       title: artwork?.title ?? "",

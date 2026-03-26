@@ -70,7 +70,6 @@ export default async function ArtworkOgImage({
               padding: 40,
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={artwork.images[0].url}
               alt={artwork.title}

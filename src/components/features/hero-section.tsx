@@ -17,7 +17,7 @@ export function HeroSection({ statement, tagline, featuredImage }: HeroSectionPr
 
   return (
     <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-center overflow-hidden">
-      <div className="mx-auto w-full max-w-[1440px] px-[var(--space-page-x)] py-12 md:py-0">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-12 md:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Image side */}
           <motion.div
@@ -55,7 +55,7 @@ export function HeroSection({ statement, tagline, featuredImage }: HeroSectionPr
             >
               <span className="block h-px w-12 bg-[var(--color-ink)]" aria-hidden="true" />
               <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-                Visual Artist · Guimarães, Portugal
+                Visual Artist — Images — Portugal
               </p>
             </motion.div>
 
