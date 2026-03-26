@@ -26,13 +26,14 @@ export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.4 * d, delay: 0.2 * d, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative aspect-[3/4] lg:aspect-[4/5]">
+            <div className="relative">
               {featuredImage ? (
                 <Image
                   src={featuredImage}
                   alt="Featured artwork by Soraia Oliveira"
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={1200}
+                  className="w-full h-auto object-contain"
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
