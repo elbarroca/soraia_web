@@ -10,17 +10,18 @@ export function ArtworkFilter() {
   const activeCategory = searchParams.get("cat") || "all";
 
   return (
-    <div className="flex items-center gap-1 overflow-x-auto pb-1 mb-10 -mx-1 px-1 scrollbar-hide">
+    <div className="flex items-center gap-6 overflow-x-auto pb-0 mb-10 scrollbar-hide">
       {categories.map((cat) => (
         <Link
           key={cat.value}
           href={cat.value === "all" ? "/artworks" : `/artworks?cat=${cat.value}`}
           scroll={false}
           className={cn(
-            "label-lg whitespace-nowrap px-4 py-2 transition-all border",
+            "relative whitespace-nowrap pb-3 text-[11px] font-medium tracking-[0.14em] uppercase transition-colors duration-300",
+            "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:transition-opacity after:duration-300",
             activeCategory === cat.value
-              ? "bg-[var(--color-ink)] text-white border-[var(--color-ink)]"
-              : "bg-transparent text-[var(--color-ink-light)] border-[var(--color-border)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]"
+              ? "text-[var(--color-ink)] after:bg-[var(--color-ink)] after:opacity-100"
+              : "text-[var(--color-ink-muted)] after:bg-[var(--color-ink)] after:opacity-0 hover:text-[var(--color-ink)] hover:after:opacity-30"
           )}
         >
           {cat.label}

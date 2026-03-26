@@ -17,16 +17,16 @@ export function PriceDisplay({
   size = "md",
 }: PriceDisplayProps) {
   const sizeClasses = {
-    sm: "text-xs",
-    md: "text-sm",
-    lg: "text-base",
+    sm: "text-[11px]",
+    md: "text-[12px]",
+    lg: "text-[15px]",
   };
 
   if (isSold) {
     return (
       <span
         className={cn(
-          "inline-block px-3 py-1 bg-[var(--color-surface-dim)] text-[var(--color-ink-muted)] font-medium tracking-[0.1em] uppercase",
+          "inline-block text-[var(--color-ink-muted)] font-medium tracking-[0.14em] uppercase",
           sizeClasses[size]
         )}
       >
@@ -37,7 +37,7 @@ export function PriceDisplay({
 
   if (isPriceOnRequest) {
     return (
-      <span className={cn("text-[var(--color-ink-light)] italic", sizeClasses[size])}>
+      <span className={cn("text-[var(--color-ink-muted)] italic tracking-[0.01em]", sizeClasses[size])}>
         Price on request
       </span>
     );
@@ -45,11 +45,11 @@ export function PriceDisplay({
 
   if (originalPriceCents && priceCents) {
     return (
-      <span className={cn("flex items-center gap-2", sizeClasses[size])}>
-        <span className="text-[var(--color-ink-muted)] line-through">
+      <span className={cn("flex items-baseline gap-2.5", sizeClasses[size])}>
+        <span className="text-[var(--color-ink-muted)] line-through decoration-1 font-normal">
           {formatPrice(originalPriceCents)}
         </span>
-        <span className="text-[var(--color-sale)] font-semibold">
+        <span className="text-[var(--color-sale)] font-medium">
           {formatPrice(priceCents)}
         </span>
       </span>
@@ -58,7 +58,7 @@ export function PriceDisplay({
 
   if (priceCents) {
     return (
-      <span className={cn("font-medium text-[var(--color-ink)]", sizeClasses[size])}>
+      <span className={cn("font-medium text-[var(--color-ink)] tracking-[0.01em]", sizeClasses[size])}>
         {formatPrice(priceCents)}
       </span>
     );

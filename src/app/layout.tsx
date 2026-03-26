@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Playfair_Display } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { websiteJsonLd } from "@/lib/structured-data";
@@ -8,6 +8,12 @@ import "./globals.css";
 const geist = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://soraia-oliveira.com";
@@ -68,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} h-full`}>
+    <html lang="en" className={`${geist.variable} ${playfair.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main-content"
@@ -77,7 +83,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <main id="main-content" className="flex-1 pt-16 md:pt-20">
+        <main id="main-content" className="flex-1 pt-[var(--header-h)] md:pt-[var(--header-h-md)]">
           {children}
         </main>
         <Footer />

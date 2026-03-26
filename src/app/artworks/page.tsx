@@ -23,10 +23,14 @@ export default async function ArtworksPage() {
 
   return (
     <Section className="pt-8 md:pt-12">
-      <div className="mb-10">
-        <h1 className="heading-1 mb-2">Artworks</h1>
-        <p className="text-[var(--color-ink-light)]">
-          Photography, drawings, artist proofs & wearable sculpture.
+      <div className="mb-12">
+        <div className="flex items-center gap-4 mb-4">
+          <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
+          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">Collection</p>
+        </div>
+        <h1 className="heading-1 mb-3">Artworks</h1>
+        <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.7] max-w-sm">
+          Photography, drawings, artist proofs &amp; wearable sculpture.
         </p>
       </div>
 

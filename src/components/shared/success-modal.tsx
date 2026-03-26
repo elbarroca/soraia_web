@@ -45,17 +45,17 @@ export function SuccessModal({ open, onClose, title, message }: SuccessModalProp
         </div>
 
         <DialogHeader className="gap-3 items-center">
-          <DialogTitle className="text-base font-semibold tracking-tight text-[var(--color-ink)]">
+          <DialogTitle className="text-[15px] font-medium tracking-[-0.01em] text-[var(--color-ink)]">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-sm text-[var(--color-ink-light)] leading-relaxed">
+          <DialogDescription className="text-[13px] text-[var(--color-ink-light)] leading-[1.7] max-w-[220px] mx-auto">
             {message}
           </DialogDescription>
         </DialogHeader>
 
         <button
           onClick={onClose}
-          className="mt-8 w-full border border-[var(--color-border-strong)] py-3 text-xs font-semibold tracking-[0.08em] uppercase text-[var(--color-ink-light)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)] transition-colors"
+          className="mt-8 w-full border border-[var(--color-border-strong)] py-3 text-[10px] font-medium tracking-[0.18em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)] transition-all duration-300"
         >
           Close
         </button>

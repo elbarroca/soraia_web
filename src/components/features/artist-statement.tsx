@@ -9,9 +9,10 @@ import { Section } from "@/components/layout/section";
 type ArtistStatementProps = {
   line1: string;
   line2: string;
+  credentialLine?: string;
 };
 
-export function ArtistStatement({ line1, line2 }: ArtistStatementProps) {
+export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatementProps) {
   return (
     <Section className="bg-[var(--color-surface-dim)] overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -32,27 +33,36 @@ export function ArtistStatement({ line1, line2 }: ArtistStatementProps) {
         <div className="lg:col-span-7 lg:col-start-6 space-y-8">
           <FadeIn>
             <div className="flex items-center gap-4 mb-2">
-              <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
-              <p className="label text-[var(--color-ink-muted)]">About the Artist</p>
+              <span className="block h-px w-10 bg-[var(--color-ink-muted)]" aria-hidden="true" />
+              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+                About the Artist
+              </p>
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <blockquote className="text-2xl md:text-3xl font-semibold leading-snug tracking-tight text-[var(--color-ink)]">
-              {line1}
+            <blockquote className="heading-editorial text-[var(--color-ink)]">
+              &ldquo;{line1}&rdquo;
             </blockquote>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-base md:text-lg text-[var(--color-ink-light)] leading-relaxed max-w-lg">
+            <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.7] max-w-lg">
               {line2}
             </p>
           </FadeIn>
+          {credentialLine && (
+            <FadeIn delay={0.25}>
+              <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.7]">
+                {credentialLine}
+              </p>
+            </FadeIn>
+          )}
           <FadeIn delay={0.3}>
             <Link
               href="/about"
-              className="group inline-flex items-center gap-2 text-xs font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+              className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
             >
-              Read more
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              Read more about Soraia
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </FadeIn>
         </div>

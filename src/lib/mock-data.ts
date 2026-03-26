@@ -8,7 +8,7 @@ import type { Artwork, ArtworkImage, Exhibition, NewsItem } from "./types";
 // ─── Site Settings (real content from original site) ───
 
 export const mockSettings: Record<string, string> = {
-  hero_statement: "VISUAL ARTIST BASED IN PORTUGAL, GUIMARAES.",
+  hero_statement: "The body as subject, tool, and territory.",
   hero_tagline:
     "Self-portraiture, photography and drawing, exploring experimental printing and performance.",
   about_intro:
@@ -29,7 +29,7 @@ export const mockSettings: Record<string, string> = {
     "BOUNDARY PUSHER",
   ]),
   studio_description:
-    "A creative studio based in Portugal, creating self-portraiture, photography, experimental printing and drawing. Founded in 2021, it's an extension of an ever-evolving creation. Located in Guimaraes, studio visits available by appointment to experience the work beyond finished pieces.",
+    "A creative studio based in Portugal, creating self-portraiture, photography, experimental printing and drawing. Founded in 2021, it's an extension of an ever-evolving creation. Located in Guimarães, studio visits available by appointment to experience the work beyond finished pieces.",
   appointment_text:
     "Connecting with you is what fulfils me. Whether you'd like to visit the studio, discuss a piece, or simply have a conversation about art — I'd love to meet you.",
   appointment_url: "https://tidycal.com/soraiaoliveira/studio-visit",
@@ -39,7 +39,7 @@ export const mockSettings: Record<string, string> = {
   social_facebook: "https://www.facebook.com/soraiaoliveira.artist/",
   social_tiktok: "https://www.tiktok.com/@soraianoliveira",
   social_youtube: "https://www.youtube.com/@soraianoliveira",
-  featured_artwork_id: "1",
+  featured_artwork_id: "14",
 };
 
 // ─── Helper ───
@@ -52,7 +52,7 @@ function img(id: string, file: string, alt: string): ArtworkImage {
 
 export const mockArtworks: Artwork[] = [
   // ── Artist Proofs ──
-  { id: "1", title: "BA-NA-NA - Artist Proof", slug: "ba-na-na-artist-proof", description: null, category: "artist-proofs", year: null, medium: null, edition: null, dimensions: null, priceCents: 19000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: true, sortOrder: 0, metaTitle: null, metaDescription: null, images: [img("1", "ba-na-na-ap.png", "BA-NA-NA - Artist Proof")] },
+  { id: "1", title: "BA-NA-NA - Artist Proof", slug: "ba-na-na-artist-proof", description: null, category: "artist-proofs", year: null, medium: null, edition: null, dimensions: null, priceCents: 19000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: false, sortOrder: 0, metaTitle: null, metaDescription: null, images: [img("1", "ba-na-na-ap.png", "BA-NA-NA - Artist Proof")] },
   { id: "2", title: "Shared my soul - Artist Proof", slug: "shared-my-soul-artist-proof", description: null, category: "artist-proofs", year: null, medium: null, edition: null, dimensions: null, priceCents: 60000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: false, sortOrder: 1, metaTitle: null, metaDescription: null, images: [img("2", "shared-my-soul-ap.png", "Shared my soul - Artist Proof")] },
   { id: "3", title: "His Meeting - Artist Proof", slug: "his-meeting-artist-proof", description: null, category: "artist-proofs", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: true, isSold: false, isVisible: true, isFeatured: false, sortOrder: 2, metaTitle: null, metaDescription: null, images: [img("3", "his-meeting-ap.png", "His Meeting - Artist Proof")] },
   { id: "4", title: "Refugio - Artist Proof", slug: "refugio-artist-proof", description: null, category: "artist-proofs", year: null, medium: null, edition: null, dimensions: null, priceCents: 65000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: false, sortOrder: 3, metaTitle: null, metaDescription: null, images: [img("4", "refugio-ap.png", "Refugio - Artist Proof")] },
@@ -67,7 +67,7 @@ export const mockArtworks: Artwork[] = [
   // ── Photography ──
   { id: "12", title: "Romeu", slug: "romeu", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: true, isSold: false, isVisible: true, isFeatured: false, sortOrder: 11, metaTitle: null, metaDescription: null, images: [img("12", "romeu.png", "Romeu")] },
   { id: "13", title: "It's always there - Artist Proof", slug: "its-always-there-artist-proof", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: 120000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: false, sortOrder: 12, metaTitle: null, metaDescription: null, images: [img("13", "its-always-there-ap.png", "It's always there")] },
-  { id: "14", title: "Clouds never truly disappear", slug: "clouds-never-truly-disappear", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: true, isSold: false, isVisible: true, isFeatured: false, sortOrder: 13, metaTitle: null, metaDescription: null, images: [img("14", "clouds-never-disappear.png", "Clouds never truly disappear")] },
+  { id: "14", title: "Clouds never truly disappear", slug: "clouds-never-truly-disappear", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: true, isSold: false, isVisible: true, isFeatured: true, sortOrder: 13, metaTitle: null, metaDescription: null, images: [img("14", "clouds-never-disappear.png", "Clouds never truly disappear")] },
   { id: "15", title: "Shared my soul", slug: "shared-my-soul", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: 180000, originalPriceCents: null, isPriceOnRequest: false, isSold: false, isVisible: true, isFeatured: false, sortOrder: 14, metaTitle: null, metaDescription: null, images: [img("15", "shared-my-soul.png", "Shared my soul")] },
   { id: "16", title: "Say yes to heaven", slug: "say-yes-to-heaven", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: true, isSold: false, isVisible: true, isFeatured: false, sortOrder: 15, metaTitle: null, metaDescription: null, images: [img("16", "say-yes-to-heaven.png", "Say yes to heaven")] },
   { id: "17", title: "ALTERA. ADERE. MOLDA", slug: "altera-adere-molda", description: null, category: "photography", year: null, medium: null, edition: null, dimensions: null, priceCents: null, originalPriceCents: null, isPriceOnRequest: false, isSold: true, isVisible: true, isFeatured: false, sortOrder: 16, metaTitle: null, metaDescription: null, images: [img("17", "altera-adere-molda.png", "ALTERA. ADERE. MOLDA")] },
@@ -109,17 +109,17 @@ export const mockArtworks: Artwork[] = [
 // ─── Exhibitions ───
 
 export const mockExhibitions: Exhibition[] = [
-  { id: "1", title: "Apenas Ser", location: "Museu Alberto Sampaio, Guimaraes", year: "2025", type: "group", externalUrl: "https://www.museualbertosampaio.gov.pt/event-item/apenas-ser-de-tales-frey-e-soraia-oliveira/" },
-  { id: "2", title: "Guimaraes Project Room", location: "Guimaraes, Portugal", year: "2024", type: "solo", externalUrl: "https://jornaldeguimaraes.pt/noticias/fotografia-e-instalacao-dao-vida-a-nova-exposicao-do-guimaraes-project-room/" },
-  { id: "3", title: "Fotografia Contemporanea Portuguesa", location: "Centro Portugues de Fotografia, Porto", year: "2024", type: "group", externalUrl: null },
-  { id: "4", title: "Artist Residency", location: "Guimaraes, Portugal", year: "2023", type: "residency", externalUrl: null },
+  { id: "1", title: "Apenas Ser", location: "Museu Alberto Sampaio, Guimarães", year: "2025", type: "group", externalUrl: "https://www.museualbertosampaio.gov.pt/event-item/apenas-ser-de-tales-frey-e-soraia-oliveira/" },
+  { id: "2", title: "Guimarães Project Room", location: "Guimarães, Portugal", year: "2024", type: "solo", externalUrl: "https://jornaldeguimaraes.pt/noticias/fotografia-e-instalacao-dao-vida-a-nova-exposicao-do-guimaraes-project-room/" },
+  { id: "3", title: "Fotografia Contemporânea Portuguesa", location: "Centro Português de Fotografia, Porto", year: "2024", type: "group", externalUrl: null },
+  { id: "4", title: "Artist Residency", location: "Guimarães, Portugal", year: "2023", type: "residency", externalUrl: null },
   { id: "5", title: "Jovens Criadores", location: "Culturgest, Lisboa", year: "2023", type: "group", externalUrl: null },
 ];
 
 // ─── News ───
 
 export const mockNews: NewsItem[] = [
-  { id: "1", title: "Apenas Ser — Tales Frey & Soraia Oliveira", excerpt: "Collaboration with Tales Frey at Museu Alberto Sampaio, Guimaraes.", externalUrl: "https://www.museualbertosampaio.gov.pt/event-item/apenas-ser-de-tales-frey-e-soraia-oliveira/", publishedDate: "2025-01-15", isVisible: true },
-  { id: "2", title: "Guimaraes Project Room Exhibition", excerpt: "Photography and installation give life to new exhibition at Guimaraes Project Room.", externalUrl: "https://jornaldeguimaraes.pt/noticias/fotografia-e-instalacao-dao-vida-a-nova-exposicao-do-guimaraes-project-room/", publishedDate: "2024-09-01", isVisible: true },
+  { id: "1", title: "Apenas Ser — Tales Frey & Soraia Oliveira", excerpt: "Collaboration with Tales Frey at Museu Alberto Sampaio, Guimarães.", externalUrl: "https://www.museualbertosampaio.gov.pt/event-item/apenas-ser-de-tales-frey-e-soraia-oliveira/", publishedDate: "2025-01-15", isVisible: true },
+  { id: "2", title: "Guimarães Project Room Exhibition", excerpt: "Photography and installation give life to new exhibition at Guimarães Project Room.", externalUrl: "https://jornaldeguimaraes.pt/noticias/fotografia-e-instalacao-dao-vida-a-nova-exposicao-do-guimaraes-project-room/", publishedDate: "2024-09-01", isVisible: true },
   { id: "3", title: "Wearable Sculpture Collection Launch", excerpt: "New jewelry collection where sculpture meets the body — handcrafted in gold and sterling silver.", externalUrl: null, publishedDate: "2024-06-20", isVisible: true },
 ];

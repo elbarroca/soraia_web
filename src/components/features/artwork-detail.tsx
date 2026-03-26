@@ -41,9 +41,9 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
         <FadeIn>
           <Link
             href="/artworks"
-            className="inline-flex items-center gap-2 text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors mb-8 group"
+            className="inline-flex items-center gap-2.5 text-[11px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300 mb-10 group"
           >
-            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft size={13} className="transition-transform duration-300 group-hover:-translate-x-1" />
             Back to Artworks
           </Link>
         </FadeIn>
@@ -63,7 +63,8 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
             <div className="lg:sticky lg:top-28 space-y-8">
               {/* Title + price */}
               <div className="space-y-3">
-                <p className="label text-[var(--color-ink-muted)]">
+                <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] flex items-center gap-3">
+                  <span className="block h-px w-6 bg-[var(--color-ink-muted)]" aria-hidden="true" />
                   {artwork.category.replaceAll("-", " ")}
                 </p>
                 <h1 className="heading-1">{artwork.title}</h1>
@@ -90,36 +91,36 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
                 {details.map((d) => (
                   <div
                     key={d.label}
-                    className="flex justify-between py-3 border-b border-[var(--color-border)] text-sm"
+                    className="flex justify-between items-baseline py-3.5 border-b border-[var(--color-border)]"
                   >
-                    <span className="text-[var(--color-ink-muted)]">{d.label}</span>
-                    <span className="font-medium capitalize">{d.value}</span>
+                    <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">{d.label}</span>
+                    <span className="text-[13px] font-medium capitalize text-[var(--color-ink)] text-right max-w-[60%]">{d.value}</span>
                   </div>
                 ))}
               </div>
 
               {/* Action buttons */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-3">
                 {canPurchase && (
                   <PurchaseButton artworkId={artwork.id} />
                 )}
                 {canInquire && (
                   <Link
                     href={`/contact?artwork=${artwork.slug}`}
-                    className="block w-full bg-[var(--color-accent)] text-white py-4 text-sm font-semibold tracking-[0.05em] uppercase transition-all hover:bg-[var(--color-accent-hover)] active:scale-[0.98] text-center"
+                    className="block w-full bg-[var(--color-ink)] text-white py-4 text-[11px] font-medium tracking-[0.18em] uppercase transition-all duration-300 hover:bg-[var(--color-ink-light)] active:scale-[0.99] text-center"
                   >
-                    Inquire
+                    Inquire About This Work
                   </Link>
                 )}
                 {artwork.isSold && (
-                  <div className="w-full py-4 text-center text-sm font-medium text-[var(--color-ink-muted)] bg-[var(--color-surface-dim)] tracking-[0.05em] uppercase">
-                    Sold
+                  <div className="w-full py-4 text-center text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--color-ink-muted)] bg-[var(--color-surface-dim)]">
+                    This Work Has Found Its Home
                   </div>
                 )}
                 {!artwork.isSold && (
                   <Link
                     href={`/contact?artwork=${artwork.slug}`}
-                    className="block w-full border border-[var(--color-border-strong)] py-4 text-sm font-semibold tracking-[0.05em] uppercase transition-all hover:border-[var(--color-ink)] text-center"
+                    className="block w-full border border-[var(--color-border-strong)] py-3.5 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-light)] transition-all duration-300 hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] text-center"
                   >
                     Ask a Question
                   </Link>

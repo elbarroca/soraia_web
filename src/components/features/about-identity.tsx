@@ -19,14 +19,14 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
   }, [words.length]);
 
   return (
-    <div className="bg-[var(--color-ink)] text-white py-20 md:py-28">
+    <div className="bg-[var(--color-ink)] text-white py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1440px] px-[var(--space-page-x)] text-center">
-        <p className="label text-white/40 mb-6">I Am</p>
-        <div className="h-16 md:h-20 flex items-center justify-center overflow-hidden">
+        <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/40 mb-6">I Am</p>
+        <div className="h-20 md:h-28 flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.span
               key={words[index]}
-              className="block text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+              className="heading-display block"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReducedMotion ? {} : { opacity: 0, y: -30 }}

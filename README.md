@@ -1,39 +1,39 @@
 # Soraia Oliveira — Portfolio & E-Commerce
 
-Portfolio profissional e loja online da artista visual **Soraia Oliveira**, baseada em Guimaraes, Portugal. Construido com Next.js 16, React 19 e uma arquitetura moderna de full-stack.
+Portfolio profissional e loja online da artista visual **Soraia Oliveira**, baseada em Guimarães, Portugal. Construído com Next.js 16, React 19 e uma arquitetura moderna de full-stack.
 
 ---
 
-## Indice
+## Índice
 
-- [Visao Geral](#visao-geral)
+- [Visão Geral](#visão-geral)
 - [Arquitetura](#arquitetura)
-- [Stack Tecnologica](#stack-tecnologica)
+- [Stack Tecnológica](#stack-tecnológica)
+- [Design System](#design-system)
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Instalacao e Configuracao](#instalacao-e-configuracao)
-- [Variaveis de Ambiente](#variaveis-de-ambiente)
+- [Instalação e Configuração](#instalação-e-configuração)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
 - [Base de Dados](#base-de-dados)
 - [Desenvolvimento Local](#desenvolvimento-local)
-- [Painel de Administracao](#painel-de-administracao)
+- [Painel de Administração](#painel-de-administração)
 - [Fluxo de Compra](#fluxo-de-compra)
-- [Design e UI](#design-e-ui)
 - [SEO e Performance](#seo-e-performance)
 - [Guia de Desenvolvimento](#guia-de-desenvolvimento)
 - [Deploy](#deploy)
 
 ---
 
-## Visao Geral
+## Visão Geral
 
 Site de portfolio e e-commerce para uma artista visual multidisciplinar. Inclui:
 
-- **Portfolio publico** com 45 obras em 4 categorias: Fotografia, Provas de Artista, Desenhos, Joalharia
-- **Painel de administracao** completo para gestao de conteudo (CRUD, upload de imagens, configuracoes)
+- **Portfolio público** com 45 obras em 4 categorias: Fotografia, Provas de Artista, Desenhos, Joalharia
+- **Painel de administração** completo para gestão de conteúdo (CRUD, upload de imagens, configurações)
 - **Loja integrada** com Stripe Checkout para vendas de obras de arte
-- **Formulario de contacto** com notificacoes por email via Resend
-- **Newsletter** com gestao de subscritores e modais de sucesso animados
-- **SEO otimizado** com sitemap dinamico, JSON-LD, Open Graph, llms.txt e favicon personalizado
-- **UI galeria** com animacoes Framer Motion, assinatura da artista como branding, e design responsivo
+- **Formulário de contacto** com seletor de intenção integrado e notificações por email via Resend
+- **Newsletter** com gestão de subscritores e modais de sucesso animados
+- **SEO otimizado** com sitemap dinâmico, JSON-LD, Open Graph, llms.txt e favicon personalizado
+- **UI galeria** editorial com animações Framer Motion, design tokens, tipografia dual-font, e design responsivo
 
 ---
 
@@ -50,7 +50,7 @@ graph TD
     D -->|Raw DB Rows| F[Mappers<br/>src/lib/mappers.ts]
     F -->|Public Types| G[Feature Components<br/>src/components/features/]
     E -->|Public Types| G
-    G -->|Render| H[Pagina HTML]
+    G -->|Render| H[Página HTML]
 
     I[Admin] -->|Login| J[Auth.js v5]
     J -->|Session JWT| K[Painel Admin]
@@ -62,15 +62,15 @@ graph TD
     O -->|Insert Order| D
 ```
 
-### Protecao de Rotas
+### Protecção de Rotas
 
 ```mermaid
 graph LR
     A[Request /admin/*] --> B{proxy.ts}
-    B -->|/admin/login| C[Pagina de Login]
-    B -->|Outras rotas| D{Sessao valida?}
+    B -->|/admin/login| C[Página de Login]
+    B -->|Outras rotas| D{Sessão válida?}
     D -->|Sim| E[Painel Admin]
-    D -->|Nao| C
+    D -->|Não| C
 ```
 
 ### Modelo de Dados
@@ -147,62 +147,135 @@ erDiagram
     }
 ```
 
-### Componentes UI
-
-```mermaid
-graph TD
-    subgraph Layout
-        Header[Header<br/>Assinatura + nav animada]
-        Footer[Footer<br/>Assinatura bold + social + newsletter]
-        Container[Container<br/>max-w-1440px]
-        Section[Section<br/>spacing responsivo]
-    end
-
-    subgraph Features
-        Hero[HeroSection<br/>Statement + imagem featured]
-        CatGrid[CategoryGrid<br/>4 categorias com imagens reais]
-        ArtGrid[ArtworkGrid<br/>Grid responsivo 2-3 colunas]
-        ArtCard[ArtworkCard<br/>Imagem + preco + hover]
-        ArtDetail[ArtworkDetail<br/>Galeria + lightbox + compra]
-        Statement[ArtistStatement<br/>Citacao + imagem estudio]
-        ExList[ExhibitionList<br/>Badges tipificados + links]
-        Newsletter[NewsletterSection<br/>Form + modal sucesso]
-        Contact[ContactForm<br/>react-hook-form + Zod + modal]
-    end
-
-    subgraph Shared
-        FadeIn[FadeIn<br/>Scroll-triggered + reduced motion]
-        SuccessModal[SuccessModal<br/>Checkmark animado]
-    end
-
-    Header --> Container
-    Footer --> Container
-    Hero --> FadeIn
-    CatGrid --> FadeIn
-    Statement --> FadeIn
-    Newsletter --> SuccessModal
-    Contact --> SuccessModal
-```
-
 ---
 
-## Stack Tecnologica
+## Stack Tecnológica
 
-| Camada | Tecnologia | Versao |
+| Camada | Tecnologia | Versão |
 |--------|-----------|--------|
 | **Framework** | Next.js (App Router) | 16.2 |
 | **UI** | React | 19 |
 | **Linguagem** | TypeScript (strict) | 5.x |
-| **Estilos** | Tailwind CSS | v4 |
+| **Estilos** | Tailwind CSS (PostCSS) | v4 |
 | **Componentes** | shadcn (base-nova) | @base-ui/react |
 | **Base de Dados** | PostgreSQL (Neon Serverless) | — |
 | **ORM** | Drizzle ORM | 0.45 |
-| **Autenticacao** | Auth.js (NextAuth v5 beta) | 5.0.0-beta |
+| **Autenticação** | Auth.js (NextAuth v5 beta) | 5.0.0-beta |
 | **Pagamentos** | Stripe Checkout | 20.x |
 | **Upload de Imagens** | Uploadthing | 7.x |
 | **Email** | Resend | 6.x |
-| **Validacao** | Zod | v4 |
-| **Animacoes** | Framer Motion | 12.x |
+| **Validação** | Zod | v4 |
+| **Animações** | Framer Motion | 12.x |
+
+---
+
+## Design System
+
+### Filosofia
+
+Estética editorial de galeria — "Gagosian meets Acne Studios meets Apartamento Magazine." Cada pixel deve sentir-se intencional, silencioso e poderoso.
+
+### Tipografia Dual-Font
+
+| Font | Variável | Uso |
+|------|----------|-----|
+| **Geist** (sans-serif) | `--font-sans` | Body text, labels, navigation |
+| **Playfair Display** (serif) | `--font-display` / `--font-serif` | Editorial quotes, pull-quotes, blockquotes, signature moments |
+
+### Escala Tipográfica
+
+| Classe | Peso | Tamanho | Uso |
+|--------|------|---------|-----|
+| `.heading-display` | 600 (semibold) | 3.5rem → 5.5rem | Hero statements, About intro, Identity words |
+| `.heading-editorial` | — | Serif italic | Pull-quotes, section accents, blockquotes |
+| `.heading-1` | 700 | 2rem → 2.5rem | Page/section headings |
+| `.heading-2` | 600 | 1.5rem | Subsection headings |
+| Labels | 500 | 10px, tracking 0.2em | Section labels with `──` horizontal rule prefix |
+
+### Paleta de Cores
+
+```css
+/* Ink (texto) */
+--color-ink: #1a1a1a;           /* Texto principal */
+--color-ink-light: #555555;      /* Texto secundário, bio paragraphs */
+--color-ink-muted: #888888;      /* Labels, placeholders, metadata */
+
+/* Surfaces (fundos) */
+--color-surface: #ffffff;        /* Fundo principal */
+--color-surface-dim: #f8f7f5;    /* Fundo alternativo (warm gray) */
+--color-surface-warm: #f3f1ed;   /* Newsletter, practice sections */
+--color-surface-hover: #f5f5f5;  /* Hover state on list rows */
+
+/* Borders */
+--color-border: #e5e5e5;        /* Separadores subtis */
+--color-border-strong: #d4d4d4;  /* Inputs, active borders */
+
+/* Status */
+--color-sold: #b91c1c;          /* Sold badge, sale badge, errors */
+
+/* Accent */
+--color-accent: #1a1a1a;        /* CTAs (matches ink) */
+```
+
+### Espaçamento
+
+```css
+--header-h: 3.5rem;             /* Header height mobile */
+--header-h-md: 4.5rem;          /* Header height desktop */
+--space-page-x: 1.5rem → 7.5rem; /* Horizontal margins (responsive) */
+--space-section-y: 5rem → 10rem;  /* Section vertical padding (responsive) */
+--max-width: 1440px;             /* Container max width */
+```
+
+### Componentes UI
+
+| Componente | Ficheiro | Descrição |
+|-----------|----------|-----------|
+| **HeroSection** | `features/hero-section.tsx` | Statement monumental + imagem featured com Framer Motion stagger |
+| **SocialProofBar** | `features/social-proof-bar.tsx` | Strip de venues de exposição (Server Component) |
+| **FeaturedArtworks** | `features/featured-artworks.tsx` | Grid editorial assimétrico (1 hero + 3 secondary) |
+| **CategoryGrid** | `features/category-grid.tsx` | 4 categorias com contagens, hover reveal, image zoom |
+| **ArtistStatement** | `features/artist-statement.tsx` | Blockquote editorial + imagem estúdio + credenciais |
+| **CollectorBanner** | `features/collector-banner.tsx` | Dark section targeting collectors (Server Component) |
+| **NewsletterSection** | `features/newsletter-section.tsx` | "First to See New Work" com urgency copy |
+| **ArtworkCard** | `features/artwork-card.tsx` | Card com badges (Sold/Sale/Edition), hover zoom `scale-[1.03]` |
+| **ArtworkGrid** | `features/artwork-grid.tsx` | Grid com category descriptions, sorting, editorial text-tab filter |
+| **ArtworkDetail** | `features/artwork-detail.tsx` | Gallery + lightbox + sticky sidebar com detalhes estilo museum card |
+| **RelatedArtworks** | `features/related-artworks.tsx` | "More from this collection" — elimina dead-end |
+| **AboutBio** | `features/about-bio.tsx` | Full-width display heading → 2-col (portrait + bio + pull-quote) |
+| **AboutIdentity** | `features/about-identity.tsx` | Cycling identity words em `heading-display` (dark section) |
+| **EducationTimeline** | `features/education-timeline.tsx` | 3 countries timeline com hover rows |
+| **ExhibitionList** | `features/exhibition-list.tsx` | Summary + year range, solo border-accent, outline badges |
+| **CollaboratorsSection** | `features/collaborators-section.tsx` | Hardcoded collaborator list |
+| **PressSection** | `features/press-section.tsx` | Press items com arrow-on-hover + press inquiry CTA |
+| **AppointmentSection** | `features/appointment-section.tsx` | Editorial list rows (In Person / Remote) — não cards |
+| **ContactForm** | `features/contact-form.tsx` | Subject pills integrados + 2-col name/email + editorial submit |
+| **NewsList** | `features/news-list.tsx` | First-item emphasis, editorial date format, fade-in arrows |
+| **Breadcrumbs** | `shared/breadcrumbs.tsx` | Home / Artworks / Category / Title |
+| **EditorialDivider** | `shared/editorial-divider.tsx` | Semantic `<hr>` com variant accent |
+| **PullQuote** | `shared/pull-quote.tsx` | Serif italic blockquote com oversized `"` |
+| **FadeIn** | `shared/fade-in.tsx` | Scroll-triggered animation com `prefers-reduced-motion` |
+| **SuccessModal** | `shared/success-modal.tsx` | Animated checkmark dialog |
+
+### Animações
+
+- **Header**: Slide-in com nav stagger. Dot indicator com `layoutId` (guarded by `prefersReducedMotion`)
+- **Hero**: Image scale-in (1.4s), text stagger, label slide horizontal
+- **Secções**: `FadeIn` scroll-triggered com `whileInView` (Framer Motion)
+- **Identidade**: Palavras rotativas com `AnimatePresence` (2s intervalo)
+- **Hover states**: `duration-300` consistently, image zoom `scale-[1.03]` at `duration-[900ms]`
+- **Todas as animações** respeitam `prefers-reduced-motion`
+
+### Acessibilidade
+
+- Skip-to-content link no layout raiz
+- `aria-label` em todos os botões de ícone e nav landmarks
+- `aria-expanded` + `aria-controls` no mobile menu toggle
+- Desktop nav: `aria-label="Main navigation"` / Mobile: `aria-label="Mobile navigation"`
+- Estilos `focus-visible` em todos os elementos interativos
+- Navegação por teclado no lightbox (setas + Escape)
+- `group-focus-within` em category grid para keyboard accessibility
+- Labels semânticos em todos os campos de formulário
 
 ---
 
@@ -212,80 +285,55 @@ graph TD
 soraia-web/
 ├── public/
 │   └── images/                       # Imagens locais (desenvolvimento)
-│       ├── artworks/                 # 46 imagens de obras (da Squarespace)
+│       ├── artworks/                 # 46 imagens de obras
 │       ├── branding/                 # Assinaturas (light, bold, social)
-│       ├── about/                    # Perfil, estudio, processo
-│       ├── studio/                   # Imagem do estudio
-│       └── contact/                  # Imagem da pagina de contacto
+│       ├── about/                    # Perfil, estúdio, processo
+│       ├── studio/                   # Imagem do estúdio
+│       └── contact/                  # Imagem da página de contacto
 ├── src/
 │   ├── app/                          # Next.js App Router
-│   │   ├── page.tsx                  # Homepage
-│   │   ├── about/                    # Pagina Sobre (bio + CV + identidade)
-│   │   ├── artworks/                 # Catalogo + detalhe [slug]
-│   │   ├── contact/                  # Formulario de contacto
-│   │   ├── soraia-space/             # Estudio + marcacoes + noticias
-│   │   ├── admin/                    # Painel de administracao
-│   │   │   ├── login/                # Login (publica)
-│   │   │   └── (dashboard)/          # Rotas protegidas
-│   │   │       ├── artworks/         # CRUD de obras
-│   │   │       ├── news/             # Gestao de noticias
-│   │   │       ├── exhibitions/      # Gestao de exposicoes
-│   │   │       ├── settings/         # Configuracoes do site
-│   │   │       ├── contacts/         # Submissoes de contacto
-│   │   │       ├── newsletter/       # Subscritores
-│   │   │       └── orders/           # Encomendas
-│   │   ├── api/                      # Rotas API
-│   │   │   ├── auth/[...nextauth]/   # Autenticacao
-│   │   │   ├── checkout/             # Sessao Stripe
-│   │   │   ├── contact/              # Submissao de contacto
-│   │   │   ├── newsletter/           # Subscricao newsletter
-│   │   │   ├── revalidate/           # ISR on-demand
-│   │   │   ├── uploadthing/          # Upload de imagens
-│   │   │   └── webhooks/stripe/      # Webhook Stripe
-│   │   ├── icon.tsx                  # Favicon dinamico (SO monograma)
-│   │   ├── apple-icon.tsx            # Apple Touch Icon (180x180)
-│   │   ├── opengraph-image.tsx       # OG image dinamica
-│   │   ├── sitemap.ts               # Sitemap XML dinamico
-│   │   ├── robots.ts                # robots.txt
-│   │   └── llms.txt/                # Endpoint para LLM crawlers
+│   │   ├── page.tsx                  # Homepage (7 sections)
+│   │   ├── about/                    # Bio + Education + Identity + Exhibitions + Collaborators + Press + CTA
+│   │   ├── artworks/                 # Gallery (filter + sort + category descriptions) + Detail [slug]
+│   │   ├── contact/                  # Info panel + integrated subject-pill form + newsletter
+│   │   ├── soraia-space/             # Studio hero + Practice + Appointments + Exhibitions + News + Newsletter
+│   │   ├── admin/                    # Painel de administração
+│   │   │   ├── login/                # Login (pública)
+│   │   │   └── (dashboard)/          # Rotas protegidas (CRUD completo)
+│   │   └── api/                      # Rotas API (auth, checkout, contact, newsletter, webhooks)
 │   ├── components/
-│   │   ├── admin/                    # Componentes do painel admin
-│   │   ├── features/                 # Componentes de negocio (15 componentes)
+│   │   ├── features/                 # 22 componentes de negócio
 │   │   ├── layout/                   # Header, Footer, Container, Section
-│   │   ├── shared/                   # FadeIn, SuccessModal
-│   │   └── ui/                       # Primitivos shadcn base-nova (17 componentes)
+│   │   ├── shared/                   # FadeIn, SuccessModal, Breadcrumbs, EditorialDivider, PullQuote
+│   │   └── ui/                       # Primitivos shadcn base-nova
 │   ├── db/
 │   │   ├── schema.ts                 # Esquema Drizzle (8 tabelas)
 │   │   ├── index.ts                  # Cliente Drizzle + Neon
-│   │   └── seed.ts                   # Script de populacao
+│   │   └── seed.ts                   # Script de população
 │   ├── hooks/
 │   │   ├── use-newsletter.ts         # Hook partilhado (Footer + Section)
-│   │   └── use-scroll-position.ts    # Detecao de scroll para header
+│   │   └── use-scroll-position.ts    # Detecção de scroll para header
 │   └── lib/
-│       ├── auth.ts                   # Configuracao Auth.js
-│       ├── config.ts                 # Constantes (BASE_URL)
-│       ├── email.ts                  # Templates Resend
-│       ├── mappers.ts                # DB rows -> tipos publicos
-│       ├── mock-data.ts              # 45 obras reais + conteudo (fallback dev)
-│       ├── queries/                  # Funcoes de consulta DB (com fallback)
-│       ├── stripe.ts                 # Cliente Stripe
-│       ├── structured-data.ts        # Geradores JSON-LD (WebSite, Person, Product)
-│       ├── types.ts                  # Tipos TypeScript publicos
-│       ├── uploadthing.ts            # Configuracao Uploadthing
+│       ├── queries/                  # Funções de consulta DB (com fallback)
+│       ├── mappers.ts                # DB rows → tipos públicos
+│       ├── mock-data.ts              # 45 obras reais + conteúdo (fallback dev)
+│       ├── types.ts                  # Tipos TypeScript públicos
+│       ├── structured-data.ts        # Geradores JSON-LD
 │       ├── utils.ts                  # cn(), formatPrice(), slugify()
 │       └── validations/              # Esquemas Zod
-├── proxy.ts                          # Protecao de rotas (Next.js 16)
-├── drizzle.config.ts                 # Configuracao Drizzle Kit
-├── CLAUDE.md                         # Instrucoes para Claude Code
-├── DESIGN.MD                         # Especificacao de design
-└── SPRINT.MD                         # Plano de sprints (8 sprints)
+├── .claude/specs/
+│   ├── persona-brand.md              # Persona e brand context completo
+│   └── design-direction.md           # Design direction e improvement roadmap
+├── proxy.ts                          # Protecção de rotas (Next.js 16)
+├── drizzle.config.ts                 # Configuração Drizzle Kit
+└── CLAUDE.md                         # Instruções para Claude Code
 ```
 
 ---
 
-## Instalacao e Configuracao
+## Instalação e Configuração
 
-### Pre-requisitos
+### Pré-requisitos
 
 - Node.js 20+
 - pnpm (gestor de pacotes)
@@ -293,22 +341,22 @@ soraia-web/
 ### Passos
 
 ```bash
-# 1. Clonar o repositorio
+# 1. Clonar o repositório
 git clone https://github.com/elbarroca/soraia_web.git
 cd soraia_web
 
-# 2. Instalar dependencias
+# 2. Instalar dependências
 pnpm install
 
-# 3. Configurar variaveis de ambiente
+# 3. Configurar variáveis de ambiente
 cp .env.example .env.local
-# Preencher com as suas credenciais (ver seccao abaixo)
+# Preencher com as suas credenciais (ver secção abaixo)
 
 # 4. Iniciar servidor de desenvolvimento
 pnpm dev
 ```
 
-O site estara disponivel em `http://localhost:3000` — funciona sem base de dados (usa dados mock automaticamente).
+O site estará disponível em `http://localhost:3000` — funciona sem base de dados (usa dados mock automaticamente).
 
 ### Com Base de Dados (opcional)
 
@@ -322,7 +370,7 @@ npx tsx src/db/seed.ts
 
 ---
 
-## Variaveis de Ambiente
+## Variáveis de Ambiente
 
 Criar um ficheiro `.env.local` na raiz do projeto:
 
@@ -330,7 +378,7 @@ Criar um ficheiro `.env.local` na raiz do projeto:
 # Base de Dados (Neon) — opcional para desenvolvimento
 DATABASE_URL="postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/soraia?sslmode=require"
 
-# Autenticacao
+# Autenticação
 AUTH_SECRET="gerar-com-openssl-rand-base64-32"
 ADMIN_EMAIL="soraia@soraia-oliveira.com"
 ADMIN_PASSWORD_HASH="hash-bcrypt-da-password"
@@ -347,9 +395,9 @@ STRIPE_WEBHOOK_SECRET="whsec_xxx"
 RESEND_API_KEY="re_xxx"
 CONTACT_NOTIFICATION_EMAIL="info@soraia-oliveira.com"
 
-# Aplicacao
+# Aplicação
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
-REVALIDATION_SECRET="string-aleatoria"
+REVALIDATION_SECRET="string-aleatória"
 ```
 
 ---
@@ -358,24 +406,24 @@ REVALIDATION_SECRET="string-aleatoria"
 
 ### Esquema
 
-A base de dados PostgreSQL (Neon Serverless) contem 8 tabelas:
+A base de dados PostgreSQL (Neon Serverless) contém 8 tabelas:
 
-| Tabela | Descricao |
+| Tabela | Descrição |
 |--------|-----------|
-| `artworks` | Obras de arte com titulo, slug, categoria, preco, visibilidade |
-| `artwork_images` | Imagens das obras (URL, alt text, ordenacao, primaria) |
-| `news` | Noticias e imprensa |
-| `exhibitions` | Exposicoes (solo, grupo, residencia, premio) |
-| `site_settings` | Configuracoes chave-valor do site |
-| `contacts` | Submissoes do formulario de contacto |
+| `artworks` | Obras de arte com título, slug, categoria, preço, visibilidade |
+| `artwork_images` | Imagens das obras (URL, alt text, ordenação, primária) |
+| `news` | Notícias e imprensa |
+| `exhibitions` | Exposições (solo, grupo, residência, prémio) |
+| `site_settings` | Configurações chave-valor do site |
+| `contacts` | Submissões do formulário de contacto |
 | `newsletter_subscribers` | Subscritores da newsletter |
 | `orders` | Encomendas Stripe com detalhes de envio |
 
-### Comandos Uteis
+### Comandos Úteis
 
 ```bash
 npx drizzle-kit push       # Sincronizar esquema com Neon
-npx drizzle-kit generate   # Gerar migracoes
+npx drizzle-kit generate   # Gerar migrações
 npx drizzle-kit studio     # Abrir Drizzle Studio (GUI)
 npx tsx src/db/seed.ts      # Popular base de dados
 ```
@@ -386,63 +434,49 @@ npx tsx src/db/seed.ts      # Popular base de dados
 
 ### Sistema de Fallback
 
-Todas as funcoes de consulta em `src/lib/queries/` possuem fallback automatico para dados mock quando a base de dados nao esta disponivel. Isto permite desenvolvimento focado na UI sem necessidade de credenciais reais.
+Todas as funções de consulta em `src/lib/queries/` possuem fallback automático para dados mock quando a base de dados não está disponível.
 
 ```
 Query DB → Sucesso → Dados reais
-         → Falha   → Mock data (45 obras, conteudo real do site original)
+         → Falha   → Mock data (45 obras, conteúdo real do site original)
 ```
 
-### Imagens Locais
+### Conversion Funnels
 
-55 imagens foram descarregadas do site original (soraia-oliveira.com) para `/public/images/`:
-
-| Pasta | Conteudo | Ficheiros |
-|-------|---------|-----------|
-| `artworks/` | Todas as obras de arte | 46 |
-| `branding/` | Assinaturas (light, bold, social) | 3 |
-| `about/` | Perfil, estudio, processo | 3 |
-| `studio/` | Imagem do espaco | 1 |
-| `contact/` | Imagem da pagina de contacto | 1 |
-| Raiz | Imagem hero featured | 1 |
-
-Em producao, as imagens serao servidas pelo Uploadthing CDN (`utfs.io`).
+```
+Homepage
+├→ "Explore Work" → Artworks (category-filtered)
+│   ├→ ArtworkCard → Artwork Detail
+│   │   ├→ PURCHASE → Stripe Checkout
+│   │   ├→ Inquire → Contact Form (pre-filled)
+│   │   └→ Related Artworks → more detail pages
+│   └→ Category filter + Sort (Curated/Price/Newest)
+├→ SocialProofBar (exhibition venues)
+├→ FeaturedArtworks (editorial picks)
+├→ CategoryGrid (with counts)
+├→ CollectorBanner → Studio Visit / Available Works
+├→ Newsletter ("First to See New Work")
+├→ About → Bio + Education + Exhibitions + Collaborators + Press
+├→ Soraia Space → Studio Visit / Online Meeting booking
+└→ Contact → Subject pills + form
+```
 
 ---
 
-## Painel de Administracao
+## Painel de Administração
 
-Acessivel em `/admin` (protegido por autenticacao).
+Acessível em `/admin` (protegido por autenticação).
 
 ### Funcionalidades
 
-- **Dashboard** — Estatisticas em tempo real (obras, noticias, exposicoes, encomendas, contactos, subscritores)
+- **Dashboard** — Estatísticas em tempo real (obras, notícias, exposições, encomendas, contactos, subscritores)
 - **Obras de Arte** — Criar, editar, eliminar, reordenar. Upload de imagens via drag-and-drop
-- **Noticias** — CRUD com modal (sem paginas separadas)
-- **Exposicoes** — CRUD com tipo (solo/grupo/residencia/premio)
-- **Configuracoes** — Editor chave-valor para textos do site (hero, bio, links)
-- **Contactos** — Lista de submissoes com marcacao de lido
-- **Newsletter** — Lista de subscritores com exportacao CSV
-- **Encomendas** — Historico de compras com formatacao de moeda e badges de estado
-
-### Fluxo de Administracao
-
-```mermaid
-graph TD
-    A[Login /admin/login] -->|Credenciais| B{Auth.js v5}
-    B -->|Sucesso| C[Dashboard<br/>Estatisticas em tempo real]
-    C --> D[Gerir Obras]
-    C --> E[Gerir Noticias]
-    C --> F[Gerir Exposicoes]
-    C --> G[Configuracoes]
-    C --> H[Ver Contactos]
-    C --> I[Ver Subscritores]
-    C --> J[Ver Encomendas]
-
-    D -->|Criar/Editar| K[Formulario + Upload]
-    K -->|Server Action| L[Base de Dados]
-    L -->|revalidatePath| M[Cache Atualizada]
-```
+- **Notícias** — CRUD com modal
+- **Exposições** — CRUD com tipo (solo/grupo/residência/prémio)
+- **Configurações** — Editor chave-valor para textos do site (hero, bio, links)
+- **Contactos** — Lista de submissões com marcação de lido
+- **Newsletter** — Lista de subscritores com exportação CSV
+- **Encomendas** — Histórico de compras com formatação de moeda e badges de estado
 
 ---
 
@@ -455,102 +489,42 @@ sequenceDiagram
     participant St as Stripe
     participant DB as Base de Dados
 
-    V->>S: Clica "COMPRAR" na obra
+    V->>S: Clica "Inquire About This Work"
     S->>S: POST /api/checkout
     S->>St: Criar Checkout Session
-    St-->>S: URL da sessao
+    St-->>S: URL da sessão
     S-->>V: Redireciona para Stripe
 
     V->>St: Preenche dados e paga
     St->>S: Webhook (checkout.session.completed)
     S->>DB: Inserir encomenda (valor em EUR)
     S->>DB: Marcar obra como vendida
-    St-->>V: Redireciona para pagina de sucesso
+    St-->>V: Redireciona para página de sucesso
 ```
 
-### Estados de Preco
+### Estados de Preço
 
-| Estado | Exibicao |
+| Estado | Exibição |
 |--------|---------|
-| Disponivel com preco | "1.800,00 EUR" + botao COMPRAR |
-| Preco sob consulta | "Preco sob consulta" + botao INQUIRIR |
-| Em promocao (joalharia) | Preco original riscado + preco atual |
-| Vendido | Badge "VENDIDO" (sem botao) |
-
----
-
-## Design e UI
-
-### Estetica
-
-O design segue uma estetica de galeria minimalista ("Architectural Void"):
-
-- **Monocromatico**: `#1a1a1a` (ink), `#555` (light), `#888` (muted), `#fafafa` (dim), `#fff` (surface)
-- **Vermelho apenas** para badges SOLD/SALE: `#b91c1c`
-- **Zero border-radius** em todo o site (estetica de galeria)
-- **Font**: Geist (via `next/font/google`, variavel `--font-sans`)
-- **Assinatura**: Imagem da assinatura da artista usada no header e footer como branding
-
-### Animacoes
-
-- **Header**: Slide-in ao carregar + nav links com stagger. Menu mobile com AnimatePresence
-- **Hero**: Imagem com scale-in, texto com stagger vertical, label com slide horizontal
-- **Seccoes**: FadeIn scroll-triggered com `whileInView` (Framer Motion)
-- **Identidade**: Palavras rotativas com AnimatePresence (2s intervalo)
-- **Modais de sucesso**: Checkmark com scale-in animado
-- **Reducao de movimento**: Todas as animacoes respeitam `prefers-reduced-motion`
-
-### Componentes Chave
-
-| Componente | Descricao |
-|-----------|-----------|
-| `CategoryGrid` | 4 categorias com imagens reais, grid 3 colunas, hover zoom + reveal |
-| `ArtistStatement` | Layout assimetrico com imagem do estudio, blockquote |
-| `ExhibitionList` | Badges tipificados (Solo/Group/Residency/Award), links externos |
-| `SuccessModal` | Modal reutilizavel com checkmark animado (newsletter + contacto) |
-| `AppointmentSection` | Cards verticais com icone, descricao e CTA |
-
-### Tokens de Design
-
-Propriedades CSS customizadas em `src/app/globals.css`:
-
-```css
---color-ink: #1a1a1a;          /* Texto principal */
---color-ink-light: #555555;     /* Texto secundario */
---color-ink-muted: #888888;     /* Labels, placeholders */
---color-surface: #ffffff;       /* Fundo principal */
---color-surface-dim: #fafafa;   /* Fundo alternativo */
---color-accent: #1a1a1a;        /* Botoes CTA */
---color-sold: #b91c1c;          /* Badge vendido */
---space-page-x: 1.5rem → 7.5rem; /* Margens responsivas */
---space-section-y: 4rem → 8rem;  /* Espacamento vertical */
-```
+| Disponível com preço | "€1,800.00" + botão Purchase |
+| Preço sob consulta | "Price on request" (italic) + botão Inquire |
+| Em promoção (joalharia) | Preço original riscado + preço atual + badge "Sale" |
+| Vendido | "This Work Has Found Its Home" (uppercase muted text) |
 
 ---
 
 ## SEO e Performance
 
-### Implementado
-
-- **Metadados dinamicos** em todas as paginas (`generateMetadata`)
-- **Sitemap XML** dinamico com todas as obras visiveis
+- **Metadados dinâmicos** em todas as páginas (`generateMetadata`)
+- **Sitemap XML** dinâmico com todas as obras visíveis
 - **robots.txt** — bloqueia `/admin/`
 - **JSON-LD** — Schema.org (WebSite, Person, Product)
-- **Open Graph** — Imagens dinamicas por pagina e por obra (1200x630)
-- **Favicon** — Monograma "SO" dinamico (`icon.tsx` 32x32, `apple-icon.tsx` 180x180)
-- **llms.txt** — Endpoint dinamico para crawlers de LLM com contagem de obras por categoria
+- **Open Graph** — Imagens dinâmicas por página e por obra (1200x630)
+- **Favicon** — Monograma "SO" dinâmico (`icon.tsx` 32x32, `apple-icon.tsx` 180x180)
+- **llms.txt** — Endpoint dinâmico para crawlers de LLM
 - **Alternates** — Links hreflang (en/pt)
-- **Redirects 301** — URLs antigas do Squarespace (`/artworks/p/:slug` -> `/artworks/:slug`)
-- **ISR** — Revalidacao on-demand via `/api/revalidate` com allowlist de paths
-
-### Acessibilidade
-
-- Link "Skip to content" no layout raiz
-- Atributos `aria-label` em todos os botoes de icone
-- Estilos `focus-visible` em todos os elementos interativos
-- Suporte a `prefers-reduced-motion` em todas as animacoes
-- Navegacao por teclado no lightbox (setas + Escape)
-- Labels semanticos em todos os campos de formulario
+- **ISR** — Revalidação on-demand via `/api/revalidate`
+- **Breadcrumbs** — navigation + SEO on artwork detail pages
 
 ---
 
@@ -560,30 +534,32 @@ Propriedades CSS customizadas em `src/app/globals.css`:
 
 ```bash
 pnpm dev                  # Servidor de desenvolvimento
-pnpm build                # Build de producao
+pnpm build                # Build de produção
 pnpm lint                 # ESLint
-npx tsc --noEmit          # Verificacao de tipos
+npx tsc --noEmit          # Verificação de tipos
 ```
 
-### Convencoes
+### Convenções
 
-- **Named exports** em todos os modulos partilhados (sem `export default`)
-- **Paginas admin** usam `export const dynamic = "force-dynamic"`
-- **Validacao** com esquemas Zod em `src/lib/validations/`
-- **Tipos publicos** em `src/lib/types.ts` (nunca expor tipos da DB diretamente)
-- **Mappers** em `src/lib/mappers.ts` (converter DB rows -> tipos publicos)
+- **Named exports** em todos os módulos partilhados (sem `export default`)
+- **Páginas admin** usam `export const dynamic = "force-dynamic"`
+- **Validação** com esquemas Zod em `src/lib/validations/`
+- **Tipos públicos** em `src/lib/types.ts` (nunca expor tipos da DB directamente)
+- **Mappers** em `src/lib/mappers.ts` (converter DB rows → tipos públicos)
 - **Design tokens** via CSS custom properties em `globals.css`
-- **Queries** com fallback para mock data (site funciona sem DB)
-- **Imagens** locais em dev (`/public/images/`), Uploadthing CDN em producao
+- **Labels** usam `text-[10px] font-medium tracking-[0.2em] uppercase` com `──` prefix
+- **Hover transitions** usam `duration-300` consistently
+- **Image hover zoom** usa `scale-[1.03]` at `duration-[900ms]`
+- **Server Components** por defeito; `"use client"` apenas quando necessário (hooks, events)
 
 ### Categorias de Obras
 
-| Slug | Total | Descricao |
+| Slug | Total | Descrição |
 |------|-------|-----------|
-| `photography` | 13 | Impressoes fine art, auto-retrato, edicoes limitadas |
-| `artist-proofs` | 11 | Provas de artista raras e anotadas |
-| `drawings` | 14 | Obras originais em grafite, carvao e tinta |
-| `jewelry` | 8 | Esculturas vestiveis em ouro e prata (todas em promocao) |
+| `photography` | 13 | Self-portraiture & fine art prints |
+| `artist-proofs` | 11 | Rare annotated editions |
+| `drawings` | 14 | Charcoal, graphite & ink on paper |
+| `jewelry` | 8 | Wearable sculpture — limited editions (all on sale) |
 
 ---
 
@@ -592,20 +568,9 @@ npx tsc --noEmit          # Verificacao de tipos
 ### Vercel (Recomendado)
 
 ```bash
-# 1. Instalar Vercel CLI
 pnpm install -g vercel
-
-# 2. Login
 vercel login
-
-# 3. Deploy
 vercel --prod
-
-# 4. Configurar variaveis de ambiente no dashboard Vercel
-# Settings -> Environment Variables -> adicionar todas do .env.local
-
-# 5. Configurar dominio customizado
-# Settings -> Domains -> adicionar soraia-oliveira.com
 ```
 
 ### DNS
@@ -615,18 +580,17 @@ A      @    76.76.21.21
 CNAME  www  cname.vercel-dns.com
 ```
 
-### Pos-Deploy
+### Pós-Deploy
 
-- Atualizar `NEXT_PUBLIC_BASE_URL` para o dominio de producao
-- Atualizar URL do webhook Stripe para producao
+- Atualizar `NEXT_PUBLIC_BASE_URL` para o domínio de produção
+- Atualizar URL do webhook Stripe para produção
 - Submeter sitemap no Google Search Console
-- Testar pagamento com cartao real (reembolsar depois)
 - Migrar imagens de `/public/images/` para Uploadthing CDN
 
 ---
 
-## Licenca
+## Licença
 
 Projeto privado. Todos os direitos reservados.
 
-Desenvolvido para **Soraia Oliveira** — artista visual, Guimaraes, Portugal.
+Desenvolvido para **Soraia Oliveira** — artista visual, Guimarães, Portugal.
