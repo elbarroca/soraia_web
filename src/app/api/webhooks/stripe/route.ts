@@ -1,9 +1,10 @@
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { db } from "@/db";
-import { orders, artworks } from "@/db/schema";
+import { orders, artworks, artworkImages } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { sendOrderConfirmation, sendOrderNotification } from "@/lib/email";
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -46,13 +47,26 @@ export async function POST(req: Request) {
       shippingAddress: session.collected_information?.shipping_details?.address ?? null,
     });
 
+    // Look up artwork details for emails
+    let artworkTitle = "Artwork";
+    let artworkImageUrl: string | null = null;
+
     if (artworkId) {
+      const artwork = await db.query.artworks.findFirst({
+        where: eq(artworks.id, artworkId),
+      });
+      if (artwork) artworkTitle = artwork.title;
+
+      const primaryImage = await db.query.artworkImages.findFirst({
+        where: eq(artworkImages.artworkId, artworkId),
+      });
+      if (primaryImage) artworkImageUrl = primaryImage.url;
+
       await db
         .update(artworks)
         .set({ isSold: true })
         .where(eq(artworks.id, artworkId));
 
-      // Bust ISR cache so the artwork shows as sold immediately
       revalidatePath("/artworks");
       if (artworkSlug) {
         revalidatePath(`/artworks/${artworkSlug}`);
@@ -60,6 +74,26 @@ export async function POST(req: Request) {
       revalidatePath("/admin/artworks");
       revalidatePath("/admin/orders");
     }
+
+    // Send confirmation emails (non-blocking)
+    const shippingDetails = session.collected_information?.shipping_details;
+    const emailData = {
+      customerName: session.customer_details?.name ?? "there",
+      customerEmail: session.customer_details?.email ?? "",
+      artworkTitle,
+      artworkSlug,
+      artworkImageUrl,
+      amount: String((session.amount_total ?? 0) / 100),
+      currency: session.currency?.toUpperCase() ?? "EUR",
+      shippingName: shippingDetails?.name ?? undefined,
+      shippingCity: shippingDetails?.address?.city ?? undefined,
+      shippingCountry: shippingDetails?.address?.country ?? undefined,
+    };
+
+    if (emailData.customerEmail && emailData.customerEmail !== "unknown") {
+      sendOrderConfirmation(emailData).catch(console.error);
+    }
+    sendOrderNotification(emailData).catch(console.error);
   }
 
   return Response.json({ received: true });
