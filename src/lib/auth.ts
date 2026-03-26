@@ -28,9 +28,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const { email, password } = parsed.data;
 
-        if (email !== process.env.ADMIN_EMAIL) return null;
+        if (email !== process.env.ADMIN_EMAIL?.trim()) return null;
 
-        const passwordHash = process.env.ADMIN_PASSWORD_HASH;
+        const passwordHash = process.env.ADMIN_PASSWORD_HASH?.trim();
         if (!passwordHash) return null;
 
         const isValid = await bcrypt.compare(password, passwordHash);
