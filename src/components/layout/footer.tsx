@@ -92,7 +92,7 @@ export function Footer() {
                   alt="Soraia Oliveira"
                   width={160}
                   height={32}
-                  className="h-7 md:h-9 w-auto object-contain object-left"
+                  className="h-9 md:h-12 w-auto object-contain object-left"
                 />
               </Link>
               <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed max-w-[240px]">

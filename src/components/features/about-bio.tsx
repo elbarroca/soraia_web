@@ -36,7 +36,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         {/* Portrait — left column, flush top with the first bio paragraph */}
         <FadeIn delay={0.15} className="lg:col-span-5">
-          <div className="relative aspect-[4/5] overflow-hidden bg-[var(--color-surface-dim)]">
+          <div className="relative aspect-square overflow-hidden bg-[var(--color-surface-dim)]">
             <Image
               src="/images/about/profile.jpg"
               alt="Soraia Oliveira in her studio"

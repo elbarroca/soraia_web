@@ -83,7 +83,7 @@ export default async function SoraiaSpacePage() {
       <SpaceNav />
 
       {/* The Practice */}
-      <Section id="the-practice" className="bg-[var(--color-surface-warm)] py-14 md:py-20">
+      <Section id="the-practice" className="bg-[var(--color-surface-warm)] py-10 md:py-14">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -103,7 +103,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* Appointments */}
-      <Section id="appointments" className="bg-[var(--color-surface-dim)] py-14 md:py-20">
+      <Section id="appointments" className="bg-[var(--color-surface-dim)] py-10 md:py-14">
         <AppointmentSection
           text={settings.appointment_text}
           studioUrl={settings.appointment_url}
@@ -112,7 +112,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* News */}
-      <Section id="news" className="py-14 md:py-20">
+      <Section id="news" className="py-10 md:py-14">
         <NewsList items={visibleNews} />
       </Section>
 

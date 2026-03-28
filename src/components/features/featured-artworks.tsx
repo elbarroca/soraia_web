@@ -37,17 +37,18 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
         {artworks.map((artwork, i) => (
           <FadeIn key={artwork.id} delay={0.06 * i}>
             <Link href={`/artworks/${artwork.slug}`} className="group block">
-              <div className="relative overflow-hidden bg-[var(--color-surface-dim)] aspect-[4/5]">
+              <div className="relative overflow-hidden bg-[var(--color-surface-dim)]">
                 {artwork.images[0] && (
                   <>
                     <Image
                       src={artwork.images[0].url}
                       alt={artwork.images[0].altText || artwork.title}
-                      fill
-                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                      width={600}
+                      height={600}
+                      className="w-full h-auto object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
                   </>
                 )}
                 {artwork.isSold && (

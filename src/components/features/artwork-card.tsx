@@ -15,14 +15,15 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/artworks/${artwork.slug}`} className="group block">
       {/* Image container */}
-      <div className="relative overflow-hidden bg-[var(--color-surface-dim)] aspect-[3/4] mb-4">
+      <div className="relative overflow-hidden bg-[var(--color-surface-dim)] mb-4">
         {primaryImage ? (
           <>
             <Image
               src={primaryImage.url}
               alt={primaryImage.altText || artwork.title}
-              fill
-              className="object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+              width={800}
+              height={800}
+              className="w-full h-auto object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
             />
             {/* Subtle overlay on hover — frames the image without obscuring it */}

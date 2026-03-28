@@ -51,7 +51,7 @@
 
   /* ─── Spacing ─── */
   --space-page-x: 1.5rem;
-  --space-section-y: 5rem;
+  --space-section-y: 3rem;
   --max-width: 1600px;
   --max-text: 600px;
   --background: oklch(1 0 0);
@@ -91,19 +91,19 @@
 @media (min-width: 768px) {
   :root {
     --space-page-x: 2rem;
-    --space-section-y: 7rem;
+    --space-section-y: 4rem;
   }
 }
 @media (min-width: 1024px) {
   :root {
     --space-page-x: 3rem;
-    --space-section-y: 9rem;
+    --space-section-y: 5rem;
   }
 }
 @media (min-width: 1440px) {
   :root {
     --space-page-x: 4rem;
-    --space-section-y: 10rem;
+    --space-section-y: 6rem;
   }
 }
 
@@ -182,19 +182,19 @@ body {
 
 /* ─── Typography utilities ─── */
 .heading-display {
-  font-size: var(--text-5xl);
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: var(--leading-tight);
   letter-spacing: -0.02em;
 }
 @media (min-width: 768px) {
   .heading-display {
-    font-size: var(--text-6xl);
+    font-size: var(--text-3xl);
   }
 }
 @media (min-width: 1024px) {
   .heading-display {
-    font-size: var(--text-7xl);
+    font-size: var(--text-4xl);
   }
 }
 
