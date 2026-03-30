@@ -47,7 +47,7 @@ export function PurchaseButton({ artworkId, disabled }: PurchaseButtonProps) {
         className="w-full"
         size="lg"
       >
-        {loading ? "Redirecting..." : "PURCHASE"}
+        {loading ? "Redirecting..." : "ADD TO CART"}
       </Button>
       {error && (
         <p className="text-[12px] text-red-600 text-center">

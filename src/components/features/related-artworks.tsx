@@ -25,7 +25,7 @@ export function RelatedArtworks({ artworks, category }: RelatedArtworksProps) {
   const label = CATEGORY_LABELS[category] ?? category;
 
   return (
-    <Section className="bg-[var(--color-surface-dim)]">
+    <Section>
       <FadeIn>
         <div className="flex items-baseline justify-between mb-10">
           <div className="space-y-2">

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/section";
 import { AboutBio } from "@/components/features/about-bio";
 import { AboutIdentity } from "@/components/features/about-identity";
+import { AboutOrigin } from "@/components/features/about-origin";
 import { EducationTimeline } from "@/components/features/education-timeline";
 import { PressSection } from "@/components/features/press-section";
 import { FadeIn } from "@/components/shared/fade-in";
@@ -41,6 +42,10 @@ export default async function AboutPage() {
 
       <AboutIdentity words={identityWords} />
 
+      <Section>
+        <AboutOrigin />
+      </Section>
+
       <Section className="bg-[var(--color-surface-dim)]">
         <PressSection />
       </Section>
@@ -54,9 +59,9 @@ export default async function AboutPage() {
                 <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-4">
                   ( Contact )
                 </p>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)]">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)]">
                   More questions?<br />
-                  <span className="pl-[10%]">Let&apos;s talk!</span>
+                  Let&apos;s talk!
                 </h2>
               </div>
               <div className="hidden sm:block flex-shrink-0 mb-2">
@@ -77,7 +82,7 @@ export default async function AboutPage() {
               What&apos;s Next
             </p>
             <h2 className="heading-editorial text-[var(--color-ink)]">
-              The work speaks for itself
+              Every piece holds a story
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
               <Link

@@ -56,4 +56,5 @@ export const categories = [
   { value: "photography", label: "Photography" },
   { value: "artist-proofs", label: "Artist Proofs" },
   { value: "drawings", label: "Drawings" },
+  { value: "jewelry", label: "Jewelry" },
 ] as const;

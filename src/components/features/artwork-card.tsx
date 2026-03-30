@@ -15,7 +15,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/artworks/${artwork.slug}`} className="group block">
       {/* Image container */}
-      <div className="relative overflow-hidden bg-[var(--color-surface-dim)] mb-4">
+      <div className="relative overflow-hidden mb-4">
         {primaryImage ? (
           <>
             <Image

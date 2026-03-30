@@ -6,18 +6,18 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 type HeroSectionProps = {
-  statement: string;
+  statement?: string;
   tagline?: string;
   featuredImage?: string;
 };
 
-export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
+export function HeroSection({ featuredImage }: HeroSectionProps) {
   const prefersReducedMotion = useReducedMotion();
   const d = prefersReducedMotion ? 0 : 1;
 
   return (
     <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-center overflow-hidden">
-      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-12 md:py-0">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-8 md:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Image side */}
           <motion.div
@@ -56,7 +56,7 @@ export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
             >
               <span className="block h-px w-12 bg-[var(--color-ink)]" aria-hidden="true" />
               <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-                Visual Artist — Images — Portugal
+                Visual Artist — Portugal
               </p>
             </motion.div>
 
@@ -67,7 +67,7 @@ export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 * d, delay: 0.25 * d, ease: [0.22, 1, 0.36, 1] }}
             >
-              {statement}
+              Soraia Oliveira
             </motion.h1>
 
             {/* Single, understated CTA */}
@@ -79,17 +79,17 @@ export function HeroSection({ statement, featuredImage }: HeroSectionProps) {
               <div className="flex flex-col sm:flex-row items-start gap-6">
                 <Link
                   href="/artworks"
-                  className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink)] transition-colors duration-300 hover:text-[var(--color-ink-light)]"
+                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-colors duration-300 hover:text-[var(--color-ink-light)]"
                 >
                   Explore Work
-                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
                 <Link
                   href="/soraia-space"
-                  className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] transition-colors duration-300 hover:text-[var(--color-ink)]"
+                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-colors duration-300 hover:text-[var(--color-ink-light)]"
                 >
                   Book a Studio Visit
-                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>

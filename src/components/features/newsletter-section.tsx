@@ -9,13 +9,13 @@ export function NewsletterSection() {
   const { email, status, subscribe, updateEmail, reset } = useNewsletter();
 
   return (
-    <Section className="bg-[var(--color-surface-warm)]">
+    <Section>
       <FadeIn>
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
             Stay Close
           </p>
-          <h2 className="heading-editorial text-[var(--color-ink)]">
+          <h2 className="heading-1">
             First to See New Work
           </h2>
           <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.7] max-w-md mx-auto">
@@ -32,7 +32,7 @@ export function NewsletterSection() {
               </p>
               <button
                 onClick={reset}
-                className="text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300 mt-2"
+                className="text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300 mt-2"
               >
                 Subscribe another email
               </button>
@@ -46,18 +46,18 @@ export function NewsletterSection() {
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 bg-transparent border-b border-[var(--color-border-strong)] px-0 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)] text-center"
+                  className="flex-1 bg-transparent border border-[var(--color-border-strong)] px-4 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="border-b border-[var(--color-border-strong)] px-4 py-3 transition-all duration-300 hover:border-[var(--color-ink)] group disabled:opacity-50"
+                  className="bg-[var(--color-ink)] text-[var(--color-surface)] px-5 py-3 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50"
                   aria-label="Subscribe"
                 >
                   {status === "loading" ? (
                     <Loader2 size={18} className="animate-spin" />
                   ) : (
-                    <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <ArrowRight size={18} />
                   )}
                 </button>
               </form>

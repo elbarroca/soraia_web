@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArtworkCard } from "./artwork-card";
+import { ArtworkFilter } from "./artwork-filter";
 import { FadeIn } from "@/components/shared/fade-in";
 import type { Artwork } from "@/lib/types";
 
@@ -13,19 +14,19 @@ type ArtworkGridProps = {
 const CATEGORY_INTROS: Record<string, { title: string; description: string }> = {
   photography: {
     title: "Photography",
-    description: "Self-portraiture and fine art prints exploring identity, presence, and the body as territory.",
+    description: "Photography and self-portraiture exploring identity, presence, and the body through performance and experimentation.",
   },
   drawings: {
     title: "Drawings",
-    description: "Works in charcoal, graphite, and ink — intimate gestures captured on paper.",
+    description: "Works in charcoal, graphite, and other media where gesture and thought take form.",
   },
   "artist-proofs": {
     title: "Artist Proofs",
-    description: "Rare annotated editions, each uniquely marked by the artist's hand.",
+    description: "A space for testing, where each work takes a different direction before the final artwork.",
   },
   jewelry: {
-    title: "Wearable Sculpture",
-    description: "Handcrafted in silver, in collaboration with Sofia Arantes. Limited editions.",
+    title: "Jewelry",
+    description: "Handcrafted pieces where sculpture meets adornment.",
   },
 };
 
@@ -69,9 +70,12 @@ export function ArtworkGrid({ artworks }: ArtworkGridProps) {
 
   return (
     <>
-      {/* Category intro + sort controls */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-        {categoryIntro ? (
+      {/* Filter tabs + sort */}
+      <ArtworkFilter sort={sort} onSortChange={setSort} />
+
+      {/* Category intro */}
+      {categoryIntro && (
+        <div className="mb-8">
           <FadeIn key={activeCategory}>
             <div className="max-w-lg">
               <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75] tracking-[0.01em]">
@@ -79,21 +83,8 @@ export function ArtworkGrid({ artworks }: ArtworkGridProps) {
               </p>
             </div>
           </FadeIn>
-        ) : (
-          <div />
-        )}
-
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value as SortOption)}
-          className="self-end text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] bg-transparent border border-transparent hover:border-[var(--color-border)] px-2 py-1.5 focus:outline-none focus:border-[var(--color-ink)] focus:text-[var(--color-ink)] hover:text-[var(--color-ink)] transition-all duration-300 cursor-pointer appearance-none"
-        >
-          <option value="curated">Curated</option>
-          <option value="price-asc">Price: Low → High</option>
-          <option value="price-desc">Price: High → Low</option>
-          <option value="newest">Newest</option>
-        </select>
-      </div>
+        </div>
+      )}
 
       {sorted.length === 0 ? (
         <div className="py-24 text-center">

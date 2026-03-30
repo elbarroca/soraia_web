@@ -1,7 +1,7 @@
 import { HeroSection } from "@/components/features/hero-section";
 import { FeaturedArtworks } from "@/components/features/featured-artworks";
 import { ArtistStatement } from "@/components/features/artist-statement";
-import { CollectorBanner } from "@/components/features/collector-banner";
+import { StudioBanner } from "@/components/features/collector-banner";
 import { NewsletterSection } from "@/components/features/newsletter-section";
 import { getSettings, getVisibleArtworks } from "@/lib/queries";
 import { toPublicArtwork } from "@/lib/mappers";
@@ -45,7 +45,7 @@ export default async function HomePage() {
         line1="Multidisciplinary artist working across photography and drawing."
         line2="Creating and exploring through the body, self-portraiture and transformation."
       />
-      <CollectorBanner />
+      <StudioBanner />
       <NewsletterSection />
     </>
   );

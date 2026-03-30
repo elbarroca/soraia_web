@@ -81,18 +81,26 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
                 </p>
               )}
 
-              {/* Details table */}
-              <div className="border-t border-[var(--color-border)]">
-                {details.map((d) => (
-                  <div
-                    key={d.label}
-                    className="flex justify-between items-baseline py-3.5 border-b border-[var(--color-border)]"
-                  >
-                    <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">{d.label}</span>
-                    <span className="text-[13px] font-medium capitalize text-[var(--color-ink)] text-right max-w-[60%]">{d.value}</span>
+              {/* Details dropdown */}
+              {details.length > 0 && (
+                <details className="border-t border-[var(--color-border)] group">
+                  <summary className="flex items-center justify-between py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">Details</span>
+                    <span className="text-[var(--color-ink-muted)] transition-transform duration-300 group-open:rotate-180 text-xs">▼</span>
+                  </summary>
+                  <div className="pb-4">
+                    {details.map((d) => (
+                      <div
+                        key={d.label}
+                        className="flex justify-between items-baseline py-3 border-b border-[var(--color-border)]"
+                      >
+                        <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">{d.label}</span>
+                        <span className="text-[13px] font-medium capitalize text-[var(--color-ink)] text-right max-w-[60%]">{d.value}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </details>
+              )}
 
               {/* Action buttons */}
               <div className="space-y-2.5 pt-3">
@@ -122,19 +130,22 @@ export function ArtworkDetail({ artwork }: ArtworkDetailProps) {
                 )}
               </div>
 
-              {/* Shipping info */}
+              {/* Shipping dropdown */}
               {!artwork.isSold && (
-                <div className="border-t border-[var(--color-border)] pt-5 space-y-2">
-                  <p className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">
-                    Shipping
-                  </p>
-                  <p className="text-[12px] text-[var(--color-ink-light)] leading-relaxed">
-                    Ships from Guimarães, Portugal. Delivery available to Portugal, Spain, France, Germany, Italy, United Kingdom, Netherlands, Belgium, and the United States.
-                  </p>
-                  <p className="text-[12px] text-[var(--color-ink-muted)] leading-relaxed">
-                    Shipping costs calculated at checkout. All works are carefully packed and insured.
-                  </p>
-                </div>
+                <details className="border-t border-[var(--color-border)] group">
+                  <summary className="flex items-center justify-between py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-[var(--color-ink-muted)]">Shipping</span>
+                    <span className="text-[var(--color-ink-muted)] transition-transform duration-300 group-open:rotate-180 text-xs">▼</span>
+                  </summary>
+                  <div className="pb-4 space-y-2">
+                    <p className="text-[12px] text-[var(--color-ink-light)] leading-relaxed">
+                      Ships from Guimarães, Portugal. Delivery available to Portugal, Spain, France, Germany, Italy, United Kingdom, Netherlands, Belgium, and the United States.
+                    </p>
+                    <p className="text-[12px] text-[var(--color-ink-muted)] leading-relaxed">
+                      Shipping costs calculated at checkout. All works are carefully packed and insured.
+                    </p>
+                  </div>
+                </details>
               )}
             </div>
           </FadeIn>

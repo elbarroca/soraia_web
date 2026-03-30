@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Section } from "@/components/layout/section";
-import { ArtworkFilter } from "@/components/features/artwork-filter";
 import { ArtworkGrid } from "@/components/features/artwork-grid";
 import { PriceDisplay } from "@/components/features/price-display";
 import { FadeIn } from "@/components/shared/fade-in";
@@ -42,19 +41,16 @@ export default async function ArtworksPage() {
         </p>
       </div>
 
-      {/* Curated highlights */}
+      {/* Featured highlights */}
       {curated.length > 0 && (
         <div className="mb-16">
-          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-6">
-            Curated
-          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {curated.map((artwork, i) => {
               const img = artwork.images.find((im) => im.isPrimary) ?? artwork.images[0];
               return (
                 <FadeIn key={artwork.id} delay={i * 0.08}>
                   <Link href={`/artworks/${artwork.slug}`} className="group block">
-                    <div className="relative overflow-hidden bg-[var(--color-surface-dim)] aspect-[4/3] mb-3">
+                    <div className="relative overflow-hidden aspect-[4/3] mb-3">
                       {img && (
                         <Image
                           src={img.url}
@@ -84,7 +80,6 @@ export default async function ArtworksPage() {
       )}
 
       <Suspense fallback={null}>
-        <ArtworkFilter />
         <ArtworkGrid artworks={visibleArtworks} />
       </Suspense>
     </Section>

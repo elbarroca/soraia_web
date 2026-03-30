@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "./container";
-import { EditorialDivider } from "@/components/shared/editorial-divider";
 import { useNewsletter } from "@/hooks/use-newsletter";
 import { SuccessModal } from "@/components/shared/success-modal";
 
@@ -45,16 +44,21 @@ function IconYouTube({ size = 16 }: { size?: number }) {
 
 const SOCIAL_LINKS = [
   { href: "https://www.instagram.com/soraianoliveira/", label: "Instagram", Icon: IconInstagram },
-  { href: "https://www.facebook.com/soraianoliveira", label: "Facebook", Icon: IconFacebook },
+  { href: "https://www.facebook.com/soraiaoliveira.artist", label: "Facebook", Icon: IconFacebook },
   { href: "https://www.tiktok.com/@soraianoliveira", label: "TikTok", Icon: IconTikTok },
   { href: "https://www.youtube.com/@soraianoliveira", label: "YouTube", Icon: IconYouTube },
 ] as const;
 
-const FOOTER_LINKS = [
-  { href: "/artworks", label: "Artworks" },
+const FOOTER_NAV_LEFT = [
   { href: "/about", label: "About" },
-  { href: "/soraia-space", label: "Soraia Space" },
+  { href: "/artworks", label: "Artworks" },
   { href: "/contact", label: "Contact" },
+];
+
+const FOOTER_NAV_RIGHT = [
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/refund-policy", label: "Refund Policy" },
+  { href: "/soraia-space", label: "Soraia Space" },
 ];
 
 export function Footer() {
@@ -69,23 +73,11 @@ export function Footer() {
         message="Thank you for subscribing. You'll hear from me when there's something worth sharing."
       />
 
-      <footer className="bg-[var(--color-surface)]">
-        <Container>
-          <EditorialDivider />
-        </Container>
-
-        {/* Parting quote — signature moment */}
-        <Container className="pt-14 md:pt-20 pb-6 md:pb-8">
-          <p className="text-center font-serif italic text-[var(--color-ink-muted)] text-[17px] md:text-[20px] leading-relaxed tracking-[0.01em] max-w-2xl mx-auto">
-            O corpo como território de identidade, intimidade e transformação.
-          </p>
-        </Container>
-
+      <footer className="bg-[var(--color-surface-dim)]">
         <Container className="py-12 md:py-16">
-          {/* Top row: Signature + Nav + Social + Newsletter */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-            {/* Brand */}
-            <div className="md:col-span-3 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-start">
+            {/* Left: Signature */}
+            <div className="md:col-span-3">
               <Link href="/" className="block" aria-label="Soraia Oliveira — home">
                 <Image
                   src="/images/branding/signature-bold.png"
@@ -95,35 +87,14 @@ export function Footer() {
                   className="h-9 md:h-12 w-auto object-contain object-left"
                 />
               </Link>
-              <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed max-w-[240px]">
-                Fragments of a visual autobiography.
-              </p>
             </div>
 
-            {/* Navigation */}
-            <div className="md:col-span-2 md:col-start-5">
-              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-5">
-                Explore
+            {/* Center: Name + Social */}
+            <div className="md:col-span-3">
+              <p className="text-[13px] font-bold tracking-[0.04em] uppercase text-[var(--color-ink)] mb-4">
+                Soraia Oliveira
               </p>
-              <nav className="flex flex-col gap-3">
-                {FOOTER_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-[13px] text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors duration-300"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            {/* Social */}
-            <div className="md:col-span-2">
-              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-5">
-                Connect
-              </p>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 {SOCIAL_LINKS.map(({ href, label, Icon }) => (
                   <a
                     key={label}
@@ -133,30 +104,49 @@ export function Footer() {
                     className="text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
                     aria-label={label}
                   >
-                    <Icon size={18} />
+                    <Icon size={16} />
                   </a>
                 ))}
               </div>
-              <a
-                href="mailto:info@soraia-oliveira.com"
-                className="block mt-4 text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
-              >
-                info@soraia-oliveira.com
-              </a>
             </div>
 
-            {/* Newsletter — simplified */}
-            <div className="md:col-span-3 md:col-start-10">
-              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-5">
-                Studio Updates
-              </p>
-              <p className="text-[12px] text-[var(--color-ink-muted)] leading-relaxed mb-4">
-                New work, exhibitions, and events — nothing more.
-              </p>
-              <form onSubmit={subscribe} className="flex items-stretch gap-0">
+            {/* Nav columns */}
+            <div className="md:col-span-2">
+              <nav className="flex flex-col gap-2.5">
+                {FOOTER_NAV_LEFT.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-[12px] text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div className="md:col-span-2">
+              <nav className="flex flex-col gap-2.5">
+                {FOOTER_NAV_RIGHT.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-[12px] text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+
+          {/* Newsletter row */}
+          <div className="mt-10 pt-8 border-t border-[var(--color-border)]/40">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <form onSubmit={subscribe} className="flex items-stretch gap-0 w-full max-w-[300px]">
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
@@ -178,7 +168,7 @@ export function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-20 pt-5 border-t border-[var(--color-border)]/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.08em] uppercase text-[var(--color-ink-muted)]/70">
+          <div className="mt-8 pt-5 border-t border-[var(--color-border)]/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.08em] uppercase text-[var(--color-ink-muted)]/70">
             <p>&copy; {new Date().getFullYear()} Soraia Oliveira. All rights reserved.</p>
             <p className="tracking-[0.18em]">Guimarães, Portugal</p>
           </div>

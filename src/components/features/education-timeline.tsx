@@ -17,12 +17,12 @@ const EDUCATION: EducationEntry[] = [
   {
     country: "Italy",
     institution: "Free University of Bolzano",
-    program: "International program",
+    program: "Erasmus program",
   },
   {
     country: "Italy",
     institution: "Accademia di Belle Arti, L'Aquila",
-    program: "International program",
+    program: "Erasmus program",
   },
 ];
 

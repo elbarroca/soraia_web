@@ -100,17 +100,17 @@ export function ContactForm() {
           <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-5">
             I&apos;m writing about
           </p>
-          <div className="flex flex-wrap gap-x-7 gap-y-3">
+          <div className="flex flex-wrap gap-3">
             {SUBJECTS.map((s) => (
               <button
                 key={s.value}
                 type="button"
                 onClick={() => selectSubject(s.value)}
                 className={cn(
-                  "relative text-[13px] tracking-wide transition-colors duration-200 pb-1 focus-visible:outline-none focus-visible:underline underline-offset-4",
+                  "relative text-[13px] font-medium tracking-wide transition-all duration-200 px-4 py-2 border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
                   activeSubject === s.value
-                    ? "text-[var(--color-ink)] border-b border-[var(--color-ink)]"
-                    : "text-[var(--color-ink-muted)] hover:text-[var(--color-ink-light)]"
+                    ? "text-white bg-[var(--color-ink)] border-[var(--color-ink)]"
+                    : "text-[var(--color-ink-muted)] border-[var(--color-border-strong)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]"
                 )}
               >
                 {s.label}

@@ -15,6 +15,7 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
   const [activeIndex, setActiveIndex] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [imageLoaded, setImageLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -25,9 +26,14 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
     setZoomPos({ x, y });
   }, []);
 
+  function handleImageChange(index: number) {
+    setImageLoaded(false);
+    setActiveIndex(index);
+  }
+
   if (images.length === 0) {
     return (
-      <div className="aspect-[3/4] bg-[var(--color-surface-dim)] flex items-center justify-center">
+      <div className="aspect-[3/4] flex items-center justify-center">
         <span className="label text-[var(--color-ink-muted)]">No images</span>
       </div>
     );
@@ -38,7 +44,7 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
       {/* Main image with hover zoom */}
       <div
         ref={containerRef}
-        className="relative w-full min-h-[300px] bg-[var(--color-surface-dim)] overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] focus-visible:ring-offset-2 outline-none"
+        className="relative w-full overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] focus-visible:ring-offset-2 outline-none"
         onMouseEnter={() => setIsZooming(true)}
         onMouseLeave={() => setIsZooming(false)}
         onMouseMove={handleMouseMove}
@@ -48,18 +54,22 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
         onKeyDown={(e) => { if (e.key === "Enter") onOpenLightbox(activeIndex); }}
         aria-label={`View ${title} fullscreen`}
       >
+        {/* Invisible spacer to prevent layout shift — uses fill once loaded */}
+        {!imageLoaded && <div className="w-full aspect-[3/4]" />}
         <Image
           src={images[activeIndex].url}
           alt={images[activeIndex].altText || title}
           width={1200}
-          height={1200}
+          height={1600}
           className={cn(
-            "w-full h-auto object-contain transition-transform duration-200 ease-out",
-            isZooming && "scale-[2.5]"
+            "w-full h-auto object-contain transition-all duration-200 ease-out",
+            isZooming && "scale-[2.5]",
+            !imageLoaded && "absolute inset-0 opacity-0"
           )}
           style={isZooming ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : undefined}
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
 
@@ -69,7 +79,7 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
           {images.map((img, i) => (
             <button
               key={img.id}
-              onClick={() => setActiveIndex(i)}
+              onClick={() => handleImageChange(i)}
               className={cn(
                 "relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 overflow-hidden transition-opacity",
                 i === activeIndex

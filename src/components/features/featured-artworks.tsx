@@ -17,15 +17,10 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
     <Section>
       <FadeIn>
         <div className="flex items-baseline justify-between mb-12">
-          <div className="space-y-2">
-            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-              Selected Works
-            </p>
-            <h2 className="heading-1">Featured</h2>
-          </div>
+          <h2 className="heading-1">Artworks</h2>
           <Link
             href="/artworks"
-            className="group hidden sm:inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
+            className="group hidden sm:inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300"
           >
             View all works
             <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-0.5" />
