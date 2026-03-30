@@ -48,6 +48,7 @@ export default function ContactPage() {
                 </a>
 
                 <div className="flex items-start gap-3">
+                  <Mail size={16} className="text-[var(--color-ink-muted)] mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-1">Studio</p>
                     <p className="text-sm">Guimarães, Portugal</p>
@@ -58,13 +59,13 @@ export default function ContactPage() {
 
             {/* Contact image */}
             <FadeIn delay={0.15} className="hidden lg:block">
-              <div className="relative aspect-[3/4] max-w-[320px] overflow-hidden mt-4">
+              <div className="relative aspect-[2/3] max-w-[240px] overflow-hidden mt-4">
                 <Image
                   src="/images/contact/contact.jpg"
                   alt="Soraia Oliveira"
                   fill
-                  className="object-cover object-top"
-                  sizes="25vw"
+                  className="object-cover object-[center_20%]"
+                  sizes="20vw"
                 />
               </div>
             </FadeIn>

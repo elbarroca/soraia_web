@@ -39,25 +39,25 @@ export function NewsletterSection() {
             </div>
           ) : (
             <>
-              <form onSubmit={subscribe} className="flex items-stretch max-w-sm mx-auto mt-8">
+              <form onSubmit={subscribe} className="flex items-center max-w-sm mx-auto mt-8 bg-[var(--color-surface-dim)] rounded-full overflow-hidden pl-5 pr-1.5 py-1.5 focus-within:bg-[var(--color-ink-muted)]/15 transition-colors duration-300">
                 <input
                   type="email"
                   placeholder="Your email"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 bg-transparent border border-[var(--color-border-strong)] px-4 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]"
+                  className="flex-1 bg-transparent border-none px-0 py-2 text-[15px] focus:outline-none placeholder:text-[var(--color-ink-muted)]"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[var(--color-ink)] text-[var(--color-surface)] px-5 py-3 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50"
+                  className="bg-[var(--color-ink)] text-[var(--color-surface)] rounded-full p-2.5 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
                   aria-label="Subscribe"
                 >
                   {status === "loading" ? (
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={16} className="animate-spin" />
                   ) : (
-                    <ArrowRight size={18} />
+                    <ArrowRight size={16} />
                   )}
                 </button>
               </form>

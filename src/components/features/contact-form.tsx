@@ -97,7 +97,7 @@ export function ContactForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
         {/* Subject selector — the form's first gesture */}
         <div>
-          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-5">
+          <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-[var(--color-ink)] mb-5">
             I&apos;m writing about
           </p>
           <div className="flex flex-wrap gap-3">
@@ -107,10 +107,10 @@ export function ContactForm() {
                 type="button"
                 onClick={() => selectSubject(s.value)}
                 className={cn(
-                  "relative text-[13px] font-medium tracking-wide transition-all duration-200 px-4 py-2 border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
+                  "relative text-[14px] font-semibold tracking-wide transition-all duration-200 px-5 py-2.5 border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
                   activeSubject === s.value
                     ? "text-white bg-[var(--color-ink)] border-[var(--color-ink)]"
-                    : "text-[var(--color-ink-muted)] border-[var(--color-border-strong)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]"
+                    : "text-[var(--color-ink)] border-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-white"
                 )}
               >
                 {s.label}

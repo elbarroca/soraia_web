@@ -143,22 +143,22 @@ export function Footer() {
           {/* Newsletter row */}
           <div className="mt-10 pt-8 border-t border-[var(--color-border)]/40">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <form onSubmit={subscribe} className="flex items-stretch gap-0 w-full max-w-[300px]">
+              <form onSubmit={subscribe} className="flex items-center w-full max-w-[300px] bg-[var(--color-surface)] rounded-full overflow-hidden pl-4 pr-1 py-1 focus-within:bg-[var(--color-ink-muted)]/20 transition-colors duration-300">
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 min-w-0 bg-transparent border-b border-[var(--color-border-strong)] px-0 py-2.5 text-[12px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)]"
+                  className="flex-1 min-w-0 bg-transparent border-none px-0 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)]"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="border-b border-[var(--color-border-strong)] px-3 py-2.5 transition-all duration-300 hover:border-[var(--color-ink)] group disabled:opacity-50 text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
+                  className="bg-[var(--color-ink)] text-[var(--color-surface)] rounded-full p-2 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
                   aria-label="Subscribe to newsletter"
                 >
-                  <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <ArrowRight size={13} />
                 </button>
               </form>
               {status === "error" && (
