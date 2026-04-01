@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 type PurchaseButtonProps = {
   artworkId: string;
@@ -41,14 +40,13 @@ export function PurchaseButton({ artworkId, disabled }: PurchaseButtonProps) {
 
   return (
     <div className="space-y-2">
-      <Button
+      <button
         onClick={handlePurchase}
         disabled={disabled || loading}
-        className="w-full"
-        size="lg"
+        className="w-full bg-[var(--color-ink)] text-white py-4 text-[11px] font-medium tracking-[0.18em] uppercase border border-[var(--color-ink)] transition-all duration-300 hover:bg-white hover:text-[var(--color-ink)] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none"
       >
         {loading ? "Redirecting..." : "ADD TO CART"}
-      </Button>
+      </button>
       {error && (
         <p className="text-[12px] text-red-600 text-center">
           {error}

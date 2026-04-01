@@ -30,6 +30,15 @@ export default async function ArtworksPage() {
 
   return (
     <Section className="pt-8 md:pt-12">
+      {/* Studio identity — large decorative masthead */}
+      <div className="mb-10 md:mb-14 overflow-hidden">
+        <FadeIn direction="none">
+          <p className="text-[clamp(3rem,10vw,8rem)] font-light tracking-[-0.02em] leading-[0.9] text-[var(--color-ink)] select-none">
+            Soraia Studio
+          </p>
+        </FadeIn>
+      </div>
+
       <div className="mb-12">
         <div className="flex items-center gap-4 mb-4">
           <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />

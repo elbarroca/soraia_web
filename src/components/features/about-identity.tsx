@@ -48,12 +48,12 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
             <motion.div
               key={i}
               className={line.indent}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, x: i % 2 === 0 ? -120 : 120 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{
-                duration: 0.5,
-                delay: 0.08 * i,
+                duration: 0.6,
+                delay: 0.07 * i,
                 ease: [0.22, 1, 0.36, 1],
               }}
             >

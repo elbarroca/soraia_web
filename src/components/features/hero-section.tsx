@@ -16,7 +16,7 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
   const d = prefersReducedMotion ? 0 : 1;
 
   return (
-    <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-center overflow-hidden">
+    <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-end pb-16 md:pb-24 overflow-hidden">
       <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-8 md:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Image side */}
@@ -70,6 +70,16 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
               Soraia Oliveira
             </motion.h1>
 
+            {/* Tagline */}
+            <motion.p
+              className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed max-w-xs"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 * d, delay: 0.5 * d }}
+            >
+              Self-portraiture, photography and drawing, exploring experimental printing and performance.
+            </motion.p>
+
             {/* Single, understated CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -79,14 +89,14 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
               <div className="flex flex-col sm:flex-row items-start gap-6">
                 <Link
                   href="/artworks"
-                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-colors duration-300 hover:text-[var(--color-ink-light)]"
+                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-300 hover:text-[var(--color-ink-light)] hover:scale-[1.04]"
                 >
                   Explore Work
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
                 <Link
                   href="/soraia-space"
-                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-colors duration-300 hover:text-[var(--color-ink-light)]"
+                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-300 hover:text-[var(--color-ink-light)] hover:scale-[1.04]"
                 >
                   Book a Studio Visit
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

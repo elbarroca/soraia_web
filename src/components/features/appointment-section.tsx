@@ -9,7 +9,7 @@ type AppointmentSectionProps = {
   callUrl: string;
 };
 
-export function AppointmentSection({ text, studioUrl, callUrl }: AppointmentSectionProps) {
+export function AppointmentSection({ text, studioUrl }: AppointmentSectionProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
       {/* Text */}
@@ -51,9 +51,9 @@ export function AppointmentSection({ text, studioUrl, callUrl }: AppointmentSect
               </p>
             </div>
             <div className="flex-shrink-0 pt-6">
-              <span className="inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
+              <span className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
                 Book
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
           </a>
@@ -61,7 +61,7 @@ export function AppointmentSection({ text, studioUrl, callUrl }: AppointmentSect
 
         <FadeIn delay={0.18}>
           <a
-            href={callUrl}
+            href="https://tidycal.com/soraiaoliveira/book-a-call"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-start justify-between gap-6 py-8 border-b border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors -mx-4 px-4"
@@ -78,9 +78,9 @@ export function AppointmentSection({ text, studioUrl, callUrl }: AppointmentSect
               </p>
             </div>
             <div className="flex-shrink-0 pt-6">
-              <span className="inline-flex items-center gap-2 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-colors">
+              <span className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
                 Book
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
           </a>

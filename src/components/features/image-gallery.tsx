@@ -63,7 +63,7 @@ export function ImageGallery({ images, title, onOpenLightbox }: ImageGalleryProp
           height={1600}
           className={cn(
             "w-full h-auto object-contain transition-all duration-200 ease-out",
-            isZooming && "scale-[2.5]",
+            isZooming && "scale-[1.5]",
             !imageLoaded && "absolute inset-0 opacity-0"
           )}
           style={isZooming ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : undefined}

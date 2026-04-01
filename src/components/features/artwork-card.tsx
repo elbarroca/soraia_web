@@ -26,8 +26,6 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
               className="w-full h-auto object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
             />
-            {/* Subtle overlay on hover — frames the image without obscuring it */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
           </>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-[var(--color-ink-muted)]">

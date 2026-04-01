@@ -76,9 +76,9 @@ export function Footer() {
       <footer className="bg-[var(--color-surface-dim)]">
         <Container className="py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-start">
-            {/* Left: Signature */}
+            {/* Left: Signature + Newsletter */}
             <div className="md:col-span-3">
-              <Link href="/" className="block" aria-label="Soraia Oliveira — home">
+              <Link href="/" className="block mb-8" aria-label="Soraia Oliveira — home">
                 <Image
                   src="/images/branding/signature-bold.png"
                   alt="Soraia Oliveira"
@@ -87,10 +87,31 @@ export function Footer() {
                   className="h-9 md:h-12 w-auto object-contain object-left"
                 />
               </Link>
+              <form onSubmit={subscribe} className="flex items-center w-full max-w-[260px] bg-[var(--color-surface)] rounded-none overflow-hidden border border-[var(--color-border)]">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => updateEmail(e.target.value)}
+                  required
+                  className="flex-1 min-w-0 bg-transparent border-none px-3 py-2.5 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)]"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="bg-[var(--color-ink)] text-[var(--color-surface)] px-3 py-2.5 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
+                  aria-label="Subscribe to newsletter"
+                >
+                  <ArrowRight size={13} />
+                </button>
+              </form>
+              {status === "error" && (
+                <p className="text-[11px] text-[var(--color-sold)] mt-2 tracking-[0.02em]">Something went wrong. Try again.</p>
+              )}
             </div>
 
             {/* Center: Name + Social */}
-            <div className="md:col-span-3">
+            <div className="md:col-span-3 md:col-start-5">
               <p className="text-[13px] font-bold tracking-[0.04em] uppercase text-[var(--color-ink)] mb-4">
                 Soraia Oliveira
               </p>
@@ -111,7 +132,7 @@ export function Footer() {
             </div>
 
             {/* Nav columns */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 md:col-start-9">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link
@@ -125,7 +146,7 @@ export function Footer() {
               </nav>
             </div>
 
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 md:col-start-11">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_RIGHT.map((link) => (
                   <Link
@@ -137,33 +158,6 @@ export function Footer() {
                   </Link>
                 ))}
               </nav>
-            </div>
-          </div>
-
-          {/* Newsletter row */}
-          <div className="mt-10 pt-8 border-t border-[var(--color-border)]/40">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <form onSubmit={subscribe} className="flex items-center w-full max-w-[300px] bg-[var(--color-surface)] rounded-full overflow-hidden pl-4 pr-1 py-1 focus-within:bg-[var(--color-ink-muted)]/20 transition-colors duration-300">
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => updateEmail(e.target.value)}
-                  required
-                  className="flex-1 min-w-0 bg-transparent border-none px-0 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)]"
-                />
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="bg-[var(--color-ink)] text-[var(--color-surface)] rounded-full p-2 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
-                  aria-label="Subscribe to newsletter"
-                >
-                  <ArrowRight size={13} />
-                </button>
-              </form>
-              {status === "error" && (
-                <p className="text-[11px] text-[var(--color-sold)] mt-2 tracking-[0.02em]">Something went wrong. Try again.</p>
-              )}
             </div>
           </div>
 

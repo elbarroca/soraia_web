@@ -30,6 +30,7 @@ export default async function SoraiaSpacePage() {
     <>
       {/* Hero */}
       <Section className="pt-6 md:pt-10 overflow-hidden">
+        {/* Centred title */}
         <div className="text-center mb-10 md:mb-14">
           <FadeIn>
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -41,42 +42,46 @@ export default async function SoraiaSpacePage() {
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <h1 className="heading-display leading-[1.0] text-[var(--color-ink)]">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
               Soraia Space
             </h1>
           </FadeIn>
-
-          <FadeIn delay={0.16}>
-            <p
-              className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug mt-5"
-            >
-              An extension of an ever-evolving creation
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.22}>
-            <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75] max-w-lg mx-auto mt-5">
-              Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
-            </p>
-            <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] max-w-lg mx-auto mt-3">
-              Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
-            </p>
-          </FadeIn>
         </div>
 
-        {/* Studio image */}
-        <FadeIn delay={0.1}>
-          <div className="relative aspect-[4/3] lg:aspect-[16/10] overflow-hidden">
-            <Image
-              src="/images/studio/studio.png"
-              alt="Soraia Space — creative studio in Guimarães"
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
+        {/* Two-column: image left, text right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Image — smaller, left */}
+          <FadeIn delay={0.1} className="lg:col-span-5">
+            <div className="relative overflow-hidden">
+              <Image
+                src="/images/studio/studio.png"
+                alt="Soraia Space — creative studio in Guimarães"
+                width={900}
+                height={1100}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                priority
+              />
+            </div>
+          </FadeIn>
+
+          {/* Text — right */}
+          <div className="lg:col-span-6 lg:col-start-7 space-y-6">
+            <FadeIn delay={0.16}>
+              <p className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug">
+                An extension of an ever-evolving creation
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.22}>
+              <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
+                Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
+              </p>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] mt-3">
+                Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
+              </p>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </Section>
 
       {/* Anchor navigation */}
@@ -103,7 +108,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* Appointments */}
-      <Section id="appointments" className="bg-[var(--color-surface-dim)] py-10 md:py-14">
+      <Section id="appointments" className="py-10 md:py-14">
         <AppointmentSection
           text={settings.appointment_text}
           studioUrl={settings.appointment_url}

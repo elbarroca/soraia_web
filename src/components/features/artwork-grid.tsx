@@ -55,10 +55,15 @@ function sortArtworks(artworks: Artwork[], sort: SortOption): Artwork[] {
   });
 }
 
+const VALID_SORTS: SortOption[] = ["curated", "price-asc", "price-desc", "newest"];
+
 export function ArtworkGrid({ artworks }: ArtworkGridProps) {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("cat") || "all";
-  const [sort, setSort] = useState<SortOption>("curated");
+  const sortParam = searchParams.get("sort") as SortOption | null;
+  const initialSort: SortOption =
+    sortParam && VALID_SORTS.includes(sortParam) ? sortParam : "curated";
+  const [sort, setSort] = useState<SortOption>(initialSort);
 
   const filtered =
     activeCategory === "all"

@@ -27,11 +27,7 @@ export default async function HomePage() {
   const featuredArtwork = artworks.find((a) => a.isFeatured && a.isVisible);
   const heroImage = featuredArtwork?.images?.[0]?.url ?? "/images/hero-featured.png";
 
-  // Featured artworks: prioritize those marked as featured, then first visible
-  const featured = artworks
-    .filter((a) => a.isVisible && !a.isSold)
-    .sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured))
-    .slice(0, 4);
+  const visibleArtworks = artworks.filter((a) => a.isVisible);
 
   return (
     <>
@@ -40,7 +36,7 @@ export default async function HomePage() {
         tagline={settings.hero_tagline}
         featuredImage={heroImage}
       />
-      <FeaturedArtworks artworks={featured} />
+      <FeaturedArtworks artworks={visibleArtworks} />
       <ArtistStatement
         line1="Multidisciplinary artist working across photography and drawing."
         line2="Creating and exploring through the body, self-portraiture and transformation."

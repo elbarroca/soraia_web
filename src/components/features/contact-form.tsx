@@ -109,8 +109,8 @@ export function ContactForm() {
                 className={cn(
                   "relative text-[14px] font-semibold tracking-wide transition-all duration-200 px-5 py-2.5 border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
                   activeSubject === s.value
-                    ? "text-white bg-[var(--color-ink)] border-[var(--color-ink)]"
-                    : "text-[var(--color-ink)] border-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-white"
+                    ? "text-white bg-[var(--color-ink-light)] border-[var(--color-ink-light)]"
+                    : "text-[var(--color-ink-light)] border-[var(--color-ink-light)] hover:bg-[var(--color-ink-light)] hover:text-white"
                 )}
               >
                 {s.label}

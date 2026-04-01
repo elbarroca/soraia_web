@@ -79,8 +79,8 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-[11px] font-medium tracking-[0.14em] uppercase py-1 transition-colors duration-300",
-                    "hover:text-[var(--color-ink)]",
+                    "text-[11px] font-medium tracking-[0.14em] uppercase py-1 transition-[color,transform] duration-300",
+                    "hover:text-[var(--color-ink)] hover:scale-[1.08]",
                     isActive(link.href)
                       ? "text-[var(--color-ink)]"
                       : "text-[var(--color-ink-muted)]"
@@ -140,10 +140,10 @@ export function Header() {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className={cn(
-                      "text-[28px] font-light tracking-[0.12em] uppercase transition-colors duration-300",
+                      "text-[28px] font-light tracking-[0.12em] uppercase transition-[color,transform] duration-300",
                       isActive(link.href)
                         ? "text-[var(--color-ink)]"
-                        : "text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
+                        : "text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:scale-[1.05]"
                     )}
                   >
                     {link.label}

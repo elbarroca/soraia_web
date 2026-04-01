@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { FadeIn } from "@/components/shared/fade-in";
 import { Section } from "@/components/layout/section";
-import { PriceDisplay } from "./price-display";
+import { FadeIn } from "@/components/shared/fade-in";
 import type { Artwork } from "@/lib/types";
+
+type CategoryTile = {
+  label: string;
+  href: string;
+  artwork: Artwork | null;
+};
 
 type FeaturedArtworksProps = {
   artworks: Artwork[];
@@ -13,60 +17,66 @@ type FeaturedArtworksProps = {
 export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
   if (artworks.length === 0) return null;
 
+  const byCategory = (cat: Artwork["category"]) =>
+    artworks.find((a) => a.category === cat && a.images.length > 0) ?? null;
+
+  const newest =
+    [...artworks]
+      .sort((a, b) => parseInt(b.year ?? "0", 10) - parseInt(a.year ?? "0", 10))
+      .find((a) => a.images.length > 0) ?? null;
+
+  const tiles: CategoryTile[] = [
+    {
+      label: "all artworks",
+      href: "/artworks",
+      artwork: artworks.find((a) => a.images.length > 0) ?? null,
+    },
+    {
+      label: "photography",
+      href: "/artworks?cat=photography",
+      artwork: byCategory("photography"),
+    },
+    {
+      label: "drawings",
+      href: "/artworks?cat=drawings",
+      artwork: byCategory("drawings"),
+    },
+    {
+      label: "new in",
+      href: "/artworks?sort=newest",
+      artwork: newest,
+    },
+  ];
+
   return (
     <Section>
-      <FadeIn>
-        <div className="flex items-baseline justify-between mb-12">
-          <h2 className="heading-1">Artworks</h2>
-          <Link
-            href="/artworks"
-            className="group hidden sm:inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300"
-          >
-            View all works
-            <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </FadeIn>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+        {tiles.map((tile, i) => {
+          const img =
+            tile.artwork?.images.find((im) => im.isPrimary) ??
+            tile.artwork?.images[0];
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10">
-        {artworks.map((artwork, i) => (
-          <FadeIn key={artwork.id} delay={0.06 * i}>
-            <Link href={`/artworks/${artwork.slug}`} className="group block">
-              <div className="relative overflow-hidden bg-[var(--color-surface-dim)]">
-                {artwork.images[0] && (
-                  <>
+          return (
+            <FadeIn key={tile.href} delay={i * 0.08}>
+              <Link href={tile.href} className="group block">
+                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)] mb-4">
+                  {img && (
                     <Image
-                      src={artwork.images[0].url}
-                      alt={artwork.images[0].altText || artwork.title}
-                      width={600}
-                      height={600}
-                      className="w-full h-auto object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      src={img.url}
+                      alt={img.altText || tile.artwork?.title || tile.label}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 50vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
-                  </>
-                )}
-                {artwork.isSold && (
-                  <span className="absolute top-3 right-3 label text-[10px] bg-[var(--color-sale)] text-white px-2.5 py-1">
-                    Sold
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 space-y-1.5">
-                <h3 className="text-sm font-medium group-hover:underline underline-offset-4">
-                  {artwork.title}
-                </h3>
-                <PriceDisplay
-                  priceCents={artwork.priceCents}
-                  originalPriceCents={artwork.originalPriceCents}
-                  isPriceOnRequest={artwork.isPriceOnRequest}
-                  isSold={artwork.isSold}
-                  size="sm"
-                />
-              </div>
-            </Link>
-          </FadeIn>
-        ))}
+                  )}
+                </div>
+                <span className="text-[13px] font-semibold tracking-[0.06em] group-hover:underline underline-offset-4 decoration-1">
+                  {tile.label} →
+                </span>
+              </Link>
+            </FadeIn>
+          );
+        })}
       </div>
     </Section>
   );

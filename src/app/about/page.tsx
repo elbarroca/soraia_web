@@ -6,7 +6,6 @@ import { AboutBio } from "@/components/features/about-bio";
 import { AboutIdentity } from "@/components/features/about-identity";
 import { AboutOrigin } from "@/components/features/about-origin";
 import { EducationTimeline } from "@/components/features/education-timeline";
-import { PressSection } from "@/components/features/press-section";
 import { FadeIn } from "@/components/shared/fade-in";
 import { getSettings } from "@/lib/queries";
 import { artistPersonJsonLd } from "@/lib/structured-data";
@@ -46,27 +45,28 @@ export default async function AboutPage() {
         <AboutOrigin />
       </Section>
 
-      <Section className="bg-[var(--color-surface-dim)]">
-        <PressSection />
-      </Section>
-
       {/* "Let's talk" CTA */}
       <Section>
         <FadeIn>
           <Link href="/contact" className="group block">
             <div className="flex items-end justify-between gap-8">
               <div>
-                <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-4">
-                  ( Contact )
-                </p>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
+                  <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+                    Contact
+                  </p>
+                </div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)]">
-                  More questions?<br />
+                  More questions?
+                </h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)] ml-8 md:ml-16">
                   Let&apos;s talk!
                 </h2>
               </div>
               <div className="hidden sm:block flex-shrink-0 mb-2">
                 <div className="relative w-16 h-16 md:w-20 md:h-20 border-2 border-[var(--color-ink)] flex items-center justify-center group-hover:bg-[var(--color-ink)] transition-colors duration-300">
-                  <ArrowRight size={24} className="rotate-45 text-[var(--color-ink)] group-hover:text-white transition-colors duration-300" />
+                  <ArrowRight size={24} className="rotate-45 group-hover:rotate-0 text-[var(--color-ink)] group-hover:text-white transition-all duration-300" />
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* Closing CTA */}
-      <Section className="bg-[var(--color-surface-dim)]">
+      <Section>
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center space-y-6">
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">

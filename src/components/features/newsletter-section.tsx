@@ -39,19 +39,19 @@ export function NewsletterSection() {
             </div>
           ) : (
             <>
-              <form onSubmit={subscribe} className="flex items-center max-w-sm mx-auto mt-8 bg-[var(--color-surface-dim)] rounded-full overflow-hidden pl-5 pr-1.5 py-1.5 focus-within:bg-[var(--color-ink-muted)]/15 transition-colors duration-300">
+              <form onSubmit={subscribe} className="flex items-center gap-3 max-w-sm mx-auto mt-8">
                 <input
                   type="email"
-                  placeholder="Your email"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 bg-transparent border-none px-0 py-2 text-[15px] focus:outline-none placeholder:text-[var(--color-ink-muted)]"
+                  className="flex-1 min-w-0 px-6 py-3.5 border border-[var(--color-ink)] rounded-full text-[15px] focus:outline-none bg-transparent placeholder:text-[var(--color-ink-muted)] text-[var(--color-ink)]"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[var(--color-ink)] text-[var(--color-surface)] rounded-full p-2.5 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
+                  className="w-[52px] h-[52px] flex-shrink-0 rounded-full border border-[var(--color-ink)] flex items-center justify-center text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
                   aria-label="Subscribe"
                 >
                   {status === "loading" ? (
