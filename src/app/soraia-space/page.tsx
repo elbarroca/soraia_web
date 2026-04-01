@@ -29,7 +29,7 @@ export default async function SoraiaSpacePage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-6 md:pt-10 overflow-hidden">
+      <Section className="pt-14 md:pt-20 overflow-hidden">
         {/* Centred title */}
         <div className="text-center mb-10 md:mb-14">
           <FadeIn>
@@ -88,7 +88,7 @@ export default async function SoraiaSpacePage() {
       <SpaceNav />
 
       {/* The Practice */}
-      <Section id="the-practice" className="bg-[var(--color-surface-warm)] py-10 md:py-14">
+      <Section id="the-practice" className="py-10 md:py-14">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">

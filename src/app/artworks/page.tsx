@@ -30,24 +30,26 @@ export default async function ArtworksPage() {
 
   return (
     <Section className="pt-8 md:pt-12">
-      {/* Studio identity — large decorative masthead */}
-      <div className="mb-10 md:mb-14 overflow-hidden">
-        <FadeIn direction="none">
-          <p className="text-[clamp(3rem,10vw,8rem)] font-light tracking-[-0.02em] leading-[0.9] text-[var(--color-ink)] select-none">
-            Soraia Studio
+      {/* Page title — matches Soraia Space style */}
+      <div className="text-center mb-10 md:mb-14">
+        <FadeIn>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
+            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+              Collection
+            </p>
+          </div>
+        </FadeIn>
+        <FadeIn delay={0.08}>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
+            Artworks
+          </h1>
+        </FadeIn>
+        <FadeIn delay={0.14}>
+          <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.7] mt-4">
+            Photography, drawings &amp; artist proofs.
           </p>
         </FadeIn>
-      </div>
-
-      <div className="mb-12">
-        <div className="flex items-center gap-4 mb-4">
-          <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
-          <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">Collection</p>
-        </div>
-        <h1 className="heading-1 mb-3">Artworks</h1>
-        <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.7] max-w-sm">
-          Photography, drawings &amp; artist proofs.
-        </p>
       </div>
 
       {/* Featured highlights */}

@@ -50,18 +50,14 @@ export function CustomCursor() {
           position: "fixed",
           top: 0,
           left: 0,
-          width: 32,
-          height: 32,
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "var(--color-ink)",
           opacity: 0,
           willChange: "transform",
         }}
-      >
-        {/* SVG circle + dot — crisp at any size */}
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="14.5" stroke="var(--color-ink)" strokeWidth="1.5" />
-          <circle cx="16" cy="16" r="2.5" fill="var(--color-ink)" />
-        </svg>
-      </div>
+      />
     </div>
   );
 }

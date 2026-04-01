@@ -57,10 +57,10 @@ export default async function AboutPage() {
                     Contact
                   </p>
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)]">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
                   More questions?
                 </h2>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase leading-[1.05] tracking-tight text-[var(--color-ink)] ml-8 md:ml-16">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] md:ml-[30%]">
                   Let&apos;s talk!
                 </h2>
               </div>

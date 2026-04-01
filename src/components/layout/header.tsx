@@ -55,8 +55,8 @@ export function Header() {
             : "bg-transparent"
         )}
       >
-        <Container className="flex items-center justify-between h-[var(--header-h)] md:h-[var(--header-h-md)]">
-          <Link href="/" className="block" aria-label="Soraia Oliveira — home">
+        <Container className="flex items-center justify-between h-[var(--header-h)] md:h-[var(--header-h-md)] pt-3 md:pt-4">
+          <Link href="/" className="block transition-transform duration-500 hover:scale-[1.04]" aria-label="Soraia Oliveira — home">
             <Image
               src="/images/branding/signature-light.png"
               alt="Soraia Oliveira"
@@ -79,8 +79,8 @@ export function Header() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-[11px] font-medium tracking-[0.14em] uppercase py-1 transition-[color,transform] duration-300",
-                    "hover:text-[var(--color-ink)] hover:scale-[1.08]",
+                    "text-[11px] font-medium tracking-[0.14em] uppercase py-1 transition-[color,transform] duration-500",
+                    "hover:text-[var(--color-ink)] hover:scale-[1.04]",
                     isActive(link.href)
                       ? "text-[var(--color-ink)]"
                       : "text-[var(--color-ink-muted)]"

@@ -51,9 +51,9 @@ export function AppointmentSection({ text, studioUrl }: AppointmentSectionProps)
               </p>
             </div>
             <div className="flex-shrink-0 pt-6">
-              <span className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
                 Book
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
           </a>
@@ -78,9 +78,9 @@ export function AppointmentSection({ text, studioUrl }: AppointmentSectionProps)
               </p>
             </div>
             <div className="flex-shrink-0 pt-6">
-              <span className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase text-[var(--color-ink-muted)] group-hover:text-[var(--color-ink)] transition-[color,transform] duration-300 group-hover:scale-[1.04]">
                 Book
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
           </a>

@@ -87,19 +87,19 @@ export function Footer() {
                   className="h-9 md:h-12 w-auto object-contain object-left"
                 />
               </Link>
-              <form onSubmit={subscribe} className="flex items-center w-full max-w-[260px] bg-[var(--color-surface)] rounded-none overflow-hidden border border-[var(--color-border)]">
+              <form onSubmit={subscribe} className="flex items-center gap-2 w-full max-w-[260px]">
                 <input
                   type="email"
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 min-w-0 bg-transparent border-none px-3 py-2.5 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)]"
+                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-border)] px-3 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[var(--color-ink)] text-[var(--color-surface)] px-3 py-2.5 transition-all duration-300 hover:bg-[var(--color-ink-light)] disabled:opacity-50 flex-shrink-0"
+                  className="flex-shrink-0 border border-[var(--color-ink)] p-2 text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
                   <ArrowRight size={13} />
@@ -111,7 +111,7 @@ export function Footer() {
             </div>
 
             {/* Center: Name + Social */}
-            <div className="md:col-span-3 md:col-start-5">
+            <div className="md:col-span-3 md:col-start-5 md:flex md:flex-col md:items-center md:text-center">
               <p className="text-[13px] font-bold tracking-[0.04em] uppercase text-[var(--color-ink)] mb-4">
                 Soraia Oliveira
               </p>
@@ -132,7 +132,7 @@ export function Footer() {
             </div>
 
             {/* Nav columns */}
-            <div className="md:col-span-2 md:col-start-9">
+            <div className="md:col-span-2 md:col-start-10">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link
