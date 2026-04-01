@@ -9,7 +9,7 @@ export function AboutOrigin() {
       <FadeIn>
         <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-dim)]">
           <Image
-            src="/images/about/studio-work.jpg"
+            src="/change2.png"
             alt="Soraia observing artwork in a gallery"
             fill
             className="object-cover"

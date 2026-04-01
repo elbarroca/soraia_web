@@ -57,7 +57,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
           <FadeIn delay={0.1} className="lg:col-span-5">
             <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dim)]">
               <Image
-                src="/images/about/studio-work.jpg"
+                src="/change1.jpg"
                 alt="Soraia Oliveira — studio work"
                 fill
                 className="object-cover"
