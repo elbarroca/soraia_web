@@ -58,9 +58,9 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
 
           return (
             <FadeIn key={tile.href} delay={i * 0.08}>
-              <Link href={tile.href} className="group flex items-stretch">
+              <Link href={tile.href} className="group block">
                 {/* Image */}
-                <div className="relative overflow-hidden flex-1 aspect-[3/4] bg-[var(--color-surface-dim)]">
+                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)] mb-3">
                   {img && (
                     <Image
                       src={img.url}
@@ -71,12 +71,10 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                     />
                   )}
                 </div>
-                {/* Label — vertical, right side */}
-                <div className="w-6 flex items-center justify-center flex-shrink-0">
-                  <span className="block -rotate-90 whitespace-nowrap text-[11px] font-semibold tracking-[0.08em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
-                    {tile.label} →
-                  </span>
-                </div>
+                {/* Label — below image */}
+                <span className="whitespace-nowrap text-[11px] font-semibold tracking-[0.08em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
+                  {tile.label} →
+                </span>
               </Link>
             </FadeIn>
           );
