@@ -22,7 +22,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
       </FadeIn>
 
       {/* Intro text + subtitle left, portrait right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-16 lg:mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-24 lg:mb-32">
         <div className="lg:col-span-7 space-y-6">
           <FadeIn delay={0.1}>
             <h1 className="heading-display leading-[1.05] text-[var(--color-ink)]">
@@ -53,21 +53,21 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
 
       {/* Bio — image left, text right */}
       {paragraphs.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
-          <FadeIn delay={0.1} className="lg:col-span-5 flex flex-col">
-            <div className="relative flex-1 overflow-hidden bg-[var(--color-surface-dim)] min-h-[300px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <FadeIn delay={0.1} className="lg:col-span-4">
+            <div className="relative aspect-[3/4] max-w-[280px] mx-auto lg:mx-0 overflow-hidden bg-[var(--color-surface-dim)]">
               <Image
                 src="/change1.jpg"
                 alt="Soraia Oliveira — studio work"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                sizes="(max-width: 1024px) 60vw, 25vw"
               />
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.15} className="lg:col-span-6 lg:col-start-7">
-            <div className="space-y-5 pt-2">
+          <FadeIn delay={0.15} className="lg:col-span-7 lg:col-start-6">
+            <div className="space-y-5">
               {paragraphs.map((p, i) => (
                 <p
                   key={i}

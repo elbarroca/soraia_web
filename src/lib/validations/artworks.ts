@@ -8,7 +8,7 @@ export const ARTWORK_CATEGORIES = [
 ] as const;
 
 export const artworkImageSchema = z.object({
-  url: z.url(),
+  url: z.string().min(1, "Image URL is required"),
   fileKey: z.string().optional(),
   altText: z.string().optional(),
   sortOrder: z.number().int().min(0),

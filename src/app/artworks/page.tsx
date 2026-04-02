@@ -30,10 +30,17 @@ export default async function ArtworksPage() {
 
   return (
     <Section className="pt-8 md:pt-12">
-      {/* Page title — matches Soraia Space style */}
-      <div className="text-center mb-10 md:mb-14">
+      {/* Large page identity title */}
+      <FadeIn>
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.03em] leading-[0.95] text-[var(--color-ink)] mb-10 md:mb-14">
+          Soraia Studio
+        </h1>
+      </FadeIn>
+
+      {/* Section label + heading */}
+      <div className="mb-10 md:mb-14">
         <FadeIn>
-          <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-6">
             <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
               Collection
@@ -41,9 +48,9 @@ export default async function ArtworksPage() {
           </div>
         </FadeIn>
         <FadeIn delay={0.08}>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
             Artworks
-          </h1>
+          </h2>
         </FadeIn>
         <FadeIn delay={0.14}>
           <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.7] mt-4">

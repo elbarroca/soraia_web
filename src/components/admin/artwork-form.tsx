@@ -106,8 +106,9 @@ export function ArtworkForm({ artwork }: ArtworkFormProps) {
           toast.success("Artwork created");
           router.push("/admin/artworks");
         }
-      } catch {
-        toast.error("Something went wrong");
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Something went wrong";
+        toast.error(message);
       }
     });
   }
