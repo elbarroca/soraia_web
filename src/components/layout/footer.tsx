@@ -94,7 +94,7 @@ export function Footer() {
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-border)] px-3 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
+                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-ink)] px-3 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
                 />
                 <button
                   type="submit"
@@ -132,7 +132,7 @@ export function Footer() {
             </div>
 
             {/* Nav columns */}
-            <div className="md:col-span-2 md:col-start-10">
+            <div className="md:col-span-2 md:col-start-9">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link

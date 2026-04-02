@@ -29,9 +29,9 @@ export default async function SoraiaSpacePage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-14 md:pt-20 overflow-hidden">
+      <Section className="pt-14 md:pt-20 pb-10 md:pb-16 overflow-hidden">
         {/* Centred title */}
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-16 md:mb-20">
           <FadeIn>
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
@@ -88,7 +88,7 @@ export default async function SoraiaSpacePage() {
       <SpaceNav />
 
       {/* The Practice */}
-      <Section id="the-practice" className="py-10 md:py-14">
+      <Section id="the-practice" className="py-16 md:py-24">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center">
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -108,7 +108,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* Appointments */}
-      <Section id="appointments" className="py-10 md:py-14">
+      <Section id="appointments" className="py-16 md:py-24">
         <AppointmentSection
           text={settings.appointment_text}
           studioUrl={settings.appointment_url}
@@ -117,7 +117,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* News */}
-      <Section id="news" className="py-10 md:py-14">
+      <Section id="news" className="py-16 md:py-24">
         <NewsList items={visibleNews} />
       </Section>
 
