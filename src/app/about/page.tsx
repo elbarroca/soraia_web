@@ -31,7 +31,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section className="pt-8 md:pt-12">
+      <Section className="pt-20 md:pt-28">
         <AboutBio intro={settings.about_intro ?? ""} paragraphs={bioParagraphs} />
       </Section>
 

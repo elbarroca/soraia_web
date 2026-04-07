@@ -30,13 +30,6 @@ export default async function ArtworksPage() {
 
   return (
     <Section className="pt-8 md:pt-12">
-      {/* Large page identity title */}
-      <FadeIn>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.03em] leading-[0.95] text-[var(--color-ink)] mb-10 md:mb-14">
-          Soraia Studio
-        </h1>
-      </FadeIn>
-
       {/* Section label + heading */}
       <div className="mb-10 md:mb-14">
         <FadeIn>

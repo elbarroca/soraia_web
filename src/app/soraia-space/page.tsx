@@ -29,7 +29,7 @@ export default async function SoraiaSpacePage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-14 md:pt-20 pb-10 md:pb-16 overflow-hidden">
+      <Section className="pt-14 md:pt-20 pb-24 md:pb-32 overflow-hidden">
         {/* Centred title */}
         <div className="text-center mb-16 md:mb-20">
           <FadeIn>
@@ -85,7 +85,9 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* Anchor navigation */}
-      <SpaceNav />
+      <div className="mt-6 md:mt-10">
+        <SpaceNav />
+      </div>
 
       {/* The Practice */}
       <Section id="the-practice" className="py-16 md:py-24">

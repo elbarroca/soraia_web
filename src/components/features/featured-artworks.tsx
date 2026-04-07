@@ -20,11 +20,6 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
   const byCategory = (cat: Artwork["category"]) =>
     artworks.find((a) => a.category === cat && a.images.length > 0) ?? null;
 
-  const newest =
-    [...artworks]
-      .sort((a, b) => parseInt(b.year ?? "0", 10) - parseInt(a.year ?? "0", 10))
-      .find((a) => a.images.length > 0) ?? null;
-
   const tiles: CategoryTile[] = [
     {
       label: "all artworks",
@@ -37,19 +32,37 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       artwork: byCategory("photography"),
     },
     {
+      label: "artist proofs",
+      href: "/artworks?cat=artist-proofs",
+      artwork: byCategory("artist-proofs"),
+    },
+    {
       label: "drawings",
       href: "/artworks?cat=drawings",
       artwork: byCategory("drawings"),
-    },
-    {
-      label: "new in",
-      href: "/artworks?sort=newest",
-      artwork: newest,
     },
   ];
 
   return (
     <Section>
+      {/* Header row: title + View artworks link */}
+      <div className="flex items-end justify-between mb-8">
+        <FadeIn>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] uppercase text-[var(--color-ink)]">
+            Artworks
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.06}>
+          <Link
+            href="/artworks"
+            className="text-[12px] font-medium tracking-[0.08em] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300 bg-[var(--color-surface-dim)] px-4 py-2"
+          >
+            View artworks &rarr;
+          </Link>
+        </FadeIn>
+      </div>
+
+      {/* Tile grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
         {tiles.map((tile, i) => {
           const img =
@@ -59,8 +72,8 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
           return (
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block">
-                {/* Image */}
-                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)] mb-3">
+                {/* Image with overlaid label */}
+                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)]">
                   {img && (
                     <Image
                       src={img.url}
@@ -70,11 +83,11 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   )}
+                  {/* Label — overlaid at bottom-right of image */}
+                  <span className="absolute bottom-3 right-3 whitespace-nowrap text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-white drop-shadow-md group-hover:underline underline-offset-4 decoration-1">
+                    {tile.label} &rarr;
+                  </span>
                 </div>
-                {/* Label — below image */}
-                <span className="whitespace-nowrap text-[11px] font-semibold tracking-[0.08em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
-                  {tile.label} →
-                </span>
               </Link>
             </FadeIn>
           );

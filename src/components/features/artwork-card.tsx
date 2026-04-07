@@ -45,11 +45,6 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
               Sale
             </span>
           )}
-          {artwork.edition && !artwork.isSold && (
-            <span className="text-[9px] font-medium tracking-[0.12em] uppercase bg-white/90 text-[var(--color-ink)] px-2 py-0.5 backdrop-blur-sm">
-              Edition
-            </span>
-          )}
         </div>
       </div>
 
