@@ -40,6 +40,12 @@
 
 **Fix**: Use inline SVG for Instagram icon. The footer already had this pattern with custom SVG social icons.
 
+## 2026-04-07: Playwright sticky nav breaks getBoundingClientRect gap measurement
+
+**Bug**: When measuring the gap between a `<section>` and a sticky `<nav>` using `getBoundingClientRect()`, the nav reports its **viewport-relative** position (stuck at top), not its natural document flow position. This produces large negative gap values.
+
+**Fix**: For sticky elements, measure the parent container's padding/margin instead of comparing bounding rects. Or scroll to the elements first so both are in natural position.
+
 ## 2026-03-25: Drizzle decimal returns string, not number
 
 **Bug**: `decimal("price", { precision: 10, scale: 2 })` in Drizzle returns the value as a `string` (e.g. `"1800.00"`), not a `number`. Components expected `priceCents: number`.

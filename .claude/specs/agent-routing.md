@@ -12,6 +12,11 @@
 **Route to**: 3 parallel Explore agents with distinct focus areas
 **Why**: 2/2 sessions show 3x faster coverage. Each agent examines ~20 files without context window pressure.
 
+### Explore: Always use for UI change validation before implementation
+**Pattern**: When screenshots/specs describe multiple UI changes across pages, use Explore agents to read current component state before coding
+**Route to**: 2-3 parallel Explore agents (one per page area)
+**Why**: 2026-04-07 session — 3 parallel Explore agents mapped all 6 affected files in one round, preventing wasted edits on already-correct items (5 of 15 checks already passed).
+
 ## Session Log
 
 ### 2026-03-25
@@ -21,6 +26,13 @@
 | Explore x2 | Codebase audit (structure + data sources) | Excellent | Parallel agents: one for file structure, one for data source analysis. Both returned comprehensive reports. |
 | Plan x1 | Design implementation plan (Sprints 3-8) | Excellent | Identified key type mismatch, proposed mapper pattern, correct execution order. |
 | reviewer x1 | Post-implementation code review | Excellent | Found 6 critical issues (webhook payment_status, revalidation path validation, JSON.parse safety, etc.) and 12 important suggestions. All criticals fixed. |
+
+### 2026-04-07
+
+| Agent | Task | Outcome | Notes |
+|-------|------|---------|-------|
+| Explore x3 | Map current UI state for Notion feedback (homepage/artworks, about/space, Playwright setup) | Excellent | 3 parallel agents mapped all affected files and current values. Identified 5/15 items already done. |
+| Plan x1 | Design Playwright test structure + implementation plan | Excellent | Comprehensive test-per-change mapping with expected pass/fail predictions. 14/15 predictions correct. |
 
 ### 2026-03-26
 
