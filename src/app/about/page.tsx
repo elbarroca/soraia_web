@@ -75,7 +75,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* Closing CTA */}
-      <Section>
+      <Section className="pb-24 md:pb-32">
         <FadeIn>
           <div className="max-w-2xl mx-auto text-center space-y-6">
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">

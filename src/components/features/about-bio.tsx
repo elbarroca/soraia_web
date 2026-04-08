@@ -23,14 +23,14 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
 
       {/* Intro text + portrait — centered layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-24 lg:mb-32">
-        <div className="lg:col-span-7 space-y-6 text-center lg:text-center">
+        <div className="lg:col-span-7 space-y-6">
           <FadeIn delay={0.1}>
-            <h1 className="heading-display leading-[1.05] text-[var(--color-ink)]" style={{ textAlign: "center" }}>
+            <h1 className="heading-display leading-[1.05] text-[var(--color-ink)]">
               {intro}
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.75] text-center">
+            <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.75]">
               My work begins with curiosity and a need to understand our inner selves, the body, and
               the spaces I move through, exploring identity, presence, and transformation.
             </p>

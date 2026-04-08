@@ -1,34 +1,36 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 type AboutIdentityProps = {
   words: string[];
 };
 
-const LAYOUT_LINES = [
-  { left: "I AM", right: "CREATIVE THINKER", indent: "pl-[5%]" },
-  { left: "", right: "DREAMER", indent: "pl-[20%]" },
-  { left: "", right: "OBSERVER", indent: "pl-[35%]" },
-  { left: "PERFORMER", right: "", indent: "pl-[8%]" },
-  { left: "", right: "MULTI-TASKER", indent: "pl-[28%]" },
-  { left: "EXPERIMENTER", right: "", indent: "pl-[5%]" },
-  { left: "AND", right: "BOUNDARY PUSHER", indent: "pl-[15%]" },
+const DEFAULT_WORDS = [
+  "CREATIVE THINKER",
+  "DREAMER",
+  "OBSERVER",
+  "PERFORMER",
+  "MULTI-TASKER",
+  "EXPERIMENTER",
+  "BOUNDARY PUSHER",
 ];
+
+const CYCLE_INTERVAL = 2400;
 
 export function AboutIdentity({ words }: AboutIdentityProps) {
   const prefersReducedMotion = useReducedMotion();
+  const displayWords = words.length > 0 ? words.map((w) => w.toUpperCase()) : DEFAULT_WORDS;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Use DB words if available, otherwise use the default layout
-  const lines = words.length > 0
-    ? words.map((word, i) => ({
-        text: word.toUpperCase(),
-        indent: LAYOUT_LINES[i % LAYOUT_LINES.length]?.indent ?? "pl-[10%]",
-      }))
-    : LAYOUT_LINES.map((line) => ({
-        text: [line.left, line.right].filter(Boolean).join("    "),
-        indent: line.indent,
-      }));
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % displayWords.length);
+    }, CYCLE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [displayWords.length, prefersReducedMotion]);
 
   return (
     <div className="bg-[var(--color-surface)] py-20 md:py-28 overflow-hidden">
@@ -43,25 +45,19 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
           Driven by Curiosity
         </motion.p>
 
-        <div className="space-y-1 md:space-y-2">
-          {lines.map((line, i) => (
-            <motion.div
-              key={i}
-              className={line.indent}
-              initial={prefersReducedMotion ? {} : { opacity: 0, x: i % 2 === 0 ? -120 : 120 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.6,
-                delay: 0.07 * i,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+        <div className="relative flex items-center justify-center min-h-[1.2em]" style={{ minHeight: "clamp(3rem, 10vw, 8rem)" }}>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentIndex}
+              className="absolute text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05] text-center"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? {} : { opacity: 0, y: -30 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05]">
-                {line.text}
-              </span>
-            </motion.div>
-          ))}
+              {displayWords[currentIndex]}
+            </motion.span>
+          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ type CategoryTile = {
   label: string;
   href: string;
   artwork: Artwork | null;
+  fallbackImage?: string;
 };
 
 type FeaturedArtworksProps = {
@@ -25,6 +26,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       label: "all artworks",
       href: "/artworks",
       artwork: artworks.find((a) => a.images.length > 0) ?? null,
+      fallbackImage: "/images/categories/all-artworks.png",
     },
     {
       label: "photography",
@@ -35,11 +37,13 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       label: "artist proofs",
       href: "/artworks?cat=artist-proofs",
       artwork: byCategory("artist-proofs"),
+      fallbackImage: "/images/categories/artist-proofs.png",
     },
     {
       label: "drawings",
       href: "/artworks?cat=drawings",
       artwork: byCategory("drawings"),
+      fallbackImage: "/images/categories/drawings.png",
     },
   ];
 
@@ -55,7 +59,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
         <FadeIn delay={0.06}>
           <Link
             href="/artworks"
-            className="text-[12px] font-medium tracking-[0.08em] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300 bg-[var(--color-surface-dim)] px-4 py-2"
+            className="text-[12px] font-medium tracking-[0.08em] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
           >
             View artworks &rarr;
           </Link>
@@ -68,26 +72,28 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??
             tile.artwork?.images[0];
+          const imageSrc = tile.fallbackImage ?? img?.url;
+          const imageAlt = img?.altText || tile.artwork?.title || tile.label;
 
           return (
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block">
-                {/* Image with overlaid label */}
+                {/* Image */}
                 <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)]">
-                  {img && (
+                  {imageSrc && (
                     <Image
-                      src={img.url}
-                      alt={img.altText || tile.artwork?.title || tile.label}
+                      src={imageSrc}
+                      alt={imageAlt}
                       fill
                       className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   )}
-                  {/* Label — overlaid at bottom-right of image */}
-                  <span className="absolute bottom-3 right-3 whitespace-nowrap text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-white drop-shadow-md group-hover:underline underline-offset-4 decoration-1">
-                    {tile.label} &rarr;
-                  </span>
                 </div>
+                {/* Label — below image, black text */}
+                <p className="mt-3 text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
+                  {tile.label}&rarr;
+                </p>
               </Link>
             </FadeIn>
           );

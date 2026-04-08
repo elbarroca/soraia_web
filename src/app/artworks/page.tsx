@@ -29,11 +29,11 @@ export default async function ArtworksPage() {
     .slice(0, 3);
 
   return (
-    <Section className="pt-8 md:pt-12">
-      {/* Section label + heading */}
-      <div className="mb-10 md:mb-14">
+    <Section className="pt-16 md:pt-24">
+      {/* Section label + heading — centered */}
+      <div className="mb-16 md:mb-20 text-center">
         <FadeIn>
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center justify-center gap-4 mb-6">
             <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
               Collection

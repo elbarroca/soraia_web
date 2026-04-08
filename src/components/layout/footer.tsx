@@ -87,19 +87,19 @@ export function Footer() {
                   className="h-9 md:h-12 w-auto object-contain object-left"
                 />
               </Link>
-              <form onSubmit={subscribe} className="flex items-center gap-2 w-full max-w-[260px]">
+              <form onSubmit={subscribe} className="flex items-stretch gap-2 w-full max-w-[260px]">
                 <input
                   type="email"
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-ink)] px-3 py-2 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
+                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-ink)] px-3 h-9 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex-shrink-0 border border-[var(--color-ink)] p-2 text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
+                  className="flex-shrink-0 border border-[var(--color-ink)] w-9 h-9 flex items-center justify-center text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
                   <ArrowRight size={13} />
@@ -131,8 +131,8 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Nav columns */}
-            <div className="md:col-span-2 md:col-start-9">
+            {/* Nav columns — aligned right */}
+            <div className="md:col-span-2 md:col-start-9 md:text-right">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link
@@ -146,7 +146,7 @@ export function Footer() {
               </nav>
             </div>
 
-            <div className="md:col-span-2 md:col-start-11">
+            <div className="md:col-span-2 md:col-start-11 md:text-right">
               <nav className="flex flex-col gap-2.5">
                 {FOOTER_NAV_RIGHT.map((link) => (
                   <Link
