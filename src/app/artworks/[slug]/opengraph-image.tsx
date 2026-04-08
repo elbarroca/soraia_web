@@ -13,6 +13,7 @@ export default async function ArtworkOgImage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://soraia-oliveira.com";
   const dbArtwork = await getArtworkBySlug(slug);
 
   if (!dbArtwork) {
@@ -38,6 +39,13 @@ export default async function ArtworkOgImage({
   }
 
   const artwork = toPublicArtwork(dbArtwork);
+  const imageUrl = artwork.images[0]?.url;
+  const absoluteImage = imageUrl?.startsWith("http")
+    ? imageUrl
+    : imageUrl
+      ? `${baseUrl}${imageUrl}`
+      : null;
+
   const priceText = artwork.isSold
     ? "SOLD"
     : artwork.isPriceOnRequest
@@ -45,6 +53,10 @@ export default async function ArtworkOgImage({
       : artwork.priceCents
         ? `€${(artwork.priceCents / 100).toLocaleString("en-EU")}`
         : "";
+
+  const details = [artwork.medium, artwork.dimensions, artwork.year]
+    .filter(Boolean)
+    .join("  ·  ");
 
   return new ImageResponse(
     (
@@ -54,12 +66,12 @@ export default async function ArtworkOgImage({
           height: "100%",
           display: "flex",
           backgroundColor: "#1a1a1a",
-          color: "#ffffff",
           fontFamily: "sans-serif",
+          color: "#ffffff",
         }}
       >
         {/* Left: artwork image */}
-        {artwork.images[0]?.url && (
+        {absoluteImage && (
           <div
             style={{
               width: "50%",
@@ -71,7 +83,7 @@ export default async function ArtworkOgImage({
             }}
           >
             <img
-              src={artwork.images[0].url}
+              src={absoluteImage}
               alt={artwork.title}
               style={{
                 maxWidth: "100%",
@@ -85,55 +97,96 @@ export default async function ArtworkOgImage({
         {/* Right: info */}
         <div
           style={{
-            width: artwork.images[0]?.url ? "50%" : "100%",
+            width: absoluteImage ? "50%" : "100%",
             height: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: 48,
+            padding: "48px 48px 48px 24px",
           }}
         >
+          {/* Category label */}
           <div
             style={{
-              fontSize: 14,
-              color: "#999999",
-              letterSpacing: "0.1em",
+              fontSize: 12,
+              color: "#8a8580",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
-              marginBottom: 16,
+              marginBottom: 20,
             }}
           >
             {artwork.category.replaceAll("-", " ")}
           </div>
+
+          {/* Title */}
           <div
             style={{
-              fontSize: 40,
+              fontSize: 38,
               fontWeight: 700,
               letterSpacing: "-0.02em",
-              marginBottom: 16,
               lineHeight: 1.1,
+              marginBottom: 16,
             }}
           >
             {artwork.title}
           </div>
+
+          {/* Price */}
           {priceText && (
             <div
               style={{
-                fontSize: 24,
-                color: artwork.isSold ? "#999999" : "#ffffff",
-                marginBottom: 24,
+                fontSize: 22,
+                color: artwork.isSold ? "#666666" : "#ffffff",
+                marginBottom: 20,
               }}
             >
               {priceText}
             </div>
           )}
+
+          {/* Details */}
+          {details && (
+            <div
+              style={{
+                fontSize: 14,
+                color: "#666666",
+                letterSpacing: "0.02em",
+              }}
+            >
+              {details}
+            </div>
+          )}
+
+          {/* Branding footer */}
           <div
             style={{
-              fontSize: 16,
-              color: "#666666",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: "auto",
+              paddingTop: 24,
             }}
           >
-            SORAIA OLIVEIRA
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#666666",
+                letterSpacing: "0.04em",
+              }}
+            >
+              SORAIA OLIVEIRA
+            </div>
+            <div
+              style={{
+                fontSize: 11,
+                color: "#555555",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              soraia-oliveira.com
+            </div>
           </div>
         </div>
       </div>
