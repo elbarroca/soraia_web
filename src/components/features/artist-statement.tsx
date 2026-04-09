@@ -24,16 +24,16 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         </div>
       </FadeIn>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-8 items-center">
         {/* Left text */}
-        <FadeIn>
-          <p className="text-xl md:text-2xl font-bold leading-snug text-[var(--color-ink)]">
+        <FadeIn className="lg:col-span-1">
+          <p className="text-2xl md:text-3xl font-bold leading-snug text-[var(--color-ink)]">
             {line1}
           </p>
         </FadeIn>
 
         {/* Center image */}
-        <FadeIn delay={0.1} className="flex justify-center">
+        <FadeIn delay={0.1} className="lg:col-span-3 flex justify-center">
           <div className="relative aspect-square w-full max-w-[380px] overflow-hidden">
             <Image
               src="/images/about/silhouette.png"
@@ -46,9 +46,9 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         </FadeIn>
 
         {/* Right text */}
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.2} className="lg:col-span-1">
           <div className="space-y-6 text-right">
-            <p className="text-xl md:text-2xl font-bold leading-snug text-[var(--color-ink)]">
+            <p className="text-2xl md:text-3xl font-bold leading-snug text-[var(--color-ink)]">
               {line2}
             </p>
             {credentialLine && (

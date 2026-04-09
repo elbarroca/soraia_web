@@ -14,13 +14,13 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    <div data-public-shell="">
       <CustomCursor />
       <Header />
       <main id="main-content" className="flex-1 pt-[var(--header-h)] md:pt-[var(--header-h-md)]">
         {children}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

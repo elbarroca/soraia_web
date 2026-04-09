@@ -31,17 +31,17 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section className="pt-20 md:pt-28">
+      <Section className="pt-20 md:pt-28 pb-16 md:pb-24">
         <AboutBio intro={settings.about_intro ?? ""} paragraphs={bioParagraphs} />
       </Section>
 
-      <Section className="bg-[var(--color-surface-dim)]">
+      <Section className="bg-[var(--color-surface-dim)] py-16 md:py-24">
         <EducationTimeline />
       </Section>
 
       <AboutIdentity words={identityWords} />
 
-      <Section>
+      <Section className="py-16 md:py-24">
         <AboutOrigin />
       </Section>
 
@@ -49,7 +49,7 @@ export default async function AboutPage() {
       <Section className="pb-24 md:pb-32">
         <FadeIn>
           <Link href="/contact" className="group block">
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-8">
               <div>
                 <div className="mb-4">
                   <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">

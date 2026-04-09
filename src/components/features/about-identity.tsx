@@ -59,7 +59,7 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
           <AnimatePresence mode="wait">
             <motion.span
               key={currentIndex}
-              className="absolute text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05] text-center"
+              className="absolute text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05] text-center"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReducedMotion ? {} : { opacity: 0, y: -30 }}

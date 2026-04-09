@@ -151,11 +151,11 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Custom cursor (non-touch only) ─── */
+/* ─── Custom cursor (non-touch only, public pages) ─── */
 @media (pointer: fine) {
-  *,
-  *::before,
-  *::after {
+  body:has([data-public-shell]) *,
+  body:has([data-public-shell]) *::before,
+  body:has([data-public-shell]) *::after {
     cursor: none !important;
   }
 }
