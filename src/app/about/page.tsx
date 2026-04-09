@@ -48,28 +48,28 @@ export default async function AboutPage() {
       {/* "Let's talk" CTA */}
       <Section className="pb-28 md:pb-36">
         <FadeIn>
-          <Link href="/contact" className="group block">
-            <div className="inline-flex items-end gap-4 sm:gap-6">
-              <div>
-                <div className="mb-4">
-                  <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-                    ( Contact )
-                  </p>
-                </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
-                  More questions?
-                </h2>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] sm:ml-[40%] md:ml-[50%] whitespace-nowrap">
+          <Link href="/contact" className="group block w-fit">
+            <div className="flex flex-col">
+              <div className="mb-4">
+                <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+                  ( Contact )
+                </p>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
+                More questions?
+              </h2>
+              <div className="flex items-center ml-[20%] sm:ml-[40%] md:ml-[50%] mt-1">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] whitespace-nowrap">
                   Let&apos;s talk!
                 </h2>
-              </div>
-              <div className="hidden sm:flex flex-shrink-0 items-end mb-1">
-                <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
-                  <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
-                  <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />
-                  <span className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-[var(--color-ink)]" />
-                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--color-ink)]" />
-                  <ArrowRight size={20} className="rotate-45 text-[var(--color-ink)] transition-transform duration-300 group-hover:rotate-0" />
+                <div className="hidden sm:flex flex-shrink-0 ml-10 md:ml-12 items-center">
+                  <div className="relative w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
+                    <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
+                    <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />
+                    <span className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-[var(--color-ink)]" />
+                    <span className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--color-ink)]" />
+                    <ArrowRight size={20} className="rotate-45 text-[var(--color-ink)] transition-transform duration-300 group-hover:rotate-0" />
+                  </div>
                 </div>
               </div>
             </div>
