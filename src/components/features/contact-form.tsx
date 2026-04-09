@@ -107,7 +107,7 @@ export function ContactForm() {
                 type="button"
                 onClick={() => selectSubject(s.value)}
                 className={cn(
-                  "relative text-[14px] font-semibold tracking-wide transition-all duration-200 px-5 py-2.5 border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
+                  "relative text-[14px] font-semibold tracking-wide transition-all duration-200 px-5 py-2.5 border rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-ink)]",
                   activeSubject === s.value
                     ? "text-white bg-[var(--color-ink-light)] border-[var(--color-ink-light)]"
                     : "text-[var(--color-ink-light)] border-[var(--color-ink-light)] hover:bg-[var(--color-ink-light)] hover:text-white"
@@ -132,7 +132,7 @@ export function ContactForm() {
               id="name"
               type="text"
               {...register("name")}
-              className="w-full bg-transparent border-b border-[var(--color-border-strong)] px-0 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
+              className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-full px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
               placeholder="Maria Silva"
             />
             {errors.name && (
@@ -151,7 +151,7 @@ export function ContactForm() {
               id="email"
               type="email"
               {...register("email")}
-              className="w-full bg-transparent border-b border-[var(--color-border-strong)] px-0 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
+              className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-full px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
               placeholder="maria@example.com"
             />
             {errors.email && (
@@ -172,7 +172,7 @@ export function ContactForm() {
             id="subject"
             type="text"
             {...register("subject")}
-            className="w-full bg-transparent border-b border-[var(--color-border-strong)] px-0 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
+            className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-full px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
             placeholder="Or type your own…"
           />
           {errors.subject && (
@@ -192,7 +192,7 @@ export function ContactForm() {
             id="message"
             rows={5}
             {...register("message")}
-            className="w-full bg-transparent border-b border-[var(--color-border-strong)] px-0 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 resize-none placeholder:text-[var(--color-ink-muted)]/40"
+            className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-2xl px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 resize-none placeholder:text-[var(--color-ink-muted)]/40"
             placeholder="I'd love to know more about your work…"
           />
           {errors.message && (

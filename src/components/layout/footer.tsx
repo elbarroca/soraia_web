@@ -77,7 +77,7 @@ export function Footer() {
         <Container className="py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-start">
             {/* Left: Signature + Newsletter */}
-            <div className="md:col-span-3">
+            <div className="md:col-span-4">
               <Link href="/" className="block mb-8" aria-label="Soraia Oliveira — home">
                 <Image
                   src="/images/branding/signature-bold.png"
@@ -94,12 +94,12 @@ export function Footer() {
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required
-                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-ink)] px-3 h-9 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
+                  className="flex-1 min-w-0 bg-transparent border border-[var(--color-ink)] rounded-full px-4 h-9 text-[12px] focus:outline-none placeholder:text-[var(--color-ink-muted)]/50 text-[var(--color-ink)] focus:border-[var(--color-ink)] transition-colors duration-300"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex-shrink-0 border border-[var(--color-ink)] w-9 h-9 flex items-center justify-center text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
+                  className="flex-shrink-0 border border-[var(--color-ink)] rounded-full w-9 h-9 flex items-center justify-center text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-surface)] transition-all duration-300 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
                   <ArrowRight size={13} />
@@ -111,7 +111,7 @@ export function Footer() {
             </div>
 
             {/* Center: Name + Social */}
-            <div className="md:col-span-3 md:col-start-5 md:flex md:flex-col md:items-center md:text-center">
+            <div className="md:col-span-4 md:col-start-5 md:flex md:flex-col md:items-center md:text-center">
               <p className="text-[13px] font-bold tracking-[0.04em] uppercase text-[var(--color-ink)] mb-4">
                 Soraia Oliveira
               </p>
@@ -132,8 +132,8 @@ export function Footer() {
             </div>
 
             {/* Nav columns — aligned right */}
-            <div className="md:col-span-2 md:col-start-9 md:text-right">
-              <nav className="flex flex-col gap-2.5">
+            <div className="md:col-span-4 md:flex md:justify-end md:gap-12">
+              <nav className="flex flex-col gap-2.5 md:text-right">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link
                     key={link.href}
@@ -144,10 +144,7 @@ export function Footer() {
                   </Link>
                 ))}
               </nav>
-            </div>
-
-            <div className="md:col-span-2 md:col-start-11 md:text-right">
-              <nav className="flex flex-col gap-2.5">
+              <nav className="flex flex-col gap-2.5 md:text-right">
                 {FOOTER_NAV_RIGHT.map((link) => (
                   <Link
                     key={link.href}

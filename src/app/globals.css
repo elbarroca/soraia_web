@@ -161,9 +161,6 @@
 }
 
 /* ─── Base ─── */
-* {
-  border-radius: 0;
-}
 
 body {
   background: var(--color-surface);

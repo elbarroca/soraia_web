@@ -79,7 +79,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block">
                 {/* Image */}
-                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)]">
+                <div className="relative overflow-hidden aspect-[3/4]">
                   {imageSrc && (
                     <Image
                       src={imageSrc}

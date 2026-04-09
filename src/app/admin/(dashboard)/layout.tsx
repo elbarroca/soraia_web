@@ -1,4 +1,5 @@
 import { AdminSidebar } from "@/components/admin/sidebar";
+import "@uploadthing/react/styles.css";
 
 export default function DashboardLayout({
   children,

@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { artworks, artworkImages } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { eq, asc, desc } from "drizzle-orm";
 import { artworkFormSchema, type ArtworkFormValues } from "@/lib/validations";
 
 async function requireAuth() {
@@ -115,6 +115,31 @@ export async function deleteArtwork(id: number) {
 export async function toggleArtworkVisibility(id: number, visible: boolean) {
   await requireAuth();
   await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
+  revalidatePath("/artworks");
+  revalidatePath("/admin/artworks");
+  return { success: true };
+}
+
+export async function reorderArtwork(id: number, direction: "up" | "down") {
+  await requireAuth();
+
+  const allArtworks = await db
+    .select({ id: artworks.id, sortOrder: artworks.sortOrder })
+    .from(artworks)
+    .orderBy(asc(artworks.sortOrder), desc(artworks.createdAt));
+
+  const currentIndex = allArtworks.findIndex((a) => a.id === id);
+  if (currentIndex === -1) return { success: false };
+
+  const swapIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+  if (swapIndex < 0 || swapIndex >= allArtworks.length) return { success: false };
+
+  // Use positional indices as new sortOrder values (handles rows sharing the same default 0)
+  await db.transaction(async (tx) => {
+    await tx.update(artworks).set({ sortOrder: swapIndex }).where(eq(artworks.id, allArtworks[currentIndex].id));
+    await tx.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
+  });
+
   revalidatePath("/artworks");
   revalidatePath("/admin/artworks");
   return { success: true };

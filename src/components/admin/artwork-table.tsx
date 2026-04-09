@@ -21,11 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Image as ImageIcon, Pencil, Trash2 } from "lucide-react";
+import { Image as ImageIcon, Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { AdminEmptyState } from "./empty-state";
 import {
   deleteArtwork,
   toggleArtworkVisibility,
+  reorderArtwork,
 } from "@/app/admin/(dashboard)/artworks/actions";
 import { ARTWORK_CATEGORIES } from "@/lib/validations";
 import { formatPrice } from "@/lib/utils";
@@ -85,6 +86,7 @@ export function ArtworkTable({
           <TableHeader>
             <TableRow>
               <TableHead className="w-12" />
+              <TableHead className="w-20">Order</TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Price</TableHead>
@@ -96,7 +98,7 @@ export function ArtworkTable({
           <TableBody>
             {filtered.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7}>
+                <TableCell colSpan={8}>
                   <AdminEmptyState
                     icon={ImageIcon}
                     title="No artworks yet"
@@ -106,7 +108,7 @@ export function ArtworkTable({
                 </TableCell>
               </TableRow>
             ) : (
-              filtered.map((artwork) => {
+              filtered.map((artwork, index) => {
                 const primaryImage = artwork.images.find((i) => i.isPrimary) ?? artwork.images[0];
                 return (
                   <TableRow key={artwork.id} className={isPending ? "opacity-50" : ""}>
@@ -122,6 +124,30 @@ export function ArtworkTable({
                       ) : (
                         <div className="h-10 w-10 rounded-sm bg-[var(--color-surface-dim)]" />
                       )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-col gap-0.5">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6"
+                          disabled={index === 0}
+                          aria-label={`Move ${artwork.title} up`}
+                          onClick={() => startTransition(async () => { await reorderArtwork(artwork.id, "up"); })}
+                        >
+                          <ChevronUp className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6"
+                          disabled={index === filtered.length - 1}
+                          aria-label={`Move ${artwork.title} down`}
+                          onClick={() => startTransition(async () => { await reorderArtwork(artwork.id, "down"); })}
+                        >
+                          <ChevronDown className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
                     </TableCell>
                     <TableCell className="font-medium">{artwork.title}</TableCell>
                     <TableCell>

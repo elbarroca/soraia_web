@@ -27,17 +27,17 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-center">
         {/* Left text */}
         <FadeIn>
-          <p className="text-xl md:text-2xl font-bold leading-snug text-[var(--color-ink)]">
+          <p className="text-2xl md:text-3xl font-bold leading-snug text-[var(--color-ink)]">
             {line1}
           </p>
         </FadeIn>
 
         {/* Center image */}
         <FadeIn delay={0.1} className="flex justify-center">
-          <div className="relative aspect-[3/4] w-full max-w-[280px] overflow-hidden">
+          <div className="relative aspect-square w-full max-w-[280px] overflow-hidden">
             <Image
-              src="/images/about/studio-work.jpg"
-              alt="Soraia Oliveira working in studio"
+              src="/images/about/silhouette.png"
+              alt="Soraia Oliveira — studio work"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 80vw, 280px"
@@ -48,7 +48,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         {/* Right text */}
         <FadeIn delay={0.2}>
           <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold leading-snug text-[var(--color-ink)]">
+            <p className="text-2xl md:text-3xl font-bold leading-snug text-[var(--color-ink)]">
               {line2}
             </p>
             {credentialLine && (
