@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Image as ImageIcon, Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
+import { toast } from "sonner";
 import { AdminEmptyState } from "./empty-state";
 import {
   deleteArtwork,
@@ -133,7 +134,12 @@ export function ArtworkTable({
                           className="h-6 w-6"
                           disabled={index === 0}
                           aria-label={`Move ${artwork.title} up`}
-                          onClick={() => startTransition(async () => { await reorderArtwork(artwork.id, "up"); })}
+                          onClick={() => startTransition(async () => {
+                            try {
+                              const res = await reorderArtwork(artwork.id, "up");
+                              if (!res.success) toast.error("Failed to reorder");
+                            } catch { toast.error("Failed to reorder"); }
+                          })}
                         >
                           <ChevronUp className="h-3.5 w-3.5" />
                         </Button>
@@ -143,7 +149,12 @@ export function ArtworkTable({
                           className="h-6 w-6"
                           disabled={index === filtered.length - 1}
                           aria-label={`Move ${artwork.title} down`}
-                          onClick={() => startTransition(async () => { await reorderArtwork(artwork.id, "down"); })}
+                          onClick={() => startTransition(async () => {
+                            try {
+                              const res = await reorderArtwork(artwork.id, "down");
+                              if (!res.success) toast.error("Failed to reorder");
+                            } catch { toast.error("Failed to reorder"); }
+                          })}
                         >
                           <ChevronDown className="h-3.5 w-3.5" />
                         </Button>

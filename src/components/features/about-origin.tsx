@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/shared/fade-in";
 
 export function AboutOrigin() {
@@ -33,6 +35,29 @@ export function AboutOrigin() {
             <p>
               Through self-portraiture and experimentation, this research expanded into performance, drawing, and material processes, shaping a practice where intuition becomes method and the body remains central.
             </p>
+          </div>
+
+          {/* What's Next CTA */}
+          <div className="pt-4 space-y-4">
+            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+              What&apos;s Next
+            </p>
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              <Link
+                href="/artworks"
+                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
+              >
+                Explore the Work
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/soraia-space"
+                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
+              >
+                Book a Studio Visit
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
         </div>
       </FadeIn>

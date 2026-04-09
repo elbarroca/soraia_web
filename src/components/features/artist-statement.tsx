@@ -47,7 +47,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
 
         {/* Right text */}
         <FadeIn delay={0.2}>
-          <div className="space-y-6">
+          <div className="space-y-6 text-right">
             <p className="text-2xl md:text-3xl font-bold leading-snug text-[var(--color-ink)]">
               {line2}
             </p>
@@ -58,7 +58,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
             )}
             <Link
               href="/about"
-              className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300"
+              className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300 ml-auto"
             >
               About
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

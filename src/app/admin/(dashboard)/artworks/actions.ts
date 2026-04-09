@@ -123,24 +123,35 @@ export async function toggleArtworkVisibility(id: number, visible: boolean) {
 export async function reorderArtwork(id: number, direction: "up" | "down") {
   await requireAuth();
 
-  const allArtworks = await db
-    .select({ id: artworks.id, sortOrder: artworks.sortOrder })
-    .from(artworks)
-    .orderBy(asc(artworks.sortOrder), desc(artworks.createdAt));
+  try {
+    const allArtworks = await db
+      .select({ id: artworks.id, sortOrder: artworks.sortOrder })
+      .from(artworks)
+      .orderBy(asc(artworks.sortOrder), desc(artworks.createdAt));
 
-  const currentIndex = allArtworks.findIndex((a) => a.id === id);
-  if (currentIndex === -1) return { success: false };
+    // Normalize sort orders so every item has a unique sequential value
+    for (let i = 0; i < allArtworks.length; i++) {
+      if (allArtworks[i].sortOrder !== i) {
+        await db.update(artworks).set({ sortOrder: i }).where(eq(artworks.id, allArtworks[i].id));
+        allArtworks[i].sortOrder = i;
+      }
+    }
 
-  const swapIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
-  if (swapIndex < 0 || swapIndex >= allArtworks.length) return { success: false };
+    const currentIndex = allArtworks.findIndex((a) => a.id === id);
+    if (currentIndex === -1) return { success: false };
 
-  // Use positional indices as new sortOrder values (handles rows sharing the same default 0)
-  await db.transaction(async (tx) => {
-    await tx.update(artworks).set({ sortOrder: swapIndex }).where(eq(artworks.id, allArtworks[currentIndex].id));
-    await tx.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
-  });
+    const swapIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+    if (swapIndex < 0 || swapIndex >= allArtworks.length) return { success: false };
 
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
-  return { success: true };
+    // Swap the two adjacent items
+    await db.update(artworks).set({ sortOrder: swapIndex }).where(eq(artworks.id, allArtworks[currentIndex].id));
+    await db.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
+
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+    return { success: true };
+  } catch (err) {
+    console.error("[reorderArtwork]", err);
+    return { success: false };
+  }
 }

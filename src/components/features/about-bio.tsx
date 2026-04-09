@@ -20,14 +20,14 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
               About the Artist
             </p>
           </div>
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
             Soraia Oliveira
           </h2>
         </div>
       </FadeIn>
 
       {/* Intro text + portrait — centered layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-24 lg:mb-32">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-32 lg:mb-40">
         <div className="lg:col-span-7 space-y-6">
           <FadeIn delay={0.1}>
             <h1 className="heading-display leading-[1.05] text-[var(--color-ink)]">
@@ -56,7 +56,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
         </FadeIn>
       </div>
 
-      {/* Bio — image left, text right */}
+      {/* Bio — image left, text right (continuous flow) */}
       {paragraphs.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           <FadeIn delay={0.1} className="lg:col-span-4">
@@ -72,11 +72,11 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
           </FadeIn>
 
           <FadeIn delay={0.15} className="lg:col-span-7 lg:col-start-6">
-            <div className="columns-1 sm:columns-2 gap-8">
+            <div className="space-y-5">
               {paragraphs.map((p, i) => (
                 <p
                   key={i}
-                  className="text-base text-[var(--color-ink-light)] leading-[1.75] break-inside-avoid mb-5 last:mb-0"
+                  className="text-base text-[var(--color-ink-light)] leading-[1.75]"
                 >
                   {p}
                 </p>

@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/features/hero-section";
 import { FeaturedArtworks } from "@/components/features/featured-artworks";
 import { ArtistStatement } from "@/components/features/artist-statement";
 import { StudioBanner } from "@/components/features/collector-banner";
+import { StudioVideo } from "@/components/features/studio-video";
 import { NewsletterSection } from "@/components/features/newsletter-section";
 import { getSettings, getVisibleArtworks } from "@/lib/queries";
 import { toPublicArtwork } from "@/lib/mappers";
@@ -42,6 +43,7 @@ export default async function HomePage() {
         line2="Creating and exploring through the body, self-portraiture and transformation."
       />
       <StudioBanner />
+      <StudioVideo />
       <NewsletterSection />
     </>
   );

@@ -45,61 +45,31 @@ export default async function AboutPage() {
         <AboutOrigin />
       </Section>
 
-      {/* Closing CTA */}
-      <Section>
-        <FadeIn>
-          <div className="max-w-2xl mx-auto text-center space-y-6">
-            <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-              What&apos;s Next
-            </p>
-            <h2 className="heading-editorial text-[var(--color-ink)]">
-              Every piece holds a story
-            </h2>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
-              <Link
-                href="/artworks"
-                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
-              >
-                Explore the Work
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/soraia-space"
-                className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"
-              >
-                Book a Studio Visit
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
-        </FadeIn>
-      </Section>
-
       {/* "Let's talk" CTA */}
       <Section className="pb-24 md:pb-32">
         <FadeIn>
           <Link href="/contact" className="group block">
-            <div className="flex items-end justify-between gap-4">
+            <div className="flex items-center justify-between gap-4">
               <div>
                 <div className="mb-4">
                   <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
                     ( Contact )
                   </p>
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
                   More questions?
                 </h2>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] md:ml-[30%]">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[40%] md:ml-[50%]">
                   Let&apos;s talk!
                 </h2>
               </div>
-              <div className="hidden sm:flex flex-shrink-0 mb-2 items-center">
-                <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
-                  <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color-ink)]" />
-                  <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--color-ink)]" />
-                  <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--color-ink)]" />
-                  <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color-ink)]" />
-                  <ArrowRight size={24} className="rotate-45 text-[var(--color-ink)] transition-transform duration-300 group-hover:rotate-0" />
+              <div className="hidden sm:flex flex-shrink-0 items-center">
+                <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
+                  <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
+                  <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />
+                  <span className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b-2 border-l-2 border-[var(--color-ink)]" />
+                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b-2 border-r-2 border-[var(--color-ink)]" />
+                  <ArrowRight size={20} className="rotate-45 text-[var(--color-ink)] transition-transform duration-300 group-hover:rotate-0" />
                 </div>
               </div>
             </div>
