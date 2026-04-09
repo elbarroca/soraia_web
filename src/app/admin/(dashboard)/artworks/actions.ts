@@ -15,101 +15,107 @@ async function requireAuth() {
 
 export async function createArtwork(data: ArtworkFormValues) {
   await requireAuth();
-  const parsed = artworkFormSchema.parse(data);
-
-  const [artwork] = await db
-    .insert(artworks)
-    .values({
-      title: parsed.title,
-      slug: parsed.slug,
-      description: parsed.description || null,
-      category: parsed.category,
-      tags: parsed.tags,
-      year: parsed.year || null,
-      medium: parsed.medium || null,
-      edition: parsed.edition || null,
-      dimensions: parsed.dimensions || null,
-      price: parsed.price || null,
-      originalPrice: parsed.originalPrice || null,
-      priceOnRequest: parsed.priceOnRequest,
-      isSold: parsed.isSold,
-      isVisible: parsed.isVisible,
-      metaTitle: parsed.metaTitle || null,
-      metaDescription: parsed.metaDescription || null,
-    })
-    .returning();
-
-  if (parsed.images.length > 0) {
-    await db.insert(artworkImages).values(
-      parsed.images.map((img, i) => ({
-        artworkId: artwork.id,
-        url: img.url,
-        fileKey: img.fileKey || null,
-        altText: img.altText || null,
-        sortOrder: i,
-        isPrimary: img.isPrimary,
-      }))
-    );
-  }
 
   try {
+    const parsed = artworkFormSchema.parse(data);
+
+    const [artwork] = await db
+      .insert(artworks)
+      .values({
+        title: parsed.title,
+        slug: parsed.slug,
+        description: parsed.description || null,
+        category: parsed.category,
+        tags: parsed.tags,
+        year: parsed.year || null,
+        medium: parsed.medium || null,
+        edition: parsed.edition || null,
+        dimensions: parsed.dimensions || null,
+        price: parsed.price || null,
+        originalPrice: parsed.originalPrice || null,
+        priceOnRequest: parsed.priceOnRequest,
+        isSold: parsed.isSold,
+        isVisible: parsed.isVisible,
+        metaTitle: parsed.metaTitle || null,
+        metaDescription: parsed.metaDescription || null,
+      })
+      .returning();
+
+    if (parsed.images.length > 0) {
+      await db.insert(artworkImages).values(
+        parsed.images.map((img, i) => ({
+          artworkId: artwork.id,
+          url: img.url,
+          fileKey: img.fileKey || null,
+          altText: img.altText || null,
+          sortOrder: i,
+          isPrimary: img.isPrimary,
+        }))
+      );
+    }
+
     revalidatePath("/artworks");
     revalidatePath("/admin/artworks");
+    return { success: true as const, id: artwork.id };
   } catch (err) {
-    console.error("[createArtwork] revalidation error:", err);
+    console.error("[createArtwork]", err);
+    const message = err instanceof Error ? err.message : "Failed to create artwork";
+    return { success: false as const, error: message };
   }
-  return { success: true, id: artwork.id };
 }
 
 export async function updateArtwork(id: number, data: ArtworkFormValues) {
   await requireAuth();
-  const parsed = artworkFormSchema.parse(data);
-
-  await db
-    .update(artworks)
-    .set({
-      title: parsed.title,
-      slug: parsed.slug,
-      description: parsed.description || null,
-      category: parsed.category,
-      tags: parsed.tags,
-      year: parsed.year || null,
-      medium: parsed.medium || null,
-      edition: parsed.edition || null,
-      dimensions: parsed.dimensions || null,
-      price: parsed.price || null,
-      originalPrice: parsed.originalPrice || null,
-      priceOnRequest: parsed.priceOnRequest,
-      isSold: parsed.isSold,
-      isVisible: parsed.isVisible,
-      metaTitle: parsed.metaTitle || null,
-      metaDescription: parsed.metaDescription || null,
-    })
-    .where(eq(artworks.id, id));
-
-  // Replace images
-  await db.delete(artworkImages).where(eq(artworkImages.artworkId, id));
-  if (parsed.images.length > 0) {
-    await db.insert(artworkImages).values(
-      parsed.images.map((img, i) => ({
-        artworkId: id,
-        url: img.url,
-        fileKey: img.fileKey || null,
-        altText: img.altText || null,
-        sortOrder: i,
-        isPrimary: img.isPrimary,
-      }))
-    );
-  }
 
   try {
+    const parsed = artworkFormSchema.parse(data);
+
+    await db
+      .update(artworks)
+      .set({
+        title: parsed.title,
+        slug: parsed.slug,
+        description: parsed.description || null,
+        category: parsed.category,
+        tags: parsed.tags,
+        year: parsed.year || null,
+        medium: parsed.medium || null,
+        edition: parsed.edition || null,
+        dimensions: parsed.dimensions || null,
+        price: parsed.price || null,
+        originalPrice: parsed.originalPrice || null,
+        priceOnRequest: parsed.priceOnRequest,
+        isSold: parsed.isSold,
+        isVisible: parsed.isVisible,
+        metaTitle: parsed.metaTitle || null,
+        metaDescription: parsed.metaDescription || null,
+      })
+      .where(eq(artworks.id, id));
+
+    // Replace images
+    await db.delete(artworkImages).where(eq(artworkImages.artworkId, id));
+    if (parsed.images.length > 0) {
+      await db.insert(artworkImages).values(
+        parsed.images.map((img, i) => ({
+          artworkId: id,
+          url: img.url,
+          fileKey: img.fileKey || null,
+          altText: img.altText || null,
+          sortOrder: i,
+          isPrimary: img.isPrimary,
+        }))
+      );
+    }
+
     revalidatePath("/artworks");
     revalidatePath(`/artworks/${parsed.slug}`);
     revalidatePath("/admin/artworks");
+    return { success: true as const };
   } catch (err) {
-    console.error("[updateArtwork] revalidation error:", err);
+    console.error("[updateArtwork]", err);
+    const message = err instanceof Error ? err.message : "Failed to update artwork";
+    return { success: false as const, error: message };
   }
-  return { success: true };
 }
 
 export async function deleteArtwork(id: number) {

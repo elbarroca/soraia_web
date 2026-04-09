@@ -97,18 +97,21 @@ export function ArtworkForm({ artwork }: ArtworkFormProps) {
     const payload = { ...data, images } as ArtworkFormValues;
 
     startTransition(async () => {
-      try {
-        if (artwork) {
-          await updateArtwork(artwork.id, payload);
-          toast.success("Artwork updated");
-        } else {
-          await createArtwork(payload);
-          toast.success("Artwork created");
-          router.push("/admin/artworks");
+      if (artwork) {
+        const result = await updateArtwork(artwork.id, payload);
+        if (!result.success) {
+          toast.error(result.error ?? "Something went wrong");
+          return;
         }
-      } catch (err) {
-        const message = err instanceof Error ? err.message : "Something went wrong";
-        toast.error(message);
+        toast.success("Artwork updated");
+      } else {
+        const result = await createArtwork(payload);
+        if (!result.success) {
+          toast.error(result.error ?? "Something went wrong");
+          return;
+        }
+        toast.success("Artwork created");
+        router.push("/admin/artworks");
       }
     });
   }

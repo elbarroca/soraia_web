@@ -43,10 +43,10 @@ export function ArtworkTable({
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [isPending, startTransition] = useTransition();
 
-  const filtered =
-    categoryFilter === "all"
-      ? artworks
-      : artworks.filter((a) => a.category === categoryFilter);
+  const isFiltered = categoryFilter !== "all";
+  const filtered = isFiltered
+    ? artworks.filter((a) => a.category === categoryFilter)
+    : artworks;
 
   function handleToggleVisibility(id: number, visible: boolean) {
     startTransition(async () => {
@@ -132,7 +132,7 @@ export function ArtworkTable({
                           variant="ghost"
                           size="icon"
                           className="h-6 w-6"
-                          disabled={index === 0}
+                          disabled={isFiltered || index === 0}
                           aria-label={`Move ${artwork.title} up`}
                           onClick={() => startTransition(async () => {
                             try {
@@ -147,7 +147,7 @@ export function ArtworkTable({
                           variant="ghost"
                           size="icon"
                           className="h-6 w-6"
-                          disabled={index === filtered.length - 1}
+                          disabled={isFiltered || index === filtered.length - 1}
                           aria-label={`Move ${artwork.title} down`}
                           onClick={() => startTransition(async () => {
                             try {

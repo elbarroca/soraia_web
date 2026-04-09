@@ -7,7 +7,7 @@ export function StudioVideo() {
   return (
     <Section noContainer className="py-0">
       <FadeIn>
-        <div className="h-[280px] md:h-[360px] lg:h-[420px] overflow-hidden">
+        <div className="h-[340px] md:h-[440px] lg:h-[520px] overflow-hidden">
           <video
             src="/soraia-studio.mp4"
             autoPlay

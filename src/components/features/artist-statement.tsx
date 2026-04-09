@@ -27,7 +27,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-8 items-center">
         {/* Left text */}
         <FadeIn className="lg:col-span-1">
-          <p className="text-lg md:text-xl lg:text-2xl font-bold leading-snug text-[#000]">
+          <p className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#000]">
             {line1}
           </p>
         </FadeIn>
@@ -48,7 +48,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         {/* Right text */}
         <FadeIn delay={0.2} className="lg:col-span-1">
           <div className="space-y-6 text-right">
-            <p className="text-lg md:text-xl lg:text-2xl font-bold leading-snug text-[#000]">
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#000]">
               {line2}
             </p>
             {credentialLine && (

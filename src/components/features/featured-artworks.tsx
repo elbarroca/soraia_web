@@ -85,7 +85,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className="object-contain object-bottom transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
+                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   ) : (
