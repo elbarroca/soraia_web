@@ -49,7 +49,7 @@ export default async function AboutPage() {
       <Section className="pb-28 md:pb-36">
         <FadeIn>
           <Link href="/contact" className="group block">
-            <div className="inline-flex items-center gap-4 sm:gap-6">
+            <div className="inline-flex items-end gap-4 sm:gap-6">
               <div>
                 <div className="mb-4">
                   <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
@@ -63,7 +63,7 @@ export default async function AboutPage() {
                   Let&apos;s talk!
                 </h2>
               </div>
-              <div className="hidden sm:flex flex-shrink-0 items-center ml-4 sm:ml-6">
+              <div className="hidden sm:flex flex-shrink-0 items-end mb-1">
                 <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
                   <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
                   <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />
