@@ -36,13 +36,23 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
     <div className="bg-[var(--color-surface)] py-20 md:py-28 overflow-hidden">
       <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)]">
         <motion.p
-          className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] text-center mb-10"
+          className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] text-center mb-3"
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
         >
           Driven by Curiosity
+        </motion.p>
+
+        <motion.p
+          className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] text-center mb-6"
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          I Am
         </motion.p>
 
         <div className="relative flex items-center justify-center min-h-[1.2em]" style={{ minHeight: "clamp(3rem, 10vw, 8rem)" }}>

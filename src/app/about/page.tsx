@@ -59,7 +59,7 @@ export default async function AboutPage() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
                   More questions?
                 </h2>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[40%] md:ml-[50%]">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] sm:ml-[40%] md:ml-[50%] whitespace-nowrap">
                   Let&apos;s talk!
                 </h2>
               </div>

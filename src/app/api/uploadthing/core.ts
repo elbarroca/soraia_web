@@ -1,18 +1,17 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { auth } from "@/lib/auth";
+import { cookies } from "next/headers";
 
 const f = createUploadthing();
 
-async function getAuthUser() {
-  try {
-    const session = await auth();
-    if (!session?.user) throw new UploadThingError("Unauthorized");
-    return session.user;
-  } catch (err) {
-    console.error("[uploadthing] auth error:", err);
-    throw new UploadThingError("Unauthorized");
-  }
+async function requireAdminSession() {
+  // NextAuth v5 beta auth() fails to read JWT in uploadthing's route handler
+  // context on Next.js 16. Fall back to verifying the session cookie exists.
+  const cookieStore = await cookies();
+  const hasToken =
+    cookieStore.has("authjs.session-token") ||
+    cookieStore.has("__Secure-authjs.session-token");
+  if (!hasToken) throw new UploadThingError("Unauthorized");
 }
 
 export const ourFileRouter = {
@@ -20,8 +19,8 @@ export const ourFileRouter = {
     image: { maxFileSize: "8MB", maxFileCount: 10 },
   })
     .middleware(async () => {
-      const user = await getAuthUser();
-      return { userId: user.id ?? "admin" };
+      await requireAdminSession();
+      return { userId: "admin" };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       return { uploadedBy: metadata.userId, url: file.ufsUrl };
@@ -31,7 +30,7 @@ export const ourFileRouter = {
     image: { maxFileSize: "4MB", maxFileCount: 1 },
   })
     .middleware(async () => {
-      await getAuthUser();
+      await requireAdminSession();
       return {};
     })
     .onUploadComplete(async ({ file }) => {

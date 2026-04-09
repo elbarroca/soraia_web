@@ -5,7 +5,7 @@ import { Section } from "@/components/layout/section";
 
 export function StudioVideo() {
   return (
-    <Section className="py-0">
+    <Section>
       <FadeIn>
         <video
           src="/soraia-studio.mp4"

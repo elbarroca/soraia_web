@@ -67,7 +67,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       </div>
 
       {/* Tile grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         {tiles.map((tile, i) => {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??

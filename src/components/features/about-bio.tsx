@@ -13,7 +13,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
     <div>
       {/* Section label */}
       <FadeIn>
-        <div className="flex flex-col items-center text-center gap-3 mb-6">
+        <div className="flex flex-col items-center text-center gap-3 mb-12 md:mb-16">
           <div className="flex items-center gap-4">
             <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
@@ -27,7 +27,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
       </FadeIn>
 
       {/* Intro text + portrait — centered layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-32 lg:mb-40">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-40 lg:mb-48">
         <div className="lg:col-span-7 space-y-6">
           <FadeIn delay={0.1}>
             <h1 className="heading-display leading-[1.05] text-[var(--color-ink)]">
