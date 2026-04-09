@@ -55,11 +55,11 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
           I Am
         </motion.p>
 
-        <div className="relative flex items-center justify-center min-h-[1.2em]" style={{ minHeight: "clamp(3rem, 10vw, 8rem)" }}>
+        <div className="relative flex items-center justify-center min-h-[1.2em]" style={{ minHeight: "clamp(2.5rem, 8vw, 6rem)" }}>
           <AnimatePresence mode="wait">
             <motion.span
               key={currentIndex}
-              className="absolute text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05] text-center"
+              className="absolute text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold uppercase tracking-tight text-[var(--color-ink)] leading-[1.05] text-center"
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReducedMotion ? {} : { opacity: 0, y: -30 }}

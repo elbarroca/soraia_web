@@ -79,13 +79,13 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block">
                 {/* Image */}
-                <div className="relative overflow-hidden aspect-[3/4]">
+                <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-surface-dim)]">
                   {imageSrc && (
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
+                      className="object-contain transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   )}

@@ -5,7 +5,7 @@ import { Section } from "@/components/layout/section";
 
 export function StudioVideo() {
   return (
-    <Section noContainer>
+    <Section noContainer className="py-0">
       <FadeIn>
         <video
           src="/soraia-studio.mp4"
@@ -13,7 +13,7 @@ export function StudioVideo() {
           muted
           loop
           playsInline
-          className="w-full h-auto"
+          className="block w-full h-auto"
         />
       </FadeIn>
     </Section>

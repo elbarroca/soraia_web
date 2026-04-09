@@ -19,6 +19,7 @@
   --color-accent-hover: #333333;
   --color-sold: #888888;
   --color-sale: #b91c1c;
+  --color-blue: #3d5a80;
 
   /* ─── Typography ─── */
   --font-primary: var(--font-sans), "Inter", system-ui, sans-serif;
