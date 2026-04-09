@@ -48,7 +48,7 @@ export default async function AboutPage() {
       {/* "Let's talk" CTA */}
       <Section className="pb-28 md:pb-36">
         <FadeIn>
-          <Link href="/contact" className="group block w-fit">
+          <Link href="/contact" className="group block">
             <div className="flex flex-col">
               <div className="mb-4">
                 <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">

@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { artworks, artworkImages } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, refresh } from "next/cache";
 import { eq, asc, desc } from "drizzle-orm";
 import { artworkFormSchema, type ArtworkFormValues } from "@/lib/validations";
 
@@ -55,7 +55,7 @@ export async function createArtwork(data: ArtworkFormValues) {
     }
 
     revalidatePath("/artworks");
-    revalidatePath("/admin/artworks");
+    refresh();
     return { success: true as const, id: artwork.id };
   } catch (err) {
     console.error("[createArtwork]", err);
@@ -109,7 +109,7 @@ export async function updateArtwork(id: number, data: ArtworkFormValues) {
 
     revalidatePath("/artworks");
     revalidatePath(`/artworks/${parsed.slug}`);
-    revalidatePath("/admin/artworks");
+    refresh();
     return { success: true as const };
   } catch (err) {
     console.error("[updateArtwork]", err);
@@ -121,24 +121,16 @@ export async function updateArtwork(id: number, data: ArtworkFormValues) {
 export async function deleteArtwork(id: number) {
   await requireAuth();
   await db.delete(artworks).where(eq(artworks.id, id));
-  try {
-    revalidatePath("/artworks");
-    revalidatePath("/admin/artworks");
-  } catch (err) {
-    console.error("[deleteArtwork] revalidation error:", err);
-  }
+  revalidatePath("/artworks");
+  refresh();
   return { success: true };
 }
 
 export async function toggleArtworkVisibility(id: number, visible: boolean) {
   await requireAuth();
   await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
-  try {
-    revalidatePath("/artworks");
-    revalidatePath("/admin/artworks");
-  } catch (err) {
-    console.error("[toggleArtworkVisibility] revalidation error:", err);
-  }
+  revalidatePath("/artworks");
+  refresh();
   return { success: true };
 }
 
@@ -169,12 +161,8 @@ export async function reorderArtwork(id: number, direction: "up" | "down") {
     await db.update(artworks).set({ sortOrder: swapIndex }).where(eq(artworks.id, allArtworks[currentIndex].id));
     await db.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
 
-    try {
-      revalidatePath("/artworks");
-      revalidatePath("/admin/artworks");
-    } catch (revalErr) {
-      console.error("[reorderArtwork] revalidation error:", revalErr);
-    }
+    revalidatePath("/artworks");
+    refresh();
     return { success: true };
   } catch (err) {
     console.error("[reorderArtwork]", err);

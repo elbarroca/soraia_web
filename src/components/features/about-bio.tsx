@@ -13,7 +13,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
     <div>
       {/* Section label */}
       <FadeIn>
-        <div className="flex flex-col items-center text-center gap-2 mb-12 md:mb-16">
+        <div className="flex flex-col items-center text-center gap-2 mb-16 md:mb-24">
           <div className="flex items-center gap-4">
             <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
