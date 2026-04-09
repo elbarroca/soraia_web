@@ -7,14 +7,16 @@ export function StudioVideo() {
   return (
     <Section noContainer className="py-0">
       <FadeIn>
-        <video
-          src="/soraia-studio.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="block w-full h-auto"
-        />
+        <div className="h-[280px] md:h-[360px] lg:h-[420px] overflow-hidden">
+          <video
+            src="/soraia-studio.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="block w-full h-full object-cover object-center"
+          />
+        </div>
       </FadeIn>
     </Section>
   );

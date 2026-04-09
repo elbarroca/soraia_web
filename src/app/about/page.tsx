@@ -31,17 +31,17 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section className="pt-24 md:pt-32 pb-20 md:pb-28">
+      <Section className="pt-28 md:pt-36 pb-24 md:pb-32">
         <AboutBio intro={settings.about_intro ?? ""} paragraphs={bioParagraphs} />
       </Section>
 
-      <Section className="bg-[var(--color-surface-dim)] py-20 md:py-28">
+      <Section className="bg-[var(--color-surface-dim)] py-24 md:py-32">
         <EducationTimeline />
       </Section>
 
       <AboutIdentity words={identityWords} />
 
-      <Section className="py-20 md:py-28">
+      <Section className="py-24 md:py-32">
         <AboutOrigin />
       </Section>
 
@@ -63,7 +63,7 @@ export default async function AboutPage() {
                   Let&apos;s talk!
                 </h2>
               </div>
-              <div className="hidden sm:flex flex-shrink-0 items-center">
+              <div className="hidden sm:flex flex-shrink-0 items-center ml-4 sm:ml-6">
                 <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
                   <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
                   <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />

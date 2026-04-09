@@ -52,8 +52,12 @@ export async function createArtwork(data: ArtworkFormValues) {
     );
   }
 
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
+  try {
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+  } catch (err) {
+    console.error("[createArtwork] revalidation error:", err);
+  }
   return { success: true, id: artwork.id };
 }
 
@@ -98,25 +102,37 @@ export async function updateArtwork(id: number, data: ArtworkFormValues) {
     );
   }
 
-  revalidatePath("/artworks");
-  revalidatePath(`/artworks/${parsed.slug}`);
-  revalidatePath("/admin/artworks");
+  try {
+    revalidatePath("/artworks");
+    revalidatePath(`/artworks/${parsed.slug}`);
+    revalidatePath("/admin/artworks");
+  } catch (err) {
+    console.error("[updateArtwork] revalidation error:", err);
+  }
   return { success: true };
 }
 
 export async function deleteArtwork(id: number) {
   await requireAuth();
   await db.delete(artworks).where(eq(artworks.id, id));
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
+  try {
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+  } catch (err) {
+    console.error("[deleteArtwork] revalidation error:", err);
+  }
   return { success: true };
 }
 
 export async function toggleArtworkVisibility(id: number, visible: boolean) {
   await requireAuth();
   await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
+  try {
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+  } catch (err) {
+    console.error("[toggleArtworkVisibility] revalidation error:", err);
+  }
   return { success: true };
 }
 
@@ -147,8 +163,12 @@ export async function reorderArtwork(id: number, direction: "up" | "down") {
     await db.update(artworks).set({ sortOrder: swapIndex }).where(eq(artworks.id, allArtworks[currentIndex].id));
     await db.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
 
-    revalidatePath("/artworks");
-    revalidatePath("/admin/artworks");
+    try {
+      revalidatePath("/artworks");
+      revalidatePath("/admin/artworks");
+    } catch (revalErr) {
+      console.error("[reorderArtwork] revalidation error:", revalErr);
+    }
     return { success: true };
   } catch (err) {
     console.error("[reorderArtwork]", err);

@@ -43,7 +43,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
         </div>
 
         <FadeIn delay={0.15} className="lg:col-span-4 lg:col-start-9">
-          <div className="relative aspect-square max-w-[340px] mx-auto overflow-hidden bg-[var(--color-surface-dim)]">
+          <div className="relative aspect-square max-w-[340px] ml-auto overflow-hidden bg-[var(--color-surface-dim)]">
             <Image
               src="/images/about/profile.jpg"
               alt="Soraia Oliveira"
