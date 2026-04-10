@@ -13,6 +13,17 @@
 # testing
 /coverage
 
+# Playwright & browser automation artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.playwright-mcp/
+**/.playwright*/
+
+# Graphify (local knowledge graph output — regenerate as needed)
+/graphify-out/
+
 # next.js
 /.next/
 /out/
