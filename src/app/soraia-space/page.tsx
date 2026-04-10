@@ -54,10 +54,10 @@ export default async function SoraiaSpacePage() {
           <FadeIn delay={0.1} className="lg:col-span-5">
             <div className="relative overflow-hidden">
               <Image
-                src="/images/studio/studio.png"
+                src="/images/soraia-space/studio.png"
                 alt="Soraia Space — creative studio in Guimarães"
-                width={900}
-                height={1100}
+                width={790}
+                height={1024}
                 className="w-full h-auto object-contain"
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 priority
@@ -89,24 +89,43 @@ export default async function SoraiaSpacePage() {
         <SpaceNav />
       </div>
 
-      {/* The Practice */}
+      {/* The Practice — mirrors hero: text | image, reversed */}
       <Section id="the-practice" className="py-16 md:py-24">
-        <FadeIn>
-          <div className="max-w-2xl mx-auto text-center">
+        <div className="text-center mb-10 md:mb-14">
+          <FadeIn>
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
               <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
                 The Practice
               </p>
             </div>
-            <h2 className="heading-editorial text-[var(--color-ink)] mb-6">
-              Where the work happens
-            </h2>
-            <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.7]">
-              Visiting the studio means stepping into the creative process — seeing work at every stage, understanding scale and texture up close, and experiencing the atmosphere where each piece begins. Whether in person or via a video call, these conversations are where real connections happen.
-            </p>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <FadeIn className="lg:col-span-6">
+            <div className="space-y-6 text-left">
+              <h2 className="heading-editorial text-[var(--color-ink)]">
+                Where the work happens
+              </h2>
+              <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.7]">
+                Visiting the studio means stepping into the creative process — seeing work at every stage, understanding scale and texture up close, and experiencing the atmosphere where each piece begins. Whether in person or via a video call, these conversations are where real connections happen.
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.08} className="lg:col-span-5 lg:col-start-8">
+            <div className="relative aspect-[790/1024] w-full overflow-hidden">
+              <Image
+                src="/images/soraia-space/where-work-happens.png"
+                alt="Artist in the studio, seated in front of a framed black-and-white landscape photograph"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
+            </div>
+          </FadeIn>
+        </div>
       </Section>
 
       {/* Appointments */}
