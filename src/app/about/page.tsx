@@ -49,8 +49,8 @@ export default async function AboutPage() {
       <Section className="pb-28 md:pb-36">
         <FadeIn>
           <Link href="/contact" className="group block">
-            <div className="flex items-center gap-8">
-              <div>
+            <div className="flex items-center justify-between gap-12">
+              <div className="min-w-0">
                 <div className="mb-4">
                   <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
                     ( Contact )
@@ -59,11 +59,11 @@ export default async function AboutPage() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)]">
                   More questions?
                 </h2>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] sm:ml-[40%] md:ml-[50%] whitespace-nowrap">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-[1.0] tracking-tight text-[var(--color-ink)] ml-[20%] sm:ml-[30%] md:ml-[35%] whitespace-nowrap">
                   Let&apos;s talk!
                 </h2>
               </div>
-              <div className="hidden sm:flex flex-shrink-0 items-center">
+              <div className="hidden sm:flex flex-shrink-0 items-center ml-auto">
                 <div className="relative w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center group-hover:opacity-70 transition-opacity duration-300">
                   <span className="absolute top-0 left-0 w-3.5 h-3.5 border-t-2 border-l-2 border-[var(--color-ink)]" />
                   <span className="absolute top-0 right-0 w-3.5 h-3.5 border-t-2 border-r-2 border-[var(--color-ink)]" />

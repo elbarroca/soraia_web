@@ -50,14 +50,32 @@ export function ArtworkTable({
 
   function handleToggleVisibility(id: number, visible: boolean) {
     startTransition(async () => {
-      await toggleArtworkVisibility(id, visible);
+      try {
+        const res = await toggleArtworkVisibility(id, visible);
+        if (!res.success) {
+          toast.error(res.error ?? "Failed to update visibility");
+        }
+      } catch (err) {
+        console.error("[toggleVisibility]", err);
+        toast.error("Failed to update visibility");
+      }
     });
   }
 
   function handleDelete(id: number, title: string) {
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     startTransition(async () => {
-      await deleteArtwork(id);
+      try {
+        const res = await deleteArtwork(id);
+        if (!res.success) {
+          toast.error(res.error ?? "Failed to delete artwork");
+          return;
+        }
+        toast.success(`"${title}" deleted`);
+      } catch (err) {
+        console.error("[deleteArtwork]", err);
+        toast.error("Failed to delete artwork");
+      }
     });
   }
 
