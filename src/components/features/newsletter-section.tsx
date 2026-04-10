@@ -9,7 +9,7 @@ export function NewsletterSection() {
   const { email, status, subscribe, updateEmail, reset } = useNewsletter();
 
   return (
-    <Section className="py-28 md:py-40 lg:py-48">
+    <Section className="!py-48 md:!py-72 lg:!py-96">
       <FadeIn>
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
