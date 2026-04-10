@@ -67,7 +67,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       </div>
 
       {/* Tile grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-10 md:gap-x-16 gap-y-12">
         {tiles.map((tile, i) => {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??
@@ -77,9 +77,9 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
 
           return (
             <FadeIn key={tile.href} delay={i * 0.08}>
-              <Link href={tile.href} className="group block">
+              <Link href={tile.href} className="group block w-full max-w-[180px] md:max-w-[200px] mx-auto">
                 {/* Image */}
-                <div className="relative aspect-[3/4] overflow-hidden">
+                <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dim)]">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}

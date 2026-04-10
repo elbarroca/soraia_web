@@ -39,8 +39,8 @@ export default async function HomePage() {
       />
       <FeaturedArtworks artworks={visibleArtworks} />
       <ArtistStatement
-        line1="Multidisciplinary artist working across photography and drawing."
-        line2="Creating and exploring through the body, self-portraiture and transformation."
+        line1={"Multidisciplinary\nartist working\nacross photography\nand drawing."}
+        line2={"Creating and\nexploring through\nthe body, self-portraiture\nand transformation."}
       />
       <StudioBanner />
       <StudioVideo />

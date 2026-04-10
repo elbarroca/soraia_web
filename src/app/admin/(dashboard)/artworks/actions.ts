@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { artworks, artworkImages } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { revalidatePath, refresh } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { eq, asc, desc } from "drizzle-orm";
 import { artworkFormSchema, type ArtworkFormValues } from "@/lib/validations";
 
@@ -55,7 +55,7 @@ export async function createArtwork(data: ArtworkFormValues) {
     }
 
     revalidatePath("/artworks");
-    refresh();
+    revalidatePath("/admin/artworks");
     return { success: true as const, id: artwork.id };
   } catch (err) {
     console.error("[createArtwork]", err);
@@ -109,7 +109,8 @@ export async function updateArtwork(id: number, data: ArtworkFormValues) {
 
     revalidatePath("/artworks");
     revalidatePath(`/artworks/${parsed.slug}`);
-    refresh();
+    revalidatePath("/admin/artworks");
+    revalidatePath(`/admin/artworks/${id}/edit`);
     return { success: true as const };
   } catch (err) {
     console.error("[updateArtwork]", err);
@@ -122,7 +123,7 @@ export async function deleteArtwork(id: number) {
   await requireAuth();
   await db.delete(artworks).where(eq(artworks.id, id));
   revalidatePath("/artworks");
-  refresh();
+  revalidatePath("/admin/artworks");
   return { success: true };
 }
 
@@ -130,7 +131,7 @@ export async function toggleArtworkVisibility(id: number, visible: boolean) {
   await requireAuth();
   await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
   revalidatePath("/artworks");
-  refresh();
+  revalidatePath("/admin/artworks");
   return { success: true };
 }
 
@@ -162,7 +163,7 @@ export async function reorderArtwork(id: number, direction: "up" | "down") {
     await db.update(artworks).set({ sortOrder: currentIndex }).where(eq(artworks.id, allArtworks[swapIndex].id));
 
     revalidatePath("/artworks");
-    refresh();
+    revalidatePath("/admin/artworks");
     return { success: true };
   } catch (err) {
     console.error("[reorderArtwork]", err);

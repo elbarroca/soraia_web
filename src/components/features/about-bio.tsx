@@ -58,7 +58,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
 
       {/* Bio — image left, text right (continuous flow) */}
       {paragraphs.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           <FadeIn delay={0.1} className="lg:col-span-4">
             <div className="relative aspect-square max-w-[380px] mx-auto lg:mx-0 overflow-hidden bg-[var(--color-surface-dim)]">
               <Image
