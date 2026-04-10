@@ -121,18 +121,32 @@ export async function updateArtwork(id: number, data: ArtworkFormValues) {
 
 export async function deleteArtwork(id: number) {
   await requireAuth();
-  await db.delete(artworks).where(eq(artworks.id, id));
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
-  return { success: true };
+
+  try {
+    await db.delete(artworks).where(eq(artworks.id, id));
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+    return { success: true as const };
+  } catch (err) {
+    console.error("[deleteArtwork]", err);
+    const message = err instanceof Error ? err.message : "Failed to delete artwork";
+    return { success: false as const, error: message };
+  }
 }
 
 export async function toggleArtworkVisibility(id: number, visible: boolean) {
   await requireAuth();
-  await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
-  revalidatePath("/artworks");
-  revalidatePath("/admin/artworks");
-  return { success: true };
+
+  try {
+    await db.update(artworks).set({ isVisible: visible }).where(eq(artworks.id, id));
+    revalidatePath("/artworks");
+    revalidatePath("/admin/artworks");
+    return { success: true as const };
+  } catch (err) {
+    console.error("[toggleArtworkVisibility]", err);
+    const message = err instanceof Error ? err.message : "Failed to update visibility";
+    return { success: false as const, error: message };
+  }
 }
 
 export async function reorderArtwork(id: number, direction: "up" | "down") {
