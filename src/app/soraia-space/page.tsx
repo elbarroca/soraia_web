@@ -28,54 +28,44 @@ export default async function SoraiaSpacePage() {
 
   return (
     <>
-      {/* Hero */}
-      <Section className="pt-14 md:pt-20 pb-24 md:pb-32 overflow-hidden">
-        {/* Centred title */}
-        <div className="text-center mb-16 md:mb-20">
+      {/* Hero — title, then image | editorial text (two columns on large screens) */}
+      <Section className="pt-14 md:pt-20 pb-16 md:pb-20 overflow-hidden">
+        <div className="text-center mb-12 md:mb-16">
           <FadeIn>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
-              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-                The Studio
-              </p>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.08}>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
               Soraia Space
             </h1>
           </FadeIn>
         </div>
 
-        {/* Horizontal hero image */}
-        <FadeIn delay={0.1}>
-          <div className="relative aspect-[2000/1344] w-full overflow-hidden mb-12 md:mb-16">
-            <Image
-              src="/images/soraia-space/hero.jpg"
-              alt="Soraia in the gallery, in conversation with a visitor"
-              fill
-              className="object-cover object-center"
-              sizes="100vw"
-              priority
-            />
-          </div>
-        </FadeIn>
-
-        {/* Text */}
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <FadeIn delay={0.16}>
-            <p className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug">
-              An extension of an ever-evolving creation
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
+          <FadeIn>
+            <div className="relative aspect-[2000/1344] w-full overflow-hidden bg-[var(--color-surface-dim)]">
+              <Image
+                src="/images/soraia-space/hero.jpg"
+                alt="Soraia in the gallery, in conversation with a visitor"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+            </div>
           </FadeIn>
-          <FadeIn delay={0.22}>
-            <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
-              Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
-            </p>
-            <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] mt-3">
-              Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
-            </p>
+
+          <FadeIn delay={0.08}>
+            <div className="space-y-6 text-left lg:py-4">
+              <p className="heading-editorial text-[var(--color-ink)]">
+                An extension of an ever-evolving creation
+              </p>
+              <div className="space-y-3">
+                <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
+                  Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
+                </p>
+                <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75]">
+                  Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
+                </p>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </Section>
@@ -85,9 +75,9 @@ export default async function SoraiaSpacePage() {
         <SpaceNav />
       </div>
 
-      {/* The Practice — mirrors hero: text | image, reversed */}
+      {/* The Practice — text left | image right (narrower image than full half-width) */}
       <Section id="the-practice" className="py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-x-12 lg:gap-y-10 items-start">
           <FadeIn className="lg:col-span-6">
             <div className="space-y-6 text-left">
               <h2 className="heading-editorial text-[var(--color-ink)]">
@@ -99,14 +89,14 @@ export default async function SoraiaSpacePage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.08} className="lg:col-span-6 lg:col-start-7">
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <FadeIn delay={0.08} className="lg:col-span-5 lg:col-start-8 flex justify-end">
+            <div className="relative aspect-[4/3] w-full max-w-full lg:max-w-[min(100%,42rem)] overflow-hidden bg-[var(--color-surface-dim)]">
               <Image
                 src="/images/soraia-space/where-work-happens.png"
                 alt="Artist in the studio, seated in front of a framed black-and-white landscape photograph"
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 42rem"
               />
             </div>
           </FadeIn>
