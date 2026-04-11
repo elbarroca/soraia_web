@@ -35,7 +35,7 @@ export default async function AboutPage() {
         <AboutBio intro={settings.about_intro ?? ""} paragraphs={bioParagraphs} />
       </Section>
 
-      <Section className="bg-[var(--color-surface-dim)] py-24 md:py-32">
+      <Section className="bg-[#fcfbf9] py-24 md:py-32">
         <EducationTimeline />
       </Section>
 

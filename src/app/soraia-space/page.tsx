@@ -48,39 +48,35 @@ export default async function SoraiaSpacePage() {
           </FadeIn>
         </div>
 
-        {/* Two-column: image left, text right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Image — smaller, left */}
-          <FadeIn delay={0.1} className="lg:col-span-5">
-            <div className="relative overflow-hidden">
-              <Image
-                src="/images/soraia-space/studio.png"
-                alt="Soraia Space — creative studio in Guimarães"
-                width={790}
-                height={1024}
-                className="w-full h-auto object-contain"
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                priority
-              />
-            </div>
-          </FadeIn>
-
-          {/* Text — right */}
-          <div className="lg:col-span-6 lg:col-start-7 space-y-6">
-            <FadeIn delay={0.16}>
-              <p className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug">
-                An extension of an ever-evolving creation
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.22}>
-              <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
-                Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
-              </p>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] mt-3">
-                Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
-              </p>
-            </FadeIn>
+        {/* Horizontal hero image */}
+        <FadeIn delay={0.1}>
+          <div className="relative aspect-[2000/1344] w-full overflow-hidden mb-12 md:mb-16">
+            <Image
+              src="/images/soraia-space/hero.jpg"
+              alt="Soraia in the gallery, in conversation with a visitor"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              priority
+            />
           </div>
+        </FadeIn>
+
+        {/* Text */}
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <FadeIn delay={0.16}>
+            <p className="heading-editorial text-[var(--color-ink)] text-lg md:text-xl leading-snug">
+              An extension of an ever-evolving creation
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.22}>
+            <p className="text-[14px] text-[var(--color-ink-light)] leading-[1.75]">
+              Guimarães, Portugal — self-portraiture, photography, experimental printing and drawing. Founded 2021.
+            </p>
+            <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] mt-3">
+              Studio visits by appointment. Come to experience scale, texture, and the process behind the work.
+            </p>
+          </FadeIn>
         </div>
       </Section>
 
@@ -91,17 +87,6 @@ export default async function SoraiaSpacePage() {
 
       {/* The Practice — mirrors hero: text | image, reversed */}
       <Section id="the-practice" className="py-16 md:py-24">
-        <div className="text-center mb-10 md:mb-14">
-          <FadeIn>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="block h-px w-8 bg-[var(--color-ink-muted)]" aria-hidden="true" />
-              <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
-                The Practice
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <FadeIn className="lg:col-span-6">
             <div className="space-y-6 text-left">
@@ -114,14 +99,14 @@ export default async function SoraiaSpacePage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.08} className="lg:col-span-5 lg:col-start-8">
-            <div className="relative aspect-[790/1024] w-full overflow-hidden">
+          <FadeIn delay={0.08} className="lg:col-span-6 lg:col-start-7">
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
               <Image
                 src="/images/soraia-space/where-work-happens.png"
                 alt="Artist in the studio, seated in front of a framed black-and-white landscape photograph"
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 42vw"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
           </FadeIn>

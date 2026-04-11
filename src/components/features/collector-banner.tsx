@@ -5,7 +5,7 @@ import { Section } from "@/components/layout/section";
 
 export function StudioBanner() {
   return (
-    <Section>
+    <Section className="pb-24 md:pb-32 lg:pb-40">
       <FadeIn>
         <div className="flex flex-col items-center text-center space-y-6">
           <h2 className="heading-1">In the studio</h2>
