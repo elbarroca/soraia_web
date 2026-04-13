@@ -24,41 +24,39 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         </div>
       </FadeIn>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12 items-center">
-        {/* Left text */}
+      {/* Mobile: line1 → image → line2; lg: three-column row */}
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-10 lg:gap-12 items-center">
         <FadeIn>
           <p className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#000] whitespace-pre-line">
             {line1}
           </p>
         </FadeIn>
 
-        {/* Center image */}
-        <FadeIn delay={0.1} className="flex justify-center">
-          <div className="relative aspect-square w-full max-w-[380px] overflow-hidden">
+        <FadeIn delay={0.1} className="flex justify-center order-2 lg:order-none">
+          <div className="relative aspect-square w-full max-w-[min(100%,300px)] lg:max-w-[380px] overflow-hidden">
             <Image
               src="/images/about/silhouette.png"
               alt="Soraia Oliveira — studio work"
               fill
               className="object-cover"
-              sizes="(max-width: 1024px) 80vw, 380px"
+              sizes="(max-width: 1024px) 75vw, 380px"
             />
           </div>
         </FadeIn>
 
-        {/* Right text */}
-        <FadeIn delay={0.2}>
-          <div className="space-y-6 text-right">
+        <FadeIn delay={0.2} className="order-3 lg:order-none">
+          <div className="space-y-6 text-left lg:text-right">
             <p className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#000] whitespace-pre-line">
               {line2}
             </p>
             {credentialLine && (
-              <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.7]">
+              <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.7] lg:ml-0">
                 {credentialLine}
               </p>
             )}
             <Link
               href="/about"
-              className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300 ml-auto"
+              className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] hover:text-[var(--color-ink-light)] transition-colors duration-300 lg:ml-auto"
             >
               About
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

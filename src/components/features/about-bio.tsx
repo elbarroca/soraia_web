@@ -26,7 +26,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
         </div>
       </FadeIn>
 
-      {/* Intro text + portrait — centered layout */}
+      {/* Intro + portrait: mobile sandwiches image between paragraphs; desktop unchanged */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-40 lg:mb-48">
         <div className="lg:col-span-7 space-y-6">
           <FadeIn delay={0.1}>
@@ -34,7 +34,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
               {intro}
             </h1>
           </FadeIn>
-          <FadeIn delay={0.2}>
+          <FadeIn delay={0.2} className="hidden lg:block">
             <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.75]">
               My work begins with curiosity and a need to understand our inner selves, the body, and
               the spaces I move through, exploring identity, presence, and transformation.
@@ -43,7 +43,7 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
         </div>
 
         <FadeIn delay={0.15} className="lg:col-span-4 lg:col-start-9">
-          <div className="relative aspect-square max-w-[340px] ml-auto overflow-hidden bg-[var(--color-surface-dim)]">
+          <div className="relative aspect-square max-w-[340px] mx-auto lg:ml-auto overflow-hidden bg-[var(--color-surface-dim)]">
             <Image
               src="/images/about/profile.jpg"
               alt="Soraia Oliveira"
@@ -53,6 +53,13 @@ export function AboutBio({ intro, paragraphs }: AboutBioProps) {
               priority
             />
           </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2} className="lg:hidden">
+          <p className="text-[15px] text-[var(--color-ink-light)] leading-[1.75]">
+            My work begins with curiosity and a need to understand our inner selves, the body, and
+            the spaces I move through, exploring identity, presence, and transformation.
+          </p>
         </FadeIn>
       </div>
 

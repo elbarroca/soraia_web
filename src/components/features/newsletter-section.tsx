@@ -42,7 +42,7 @@ export function NewsletterSection() {
               <form onSubmit={subscribe} className="flex items-center gap-3 max-w-sm mx-auto mt-8">
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => updateEmail(e.target.value)}
                   required

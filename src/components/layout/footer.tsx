@@ -75,19 +75,19 @@ export function Footer() {
 
       <footer className="bg-[var(--color-surface-dim)]">
         <Container className="py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-start text-center md:text-left">
             {/* Left: Signature + Newsletter */}
-            <div className="md:col-span-4">
+            <div className="md:col-span-4 flex flex-col items-center md:items-start">
               <Link href="/" className="block mb-8" aria-label="Soraia Oliveira — home">
                 <Image
                   src="/images/branding/signature-bold.png"
                   alt="Soraia Oliveira"
                   width={160}
                   height={32}
-                  className="h-9 md:h-12 w-auto object-contain object-left"
+                  className="h-9 md:h-12 w-auto object-contain object-center md:object-left"
                 />
               </Link>
-              <form onSubmit={subscribe} className="flex items-stretch gap-2 w-full max-w-[260px]">
+              <form onSubmit={subscribe} className="flex items-stretch gap-2 w-full max-w-[260px] mx-auto md:mx-0">
                 <input
                   type="email"
                   placeholder="your@email.com"
@@ -111,7 +111,7 @@ export function Footer() {
             </div>
 
             {/* Center: Name + Social */}
-            <div className="md:col-span-4 md:col-start-5 md:flex md:flex-col md:items-center md:text-center">
+            <div className="flex flex-col items-center text-center md:col-span-4 md:col-start-5 md:items-center">
               <p className="text-[13px] font-bold tracking-[0.04em] uppercase text-[var(--color-ink)] mb-4">
                 Soraia Oliveira
               </p>
@@ -131,9 +131,9 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Nav columns — aligned right */}
-            <div className="md:col-span-4 md:flex md:justify-end md:gap-12">
-              <nav className="flex flex-col gap-2.5 md:text-right">
+            {/* Nav columns — centered on mobile, right on md+ */}
+            <div className="flex flex-row flex-wrap justify-center gap-x-12 gap-y-3 md:col-span-4 md:flex-nowrap md:justify-end md:gap-12">
+              <nav className="flex flex-col gap-2.5 text-center md:text-right">
                 {FOOTER_NAV_LEFT.map((link) => (
                   <Link
                     key={link.href}
@@ -144,7 +144,7 @@ export function Footer() {
                   </Link>
                 ))}
               </nav>
-              <nav className="flex flex-col gap-2.5 md:text-right">
+              <nav className="flex flex-col gap-2.5 text-center md:text-right">
                 {FOOTER_NAV_RIGHT.map((link) => (
                   <Link
                     key={link.href}

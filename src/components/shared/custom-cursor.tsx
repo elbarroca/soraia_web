@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -9,30 +9,34 @@ export function CustomCursor() {
   const mx = useRef(-100);
   const my = useRef(-100);
 
-  const animate = useCallback(() => {
-    const el = cursorRef.current;
-    if (el) {
-      el.style.transform = `translate3d(${mx.current}px, ${my.current}px, 0) translate(-50%, -50%)`;
-      el.style.opacity = visible.current ? "1" : "0";
-    }
-    raf.current = requestAnimationFrame(animate);
-  }, []);
-
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    function tick() {
+      const el = cursorRef.current;
+      if (el) {
+        el.style.transform = `translate3d(${mx.current}px, ${my.current}px, 0) translate(-50%, -50%)`;
+        el.style.opacity = visible.current ? "1" : "0";
+      }
+      raf.current = requestAnimationFrame(tick);
+    }
 
     function onMove(e: MouseEvent) {
       mx.current = e.clientX;
       my.current = e.clientY;
       visible.current = true;
     }
-    function onLeave() { visible.current = false; }
-    function onEnter() { visible.current = true; }
+    function onLeave() {
+      visible.current = false;
+    }
+    function onEnter() {
+      visible.current = true;
+    }
 
     document.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
-    raf.current = requestAnimationFrame(animate);
+    raf.current = requestAnimationFrame(tick);
 
     return () => {
       document.removeEventListener("mousemove", onMove);
@@ -40,7 +44,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseenter", onEnter);
       cancelAnimationFrame(raf.current);
     };
-  }, [animate]);
+  }, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999]" aria-hidden="true">

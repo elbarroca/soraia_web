@@ -37,12 +37,12 @@ export function AboutOrigin() {
             </p>
           </div>
 
-          {/* What's Next CTA */}
-          <div className="pt-4 space-y-4">
+          {/* What's Next CTA — right-aligned on small screens */}
+          <div className="pt-4 space-y-4 text-right sm:text-left">
             <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
               What&apos;s Next
             </p>
-            <div className="flex flex-col sm:flex-row items-start gap-6">
+            <div className="flex flex-col sm:flex-row items-end sm:items-start gap-6 ml-auto sm:ml-0 max-w-full">
               <Link
                 href="/artworks"
                 className="group inline-flex items-center gap-3 text-[11px] font-medium tracking-[0.14em] uppercase text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-300"

@@ -133,7 +133,7 @@ export function ContactForm() {
               type="text"
               {...register("name")}
               className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-full px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
-              placeholder="Maria Silva"
+              placeholder="Maria"
             />
             {errors.name && (
               <p className="text-xs text-[var(--color-sold)] mt-2">{errors.name.message}</p>
@@ -152,7 +152,7 @@ export function ContactForm() {
               type="email"
               {...register("email")}
               className="w-full bg-transparent border border-[var(--color-border-strong)] rounded-full px-5 py-3 text-[15px] focus:border-[var(--color-ink)] focus:outline-none transition-colors duration-300 placeholder:text-[var(--color-ink-muted)]/40"
-              placeholder="maria@example.com"
+              placeholder="maria@email.com"
             />
             {errors.email && (
               <p className="text-xs text-[var(--color-sold)] mt-2">{errors.email.message}</p>

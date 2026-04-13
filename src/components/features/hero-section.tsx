@@ -16,37 +16,11 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
   const d = prefersReducedMotion ? 0 : 1;
 
   return (
-    <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-center py-16 md:py-24 overflow-hidden">
-      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-8 md:py-0">
+    <section className="min-h-[calc(100vh-var(--header-h))] md:min-h-[calc(100vh-var(--header-h-md))] flex items-center py-10 md:py-24 overflow-hidden">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-6 md:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
-          {/* Image side */}
-          <motion.div
-            className="relative lg:col-span-6 lg:col-start-7 overflow-hidden order-first lg:order-last"
-            initial={{ opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.4 * d, delay: 0.2 * d, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="relative">
-              {featuredImage ? (
-                <Image
-                  src={featuredImage}
-                  alt="Featured artwork by Soraia Oliveira"
-                  width={1200}
-                  height={1200}
-                  className="w-full h-auto object-contain"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-[var(--color-surface-dim)] flex items-center justify-center text-[var(--color-ink-muted)]">
-                  <span className="label">Featured Artwork</span>
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Text side */}
-          <div className="lg:col-span-5 space-y-8 lg:space-y-12 order-last lg:order-first">
+          {/* Text first in DOM: reads above image on mobile, left column on lg */}
+          <div className="lg:col-span-5 space-y-8 lg:space-y-12">
             {/* Animated label */}
             <motion.div
               className="flex items-center gap-4"
@@ -86,7 +60,7 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 * d, delay: 0.75 * d }}
             >
-              <div className="flex flex-col sm:flex-row items-start gap-6">
+              <div className="flex flex-col sm:flex-row items-end sm:items-start gap-6 text-right sm:text-left ml-auto sm:ml-0 max-w-full">
                 <Link
                   href="/artworks"
                   className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"
@@ -104,6 +78,32 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
               </div>
             </motion.div>
           </div>
+
+          {/* Image — below text on mobile, right column on lg */}
+          <motion.div
+            className="relative lg:col-span-6 lg:col-start-7 overflow-hidden"
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4 * d, delay: 0.2 * d, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="relative mx-auto w-full max-w-[min(100%,420px)] lg:max-w-none">
+              {featuredImage ? (
+                <Image
+                  src={featuredImage}
+                  alt="Featured artwork by Soraia Oliveira"
+                  width={1200}
+                  height={1200}
+                  className="w-full h-auto object-contain"
+                  priority
+                  sizes="(max-width: 1024px) 92vw, 50vw"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[var(--color-surface-dim)] flex items-center justify-center text-[var(--color-ink-muted)]">
+                  <span className="label">Featured Artwork</span>
+                </div>
+              )}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

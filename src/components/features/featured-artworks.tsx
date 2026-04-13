@@ -66,8 +66,8 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
         </FadeIn>
       </div>
 
-      {/* Tile grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-12">
+      {/* Tile grid — equal cell size; thumbnails scale to shared frame */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-12 items-end">
         {tiles.map((tile, i) => {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??
@@ -77,15 +77,15 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
 
           return (
             <FadeIn key={tile.href} delay={i * 0.08}>
-              <Link href={tile.href} className="group block w-full max-w-[260px] md:max-w-[300px] mx-auto">
-                {/* Image */}
-                <div className="relative aspect-[3/4] flex items-center justify-center">
+              <Link href={tile.href} className="group block w-full">
+                {/* Image — full column width, fixed aspect so all tiles match */}
+                <div className="relative aspect-[3/4] w-full flex items-end justify-center">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className="object-contain transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
+                      className="object-contain object-bottom transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   ) : (

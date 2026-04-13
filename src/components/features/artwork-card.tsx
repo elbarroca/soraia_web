@@ -13,20 +13,17 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   const primaryImage = artwork.images.find((img) => img.isPrimary) ?? artwork.images[0];
 
   return (
-    <Link href={`/artworks/${artwork.slug}`} className="group block">
-      {/* Image container */}
-      <div className="relative overflow-hidden mb-4">
+    <Link href={`/artworks/${artwork.slug}`} className="group block h-full flex flex-col">
+      {/* Image — shared aspect frame so grid tiles align */}
+      <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden bg-[var(--color-surface-dim)]/40">
         {primaryImage ? (
-          <>
-            <Image
-              src={primaryImage.url}
-              alt={primaryImage.altText || artwork.title}
-              width={800}
-              height={800}
-              className="w-full h-auto object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-            />
-          </>
+          <Image
+            src={primaryImage.url}
+            alt={primaryImage.altText || artwork.title}
+            fill
+            className="object-contain object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+          />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-[var(--color-ink-muted)]">
             <span className="label">No Image</span>
@@ -34,7 +31,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
         )}
 
         {/* Status badges */}
-        <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+        <div className="absolute top-3 right-3 flex flex-col gap-1.5 items-end z-10">
           {artwork.isSold && (
             <span className="text-[9px] font-medium tracking-[0.15em] uppercase bg-[var(--color-sale)] text-white px-2 py-0.5">
               Sold
@@ -49,7 +46,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
       </div>
 
       {/* Info */}
-      <div className="space-y-1 mt-3.5">
+      <div className="space-y-1 mt-3.5 flex-1">
         <h3 className="text-sm font-medium leading-snug group-hover:underline decoration-1 underline-offset-4 transition-all duration-300">
           {artwork.title}
         </h3>
