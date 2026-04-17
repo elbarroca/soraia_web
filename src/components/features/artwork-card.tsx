@@ -15,7 +15,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/artworks/${artwork.slug}`} className="group block h-full flex flex-col">
       {/* Image — shared aspect frame so grid tiles align */}
-      <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden bg-[var(--color-surface-dim)]/40">
+      <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden bg-[var(--color-surface-dim)]/40">
         {primaryImage ? (
           <Image
             src={primaryImage.url}

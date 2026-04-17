@@ -26,12 +26,13 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       label: "all artworks",
       href: "/artworks",
       artwork: artworks.find((a) => a.images.length > 0) ?? null,
-      fallbackImage: "/images/categories/all-artworks.png",
+      fallbackImage: "/change1.jpg",
     },
     {
       label: "photography",
       href: "/artworks?cat=photography",
       artwork: byCategory("photography"),
+      fallbackImage: "/change2.png",
     },
     {
       label: "artist proofs",
@@ -79,13 +80,13 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block w-full">
                 {/* Image — full column width, fixed aspect so all tiles match */}
-                <div className="relative aspect-[3/4] w-full flex items-end justify-center">
+                <div className="relative aspect-[4/3] w-full flex items-center justify-center">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className="object-contain object-bottom transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
+                      className="object-contain object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
                       sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 25vw"
                     />
                   ) : (

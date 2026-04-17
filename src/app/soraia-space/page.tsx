@@ -40,7 +40,7 @@ export default async function SoraiaSpacePage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
           <FadeIn>
-            <div className="mx-auto w-full max-w-[min(100%,520px)] lg:max-w-none">
+            <div className="mx-auto w-full max-w-[min(100%,380px)] lg:max-w-none">
               <div className="relative aspect-[2000/1344] w-full overflow-hidden bg-[var(--color-surface-dim)]">
                 <Image
                   src="/images/soraia-space/hero.jpg"
@@ -92,12 +92,12 @@ export default async function SoraiaSpacePage() {
           </FadeIn>
 
           <FadeIn delay={0.08} className="lg:col-span-5 lg:col-start-8 flex justify-end">
-            <div className="relative aspect-[3/4] w-full max-w-full lg:max-w-[min(100%,32rem)] overflow-hidden bg-[var(--color-surface-dim)]">
+            <div className="relative aspect-[4/3] w-full max-w-full lg:max-w-[min(100%,32rem)] overflow-hidden bg-[var(--color-surface-dim)]">
               <Image
                 src="/images/soraia-space/where-work-happens.png"
                 alt="Artist in the studio, seated in front of a framed black-and-white landscape photograph"
                 fill
-                className="object-cover object-[center_35%]"
+                className="object-contain object-center"
                 sizes="(max-width: 1024px) 100vw, 32rem"
               />
             </div>
