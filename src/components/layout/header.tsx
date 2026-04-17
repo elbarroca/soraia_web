@@ -143,7 +143,7 @@ export function Header() {
                       "text-[28px] font-light tracking-[0.12em] uppercase transition-[color,transform] duration-300",
                       isActive(link.href)
                         ? "text-[var(--color-ink)]"
-                        : "text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:scale-[1.05]"
+                        : "text-[var(--color-ink)] hover:scale-[1.05]"
                     )}
                   >
                     {link.label}
@@ -166,7 +166,7 @@ export function Header() {
                 height={24}
                 className="h-5 w-auto opacity-10"
               />
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-ink-muted)]">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-ink)]/60">
                 Guimarães, Portugal
               </p>
             </motion.div>

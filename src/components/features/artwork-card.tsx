@@ -22,7 +22,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
             alt={primaryImage.altText || artwork.title}
             fill
             className="object-contain object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-[var(--color-ink-muted)]">

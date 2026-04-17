@@ -20,7 +20,8 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
       <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] py-6 md:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Text first in DOM: reads above image on mobile, left column on lg */}
-          <div className="lg:col-span-5 space-y-8 lg:space-y-12">
+          {/* Text first: labels, title, tagline */}
+          <div className="lg:col-span-5 space-y-8 lg:space-y-12 order-1">
             {/* Animated label */}
             <motion.div
               className="flex items-center gap-4"
@@ -33,8 +34,7 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
                 Visual Artist — Portugal
               </p>
             </motion.div>
-
-            {/* Statement — monumental */}
+  
             <motion.h1
               className="heading-display leading-[1.0] tracking-[-0.015em]"
               initial={{ opacity: 0, y: 50 }}
@@ -43,8 +43,7 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
             >
               Soraia Oliveira
             </motion.h1>
-
-            {/* Tagline */}
+  
             <motion.p
               className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed max-w-xs"
               initial={{ opacity: 0, y: 20 }}
@@ -53,35 +52,11 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
             >
               Self-portraiture, photography and drawing, exploring experimental printing and performance.
             </motion.p>
-
-            {/* Single, understated CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 * d, delay: 0.75 * d }}
-            >
-              <div className="flex flex-col sm:flex-row items-end sm:items-start gap-6 text-right sm:text-left ml-auto sm:ml-0 max-w-full">
-                <Link
-                  href="/artworks"
-                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"
-                >
-                  Explore Work
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="/soraia-space"
-                  className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"
-                >
-                  Book a Studio Visit
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </motion.div>
           </div>
-
-          {/* Image — below text on mobile, right column on lg */}
+  
+          {/* Image — between text and buttons on mobile, right column on lg */}
           <motion.div
-            className="relative lg:col-span-6 lg:col-start-7 overflow-hidden"
+            className="relative lg:col-span-6 lg:col-start-7 lg:row-span-2 overflow-hidden order-2 lg:order-none"
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.4 * d, delay: 0.2 * d, ease: [0.22, 1, 0.36, 1] }}
@@ -102,6 +77,31 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
                   <span className="label">Featured Artwork</span>
                 </div>
               )}
+            </div>
+          </motion.div>
+  
+          {/* Buttons — bottom on mobile, below text on lg */}
+          <motion.div
+            className="lg:col-span-5 order-3 lg:order-none"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 * d, delay: 0.75 * d }}
+          >
+            <div className="flex flex-col sm:flex-row items-start sm:items-start gap-6 text-left sm:text-left ml-0 sm:ml-0 max-w-full">
+              <Link
+                href="/artworks"
+                className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"
+              >
+                Explore Work
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/soraia-space"
+                className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"
+              >
+                Book a Studio Visit
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </div>
           </motion.div>
         </div>
