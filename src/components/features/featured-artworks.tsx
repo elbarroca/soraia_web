@@ -25,14 +25,14 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
     {
       label: "all artworks",
       href: "/artworks",
-      artwork: artworks.find((a) => a.images.length > 0) ?? null,
-      fallbackImage: "/change1.jpg",
+      artwork: null,
+      fallbackImage: "/images/categories/all-artworks.png",
     },
     {
       label: "photography",
       href: "/artworks?cat=photography",
-      artwork: byCategory("photography"),
-      fallbackImage: "/change2.png",
+      artwork: null,
+      fallbackImage: "/images/categories/romeu.png",
     },
     {
       label: "artist proofs",
@@ -86,7 +86,9 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className="object-contain object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]"
+                      className={`object-contain object-center transition-transform duration-[1200ms] ease-out ${
+                        i < 2 ? "scale-[1.12] group-hover:scale-[1.14]" : "group-hover:scale-[1.015]"
+                      }`}
                       sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 25vw"
                     />
                   ) : (
@@ -95,7 +97,6 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                     </div>
                   )}
                 </div>
-                {/* Label — below image, black text */}
                 <p className="mt-3 text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
                   {tile.label}&rarr;
                 </p>

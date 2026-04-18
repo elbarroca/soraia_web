@@ -54,10 +54,11 @@ export function CustomCursor() {
           position: "fixed",
           top: 0,
           left: 0,
-          width: 6,
-          height: 6,
+          width: 8,
+          height: 8,
           borderRadius: "50%",
           background: "var(--color-ink)",
+          border: "1.5px solid #fff",
           opacity: 0,
           willChange: "transform",
         }}

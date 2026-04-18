@@ -25,7 +25,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
       </FadeIn>
 
       {/* Mobile: line1 → image → line2; lg: three-column row */}
-      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-10 lg:gap-12 items-center">
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-10 lg:gap-12 lg:items-center">
         <FadeIn>
           <p className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#000] whitespace-pre-line">
             {line1}
@@ -33,7 +33,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         </FadeIn>
 
         <FadeIn delay={0.1} className="flex justify-center order-2 lg:order-none">
-          <div className="relative aspect-square w-full max-w-[200px] lg:max-w-[380px] overflow-hidden">
+          <div className="relative aspect-square w-full max-w-[220px] md:max-w-[280px] lg:max-w-[380px] overflow-hidden">
             <Image
               src="/images/about/silhouette.png"
               alt="Soraia Oliveira — studio work"

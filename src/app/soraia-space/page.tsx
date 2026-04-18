@@ -40,7 +40,7 @@ export default async function SoraiaSpacePage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
           <FadeIn>
-            <div className="mx-auto w-full max-w-[min(100%,380px)] lg:max-w-none">
+            <div className="mx-auto w-full max-w-[min(100%,380px)] lg:max-w-[85%] lg:ml-0">
               <div className="relative aspect-[2000/1344] w-full overflow-hidden bg-[var(--color-surface-dim)]">
                 <Image
                   src="/images/soraia-space/hero.jpg"
