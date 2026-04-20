@@ -83,7 +83,7 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
 
           {/* Image */}
           <motion.div
-            className="relative lg:col-span-6 lg:col-start-7 lg:row-span-2 overflow-hidden"
+            className="relative lg:col-span-6 lg:col-start-7 overflow-hidden"
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.4 * d, delay: 0.2 * d, ease: [0.22, 1, 0.36, 1] }}
@@ -109,12 +109,12 @@ export function HeroSection({ featuredImage }: HeroSectionProps) {
 
           {/* Mobile Buttons */}
           <motion.div
-            className="lg:hidden mt-2"
+            className="lg:hidden mt-2 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 * d, delay: 0.75 * d }}
           >
-            <div className="flex flex-col items-start gap-6 text-left w-full">
+            <div className="flex flex-col items-end gap-6 text-right w-full">
               <Link
                 href="/artworks"
                 className="group inline-flex items-center gap-3 text-[13px] font-semibold tracking-[0.12em] uppercase text-[var(--color-ink)] transition-[color,transform] duration-500 hover:text-[var(--color-ink-light)] hover:scale-[1.02]"

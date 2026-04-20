@@ -7,9 +7,9 @@ import { FadeIn } from "@/components/shared/fade-in";
 
 export function AboutOrigin() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-      <FadeIn>
-        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-dim)]">
+    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
+      <FadeIn className="order-last lg:order-none">
+        <div className="relative aspect-square max-w-[240px] md:max-w-md lg:max-w-none lg:aspect-[4/3] mx-auto lg:mx-0 overflow-hidden bg-[var(--color-surface-dim)]">
           <Image
             src="/change2.png"
             alt="Soraia observing artwork in a gallery"

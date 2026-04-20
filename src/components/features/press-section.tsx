@@ -37,7 +37,7 @@ export function PressSection() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start justify-between gap-4 py-4 border-b border-[var(--color-border)] transition-colors duration-300 hover:bg-[var(--color-surface-hover)] -mx-4 px-4"
+                className="group flex items-start justify-between gap-4 py-4 border-b border-[var(--color-border)] transition-colors duration-300 lg:hover:bg-[var(--color-surface-hover)] -mx-4 px-4"
               >
                 <div>
                   <p className="text-[13px] font-medium text-[var(--color-ink)] group-hover:underline decoration-1 underline-offset-4 decoration-[var(--color-border-strong)]">

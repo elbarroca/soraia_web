@@ -37,7 +37,7 @@ export function AppointmentSection({ text, studioUrl }: AppointmentSectionProps)
             href={studioUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-start justify-between gap-6 py-8 border-b border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors -mx-4 px-4"
+            className="group flex items-start justify-between gap-6 py-8 border-b border-[var(--color-border)] lg:hover:bg-[var(--color-surface-hover)] transition-colors -mx-4 px-4"
           >
             <div className="flex-1">
               <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-2">
@@ -64,7 +64,7 @@ export function AppointmentSection({ text, studioUrl }: AppointmentSectionProps)
             href="https://tidycal.com/soraiaoliveira/book-a-call"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-start justify-between gap-6 py-8 border-b border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors -mx-4 px-4"
+            className="group flex items-start justify-between gap-6 py-8 border-b border-[var(--color-border)] lg:hover:bg-[var(--color-surface-hover)] transition-colors -mx-4 px-4"
           >
             <div className="flex-1">
               <p className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] mb-2">

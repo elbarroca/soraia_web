@@ -15,13 +15,13 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/artworks/${artwork.slug}`} className="group block h-full flex flex-col">
       {/* Image — shared aspect frame so grid tiles align */}
-      <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden bg-[var(--color-surface-dim)]/40">
+      <div className="relative mb-4 aspect-[4/5] md:aspect-[4/5] w-full overflow-hidden">
         {primaryImage ? (
           <Image
             src={primaryImage.url}
             alt={primaryImage.altText || artwork.title}
             fill
-            className="object-contain object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+            className="object-cover object-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
           />
         ) : (

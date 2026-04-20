@@ -68,7 +68,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       </div>
 
       {/* Tile grid — equal cell size; thumbnails scale to shared frame */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-12 items-end">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-4 gap-y-16 items-start">
         {tiles.map((tile, i) => {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??
@@ -80,13 +80,13 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block w-full">
                 {/* Image — full column width, fixed aspect so all tiles match */}
-                <div className="relative aspect-[4/3] w-full flex items-center justify-center">
+                <div className="relative aspect-[4/5] md:aspect-[4/5] w-full flex items-center justify-center overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
                       fill
-                      className={`object-contain object-center transition-transform duration-[1200ms] ease-out ${
+                      className={`object-cover object-center transition-transform duration-[1200ms] ease-out ${
                         i < 2 ? "scale-[1.12] group-hover:scale-[1.14]" : "group-hover:scale-[1.015]"
                       }`}
                       sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 25vw"
@@ -97,9 +97,11 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
                     </div>
                   )}
                 </div>
-                <p className="mt-3 text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
-                  {tile.label}&rarr;
-                </p>
+                <div className="mt-6 flex justify-end">
+                  <p className="text-[13px] md:text-[15px] font-semibold tracking-[0.04em] text-[var(--color-ink)] group-hover:underline underline-offset-4 decoration-1">
+                    {tile.label} &rarr;
+                  </p>
+                </div>
               </Link>
             </FadeIn>
           );

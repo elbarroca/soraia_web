@@ -28,9 +28,8 @@ export default async function SoraiaSpacePage() {
 
   return (
     <>
-      {/* Hero — title, then image | editorial text (two columns on large screens) */}
       <Section className="pt-14 md:pt-20 pb-16 md:pb-20 overflow-hidden">
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <FadeIn>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.0] tracking-[-0.02em] text-[var(--color-ink)]">
               Soraia Space
@@ -40,7 +39,7 @@ export default async function SoraiaSpacePage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
           <FadeIn>
-            <div className="mx-auto w-full max-w-[min(100%,380px)] lg:max-w-[85%] lg:ml-0">
+            <div className="mx-auto w-full max-w-[min(100%,440px)] lg:max-w-[85%] lg:ml-0">
               <div className="relative aspect-[2000/1344] w-full overflow-hidden bg-[var(--color-surface-dim)]">
                 <Image
                   src="/images/soraia-space/hero.jpg"

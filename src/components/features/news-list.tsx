@@ -24,7 +24,7 @@ export function NewsList({ items }: NewsListProps) {
             href={item.externalUrl || "#"}
             target={item.externalUrl ? "_blank" : undefined}
             rel={item.externalUrl ? "noopener noreferrer" : undefined}
-            className="group flex items-start justify-between gap-4 py-5 border-b border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors duration-300 -mx-4 px-4"
+            className="group flex items-start justify-between gap-4 py-5 border-b border-[var(--color-border)] lg:hover:bg-[var(--color-surface-hover)] transition-colors duration-300 -mx-4 px-4"
           >
             <div className="flex-1 min-w-0">
               {/* First item uses slightly larger text to signal recency/importance */}
