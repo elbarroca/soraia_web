@@ -33,8 +33,8 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
   }, [displayWords.length, prefersReducedMotion]);
 
   return (
-    <div className="bg-[var(--color-surface)] py-14 md:py-20 overflow-hidden">
-      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)]">
+    <div className="bg-[var(--color-surface)] flex flex-col items-center justify-center overflow-hidden py-10 md:py-14">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] flex flex-col items-center justify-center">
         <motion.p
           className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] text-center mb-3"
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
@@ -55,7 +55,7 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
           I Am
         </motion.p>
 
-        <div className="relative flex items-center justify-center min-h-[1.2em]" style={{ minHeight: "clamp(2.5rem, 8vw, 6rem)" }}>
+        <div className="relative w-full" style={{ minHeight: "clamp(2.5rem, 8vw, 6rem)" }}>
           <AnimatePresence mode="wait">
             <motion.span
               key={currentIndex}

@@ -114,7 +114,7 @@ export default async function SoraiaSpacePage() {
       </Section>
 
       {/* News */}
-      <Section id="news" className="py-16 md:py-24">
+      <Section id="news" className="py-16 md:py-24 bg-[#FCFBF9] md:bg-transparent">
         <NewsList items={visibleNews} />
       </Section>
 

@@ -80,7 +80,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block w-full">
                 {/* Image — full column width, fixed aspect so all tiles match */}
-                <div className="relative aspect-[4/5] md:aspect-[4/5] w-full flex items-center justify-center overflow-hidden">
+                <div className="relative aspect-[4/3] md:aspect-[4/3] w-[90%] mx-auto flex items-center justify-center overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}

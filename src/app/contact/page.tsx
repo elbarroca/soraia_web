@@ -58,8 +58,8 @@ export default function ContactPage() {
             </FadeIn>
 
             {/* Contact image */}
-            <FadeIn delay={0.15}>
-              <div className="relative aspect-[2/3] w-full lg:max-w-[240px] overflow-hidden mt-8 lg:mt-4">
+            <FadeIn delay={0.15} className="hidden lg:block">
+              <div className="relative aspect-square max-w-[200px] mx-auto lg:aspect-[2/3] lg:max-w-[240px] lg:mx-0 overflow-hidden mt-8 lg:mt-4">
                 <Image
                   src="/images/contact/contact.jpg"
                   alt="Soraia Oliveira"
