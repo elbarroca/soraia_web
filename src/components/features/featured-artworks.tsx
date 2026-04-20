@@ -68,7 +68,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
       </div>
 
       {/* Tile grid — equal cell size; thumbnails scale to shared frame */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-4 gap-y-16 items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-10 gap-y-16 items-start">
         {tiles.map((tile, i) => {
           const img =
             tile.artwork?.images.find((im) => im.isPrimary) ??
@@ -80,7 +80,7 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block w-full">
                 {/* Image — full column width, fixed aspect so all tiles match */}
-                <div className="relative aspect-[4/3] md:aspect-[4/3] w-[90%] mx-auto flex items-center justify-center overflow-hidden">
+                <div className="relative aspect-[4/5] w-[90%] mx-auto flex items-center justify-center overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}

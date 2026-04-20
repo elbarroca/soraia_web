@@ -42,7 +42,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
 
         {/* Image — small/centered on mobile, full-size on desktop */}
         <FadeIn delay={0.1} className="flex justify-center">
-          <div className="relative aspect-square w-full max-w-[120px] lg:max-w-[380px] overflow-hidden">
+          <div className="relative aspect-square w-full max-w-[340px] lg:max-w-[380px] overflow-hidden">
             <Image
               src="/images/about/silhouette.png"
               alt="Soraia Oliveira — studio work"
@@ -56,7 +56,7 @@ export function ArtistStatement({ line1, line2, credentialLine }: ArtistStatemen
         {/* Mobile line2 + link */}
         <FadeIn delay={0.1} className="lg:hidden">
           <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold leading-snug text-[#000] whitespace-pre-line">
+            <p className="text-xl md:text-2xl font-bold leading-snug text-[#000] whitespace-pre-line text-right">
               {line2}
             </p>
             {credentialLine && (

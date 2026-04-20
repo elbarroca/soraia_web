@@ -33,8 +33,8 @@ export function AboutIdentity({ words }: AboutIdentityProps) {
   }, [displayWords.length, prefersReducedMotion]);
 
   return (
-    <div className="bg-[var(--color-surface)] flex flex-col items-center justify-center overflow-hidden py-10 md:py-14">
-      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] flex flex-col items-center justify-center">
+    <div className="bg-[var(--color-surface)] overflow-hidden py-10 md:py-14">
+      <div className="mx-auto w-full max-w-[var(--max-width)] px-[var(--space-page-x)] flex flex-col items-center">
         <motion.p
           className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--color-ink-muted)] text-center mb-3"
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
