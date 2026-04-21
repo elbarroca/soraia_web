@@ -46,7 +46,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* "Let's talk" CTA */}
-      <Section className="pb-28 md:pb-36">
+      <Section className="pt-28 md:pt-36 pb-28 md:pb-36">
         <FadeIn>
           <Link href="/contact" className="group block">
             <div className="flex items-center justify-between gap-12">

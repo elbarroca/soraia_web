@@ -80,14 +80,14 @@ export function FeaturedArtworks({ artworks }: FeaturedArtworksProps) {
             <FadeIn key={tile.href} delay={i * 0.08}>
               <Link href={tile.href} className="group block w-full">
                 {/* Image — full column width, fixed aspect so all tiles match */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <div className="relative aspect-[4/5] w-[82%] sm:w-full mx-auto overflow-hidden">
                   {imageSrc ? (
                     <Image
                       src={imageSrc}
                       alt={imageAlt}
                       fill
                       className="object-cover object-center transition-transform duration-[1200ms] ease-out scale-[1.12] group-hover:scale-[1.14]"
-                      sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, 25vw"
+                      sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, 25vw"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-[var(--color-ink-muted)]">
