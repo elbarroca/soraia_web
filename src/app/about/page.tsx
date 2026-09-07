@@ -10,7 +10,7 @@ import { FadeIn } from "@/components/shared/fade-in";
 import { getSettings } from "@/lib/queries";
 import { artistPersonJsonLd } from "@/lib/structured-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About",

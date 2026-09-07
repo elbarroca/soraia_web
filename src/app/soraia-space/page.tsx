@@ -10,7 +10,7 @@ import { toPublicNews } from "@/lib/mappers";
 import { mockNews } from "@/lib/mock-data";
 import { NewsletterSection } from "@/components/features/newsletter-section";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Soraia Space",

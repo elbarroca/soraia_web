@@ -10,7 +10,7 @@ import { getVisibleArtworks } from "@/lib/queries";
 import { toPublicArtwork } from "@/lib/mappers";
 import { mockArtworks } from "@/lib/mock-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Artworks",
